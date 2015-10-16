@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hw_name: MyString
+  user_id: 
+  hw_description: MyText
+  hw_release_date: 2015-10-15 19:42:15
+  hw_due_date: 2015-10-15 19:42:15
+  hw_test_case_dir: MyString
+
+two:
+  hw_name: MyString
+  user_id: 
+  hw_description: MyText
+  hw_release_date: 2015-10-15 19:42:15
+  hw_due_date: 2015-10-15 19:42:15
+  hw_test_case_dir: MyString

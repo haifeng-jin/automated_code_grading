@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Hw name:</strong>
+  <%= @homework.hw_name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @homework.user %>
+</p>
+
+<p>
+  <strong>Hw description:</strong>
+  <%= @homework.hw_description %>
+</p>
+
+<p>
+  <strong>Hw release date:</strong>
+  <%= @homework.hw_release_date %>
+</p>
+
+<p>
+  <strong>Hw due date:</strong>
+  <%= @homework.hw_due_date %>
+</p>
+
+<p>
+  <strong>Hw test case dir:</strong>
+  <%= @homework.hw_test_case_dir %>
+</p>
+
+<%= link_to 'Edit', edit_homework_path(@homework) %> |
+<%= link_to 'Back', homeworks_path %>

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Submissions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Homework</th>
+      <th>User</th>
+      <th>Sm grade</th>
+      <th>Sm date</th>
+      <th>Sm src code dir</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <tr>
+        <td><%= submission.homework %></td>
+        <td><%= submission.user %></td>
+        <td><%= submission.sm_grade %></td>
+        <td><%= submission.sm_date %></td>
+        <td><%= submission.sm_src_code_dir %></td>
+        <td><%= link_to 'Show', submission %></td>
+        <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
+        <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Submission', new_submission_path %>
