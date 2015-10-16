@@ -1,0 +1,41 @@
+<%= form_for(@homework) do |f| %>
+  <% if @homework.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@homework.errors.count, "error") %> prohibited this homework from being saved:</h2>
+
+      <ul>
+      <% @homework.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :hw_name %><br>
+    <%= f.text_field :hw_name %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :hw_description %><br>
+    <%= f.text_area :hw_description %>
+  </div>
+  <div class="field">
+    <%= f.label :hw_release_date %><br>
+    <%= f.datetime_select :hw_release_date %>
+  </div>
+  <div class="field">
+    <%= f.label :hw_due_date %><br>
+    <%= f.datetime_select :hw_due_date %>
+  </div>
+  <div class="field">
+    <%= f.label :hw_test_case_dir %><br>
+    <%= f.text_field :hw_test_case_dir %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

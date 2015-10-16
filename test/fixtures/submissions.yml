@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  homework_id: 
+  user_id: 
+  sm_grade: 1
+  sm_date: 2015-10-15 19:42:28
+  sm_src_code_dir: MyString
+
+two:
+  homework_id: 
+  user_id: 
+  sm_grade: 1
+  sm_date: 2015-10-15 19:42:28
+  sm_src_code_dir: MyString

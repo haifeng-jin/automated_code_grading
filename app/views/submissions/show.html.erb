@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Homework:</strong>
+  <%= @submission.homework %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @submission.user %>
+</p>
+
+<p>
+  <strong>Sm grade:</strong>
+  <%= @submission.sm_grade %>
+</p>
+
+<p>
+  <strong>Sm date:</strong>
+  <%= @submission.sm_date %>
+</p>
+
+<p>
+  <strong>Sm src code dir:</strong>
+  <%= @submission.sm_src_code_dir %>
+</p>
+
+<%= link_to 'Edit', edit_submission_path(@submission) %> |
+<%= link_to 'Back', submissions_path %>
