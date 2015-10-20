@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   validates :user_email, presence: true
   validates :user_password, presence: true
   validates :user_name, presence: true
-  validates :course_id, presence: true
+  ##allow nil for course_id,
+  #validates :course_id, presence: true
   validates_uniqueness_of :user_email
 
   def self.new_student(user_params)
