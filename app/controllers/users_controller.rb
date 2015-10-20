@@ -21,8 +21,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new_student(user_params)
+    #ADD by ZHENLI
+    #If @user.course_id don't exist in database, use nil instead.
+    if(!Course.exists?(@user.course_id))
+      @user.course_id = nil
+    end
     if @user.save
-      if @user.course_id == 0
+      if @user.course_id == nil
         render :text => 'Class NULL captured, fix me at model user.'
       else
         redirect_to @user, notice: 'User was successfully created'
