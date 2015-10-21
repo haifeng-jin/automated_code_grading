@@ -1,13 +1,7 @@
 class Course < ActiveRecord::Base
-  belongs_to :user
-  has_many :users
+  has_many :course_to_users
+  has_many :users, through: :course_to_users
 
-  def self.get_courseName(course_id)
-    if course_id == 0
-      return 'Null'
-    else
-      return self.find(course_id).course_name
-    end
-  end
-
+  has_many :assignments
+  has_many :homeworks, through: :assignments
 end

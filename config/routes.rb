@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  resources :homeworks
+  resources :courses
+  resources :users
+  resources :assignments
+  resources :course_to_users
+  resources :course_has_homeworks
+  resources :course_to_users
+  resources :submissions
+  resources :homeworks
+  resources :courses
+  resources :users
   get 'login'       => 'sessions#new'
   post 'login'      => 'sessions#create'
   get 'logout'      => 'sessions#destroy'

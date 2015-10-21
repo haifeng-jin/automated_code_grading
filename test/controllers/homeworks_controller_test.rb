@@ -18,7 +18,7 @@ class HomeworksControllerTest < ActionController::TestCase
 
   test "should create homework" do
     assert_difference('Homework.count') do
-      post :create, homework: { hw_description: @homework.hw_description, hw_due_date: @homework.hw_due_date, hw_name: @homework.hw_name, hw_release_date: @homework.hw_release_date, hw_test_case_dir: @homework.hw_test_case_dir, user_id: @homework.user_id }
+      post :create, homework: { hw_description: @homework.hw_description, hw_due_date: @homework.hw_due_date, hw_name: @homework.hw_name, hw_release_date: @homework.hw_release_date, hw_test_case_dir: @homework.hw_test_case_dir }
     end
 
     assert_redirected_to homework_path(assigns(:homework))
@@ -35,7 +35,7 @@ class HomeworksControllerTest < ActionController::TestCase
   end
 
   test "should update homework" do
-    patch :update, id: @homework, homework: { hw_description: @homework.hw_description, hw_due_date: @homework.hw_due_date, hw_name: @homework.hw_name, hw_release_date: @homework.hw_release_date, hw_test_case_dir: @homework.hw_test_case_dir, user_id: @homework.user_id }
+    patch :update, id: @homework, homework: { hw_description: @homework.hw_description, hw_due_date: @homework.hw_due_date, hw_name: @homework.hw_name, hw_release_date: @homework.hw_release_date, hw_test_case_dir: @homework.hw_test_case_dir }
     assert_redirected_to homework_path(assigns(:homework))
   end
 

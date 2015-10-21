@@ -1,4 +1,6 @@
 class Homework < ActiveRecord::Base
-  belongs_to :user
+  has_many :assignments
+  has_many :courses, through: :assignments
   has_many :submissions
+
 end

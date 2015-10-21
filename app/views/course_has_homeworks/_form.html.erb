@@ -1,0 +1,25 @@
+<%= form_for(@course_has_homework) do |f| %>
+  <% if @course_has_homework.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course_has_homework.errors.count, "error") %> prohibited this course_has_homework from being saved:</h2>
+
+      <ul>
+      <% @course_has_homework.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :course_id %><br>
+    <%= f.text_field :course_id %>
+  </div>
+  <div class="field">
+    <%= f.label :homework_id %><br>
+    <%= f.text_field :homework_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

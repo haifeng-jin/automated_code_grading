@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Hw name</th>
-      <th>User</th>
       <th>Hw description</th>
       <th>Hw release date</th>
       <th>Hw due date</th>
@@ -19,7 +18,6 @@
     <% @homeworks.each do |homework| %>
       <tr>
         <td><%= homework.hw_name %></td>
-        <td><%= homework.user %></td>
         <td><%= homework.hw_description %></td>
         <td><%= homework.hw_release_date %></td>
         <td><%= homework.hw_due_date %></td>
