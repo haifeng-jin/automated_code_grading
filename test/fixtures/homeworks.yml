@@ -2,16 +2,14 @@
 
 one:
   hw_name: MyString
-  user_id: 
-  hw_description: MyText
-  hw_release_date: 2015-10-15 19:42:15
-  hw_due_date: 2015-10-15 19:42:15
+  hm_description: MyText
+  hm_release_time: 2015-10-21 22:34:57
+  hw_due_time: 2015-10-21 22:34:57
   hw_test_case_dir: MyString
 
 two:
   hw_name: MyString
-  user_id: 
-  hw_description: MyText
-  hw_release_date: 2015-10-15 19:42:15
-  hw_due_date: 2015-10-15 19:42:15
+  hm_description: MyText
+  hm_release_time: 2015-10-21 22:34:57
+  hw_due_time: 2015-10-21 22:34:57
   hw_test_case_dir: MyString

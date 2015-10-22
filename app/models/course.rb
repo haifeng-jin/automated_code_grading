@@ -1,6 +1,9 @@
 class Course < ActiveRecord::Base
-  belongs_to :user
-  has_many :users
+  has_many :course_to_users
+  has_many :users, through: :course_to_users
+
+  has_many :course_to_homeworks
+  has_many :homeworks, through: :course_to_homeworks
 
   def self.get_courseName(course_id)
     if course_id == nil

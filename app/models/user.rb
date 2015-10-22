@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
-  belongs_to :course
-  has_many :homeworks
+  has_many :course_to_users
+  has_many :courses, through: :course_to_users
   has_many :submissions
-  has_many :courses
 
   validates :user_email, presence: true
   validates :user_password, presence: true
