@@ -2,11 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @course = {}
     @users = User.all
-    @users.each do |user|
-      @course[user.id] = user_courseName(user.course_id)
-    end
   end
 
   def show
@@ -21,17 +17,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new_student(user_params)
-    #ADD by ZHENLI
-    #If @user.course_id don't exist in database, use nil instead.
-    if(!Course.exists?(@user.course_id))
-      @user.course_id = nil
-    end
     if @user.save
-      if @user.course_id == nil
-        render :text => 'Class NULL captured, fix me at model user.'
-      else
         redirect_to @user, notice: 'User was successfully created'
-      end
     else
       render :new
     end
