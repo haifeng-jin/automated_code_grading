@@ -4,6 +4,7 @@ class Course < ActiveRecord::Base
 
   has_many :course_to_homeworks
   has_many :homeworks, through: :course_to_homeworks
+  has_many :announcements
 
   def self.get_courseName(course_id)
     if course_id == nil
