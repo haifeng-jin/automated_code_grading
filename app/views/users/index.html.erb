@@ -9,7 +9,6 @@
       <th>User password</th>
       <th>User name</th>
       <th>User role</th>
-      <th>Course</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +20,6 @@
         <td><%= user.user_password %></td>
         <td><%= user.user_name %></td>
         <td><%= user.user_role %></td>
-        <td><%= @course[user.id] %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
