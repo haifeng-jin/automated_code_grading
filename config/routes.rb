@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   post 'login'      => 'sessions#create'
   get 'logout'      => 'sessions#destroy'
   get 'signup'      => 'users#new'
+  get 'instructor_home'    => 'users#instructor_index'
   
-  root 'static_pages#home'  
+  root 'sessions#new'
   get 'static_pages/help'
   get 'static_pages/about'
 
