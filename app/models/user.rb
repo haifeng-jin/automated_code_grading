@@ -22,4 +22,8 @@ class User < ActiveRecord::Base
       return false
     end
   end
+
+  def get_submissions(courseID, homeworkID)
+    Submission.where(user_id: self.id).where(course_id: courseID).where(homework_id: homeworkID)
+  end
 end
