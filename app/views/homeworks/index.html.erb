@@ -6,10 +6,9 @@
   <thead>
     <tr>
       <th>Hw name</th>
-      <th>User</th>
       <th>Hw description</th>
-      <th>Hw release date</th>
-      <th>Hw due date</th>
+      <th>Hw release time</th>
+      <th>Hw due time</th>
       <th>Hw test case dir</th>
       <th colspan="3"></th>
     </tr>
@@ -19,10 +18,9 @@
     <% @homeworks.each do |homework| %>
       <tr>
         <td><%= homework.hw_name %></td>
-        <td><%= homework.user %></td>
         <td><%= homework.hw_description %></td>
-        <td><%= homework.hw_release_date %></td>
-        <td><%= homework.hw_due_date %></td>
+        <td><%= homework.hw_release_time %></td>
+        <td><%= homework.hw_due_time %></td>
         <td><%= homework.hw_test_case_dir %></td>
         <td><%= link_to 'Show', homework %></td>
         <td><%= link_to 'Edit', edit_homework_path(homework) %></td>

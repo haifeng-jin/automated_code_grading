@@ -20,16 +20,20 @@
     <%= f.text_field :user_id %>
   </div>
   <div class="field">
+    <%= f.label :course_id %><br>
+    <%= f.text_field :course_id %>
+  </div>
+  <div class="field">
     <%= f.label :sm_grade %><br>
-    <%= f.number_field :sm_grade %>
+    <%= f.text_field :sm_grade %>
   </div>
   <div class="field">
-    <%= f.label :sm_date %><br>
-    <%= f.datetime_select :sm_date %>
+    <%= f.label :sm_time %><br>
+    <%= f.datetime_select :sm_time %>
   </div>
   <div class="field">
-    <%= f.label :sm_src_code_dir %><br>
-    <%= f.text_field :sm_src_code_dir %>
+    <%= f.label :sm_src_dir %><br>
+    <%= f.text_field :sm_src_dir %>
   </div>
   <div class="actions">
     <%= f.submit %>

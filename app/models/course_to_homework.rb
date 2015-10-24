@@ -1,4 +1,4 @@
-class CourseToHomework < ActiceReacord::Base
+class CourseToHomework < ActiveRecord::Base
   belongs_to :course
   belongs_to :homework
 end

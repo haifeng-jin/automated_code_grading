@@ -8,6 +8,10 @@ class UsersController < ApplicationController
   def show
   end
 
+  def show_student
+    @user = User.find(session[:user_id])
+  end
+
   def new
     @user = User.new
   end
@@ -18,19 +22,17 @@ class UsersController < ApplicationController
   def create
     @user = User.new_student(user_params)
     if @user.save
-        redirect_to @user, notice: 'User was successfully created'
+      redirect_to @user, notice: 'User was successfully created'
     else
       render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        redirect_to @user, notice: 'User was successfully updated.' 
-      else
-        render :edit
-      end
+    if @user.update(user_params)
+      redirect_to @user, notice: 'User was successfully updated.' 
+    else
+      render :edit
     end
   end
 
@@ -49,7 +51,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:user_email, :user_password, :user_name, :user_role, :course_id)
   end
 
-  def user_courseName(id)
-    Course.get_courseName(id)
-  end
+#  def user_courseName(id)
+#    Course.get_courseName(id)
+#  end
 end

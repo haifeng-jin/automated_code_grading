@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022034556) do
+ActiveRecord::Schema.define(version: 20151024053555) do
+
+  create_table "announcements", force: :cascade do |t|
+    t.text     "announcement_description"
+    t.integer  "course_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "announcements", ["course_id"], name: "index_announcements_on_course_id"
 
   create_table "course_to_homeworks", force: :cascade do |t|
     t.integer  "course_id"
@@ -41,8 +50,8 @@ ActiveRecord::Schema.define(version: 20151022034556) do
 
   create_table "homeworks", force: :cascade do |t|
     t.string   "hw_name"
-    t.text     "hm_description"
-    t.datetime "hm_release_time"
+    t.text     "hw_description"
+    t.datetime "hw_release_time"
     t.datetime "hw_due_time"
     t.string   "hw_test_case_dir", limit: 2047
     t.datetime "created_at",                    null: false
@@ -50,14 +59,19 @@ ActiveRecord::Schema.define(version: 20151022034556) do
   end
 
   create_table "submissions", force: :cascade do |t|
-    t.integer  "sm_homework_id"
-    t.integer  "sm_user_id"
+    t.integer  "homework_id"
+    t.integer  "user_id"
+    t.integer  "course_id"
     t.float    "sm_grade"
-    t.datetime "sm_date"
-    t.string   "sm_src_code_dir", limit: 2047
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "sm_time"
+    t.string   "sm_src_dir",  limit: 2047
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
+
+  add_index "submissions", ["course_id"], name: "index_submissions_on_course_id"
+  add_index "submissions", ["homework_id"], name: "index_submissions_on_homework_id"
+  add_index "submissions", ["user_id"], name: "index_submissions_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "user_name"

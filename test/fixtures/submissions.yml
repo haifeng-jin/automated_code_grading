@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  sm_homework_id: 1
-  sm_user_id: 1
+  homework_id: 
+  user_id: 
+  course_id: 
   sm_grade: 1.5
-  sm_date: 2015-10-21 22:29:51
-  sm_src_code_dir: MyString
+  sm_time: 2015-10-24 00:35:55
+  sm_src_dir: MyString
 
 two:
-  sm_homework_id: 1
-  sm_user_id: 1
+  homework_id: 
+  user_id: 
+  course_id: 
   sm_grade: 1.5
-  sm_date: 2015-10-21 22:29:51
-  sm_src_code_dir: MyString
+  sm_time: 2015-10-24 00:35:55
+  sm_src_dir: MyString

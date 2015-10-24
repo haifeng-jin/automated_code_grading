@@ -1,0 +1,37 @@
+<p>
+  <th>Welcome, <%=@user.user_name %></th>
+</p>
+<p>
+  <th>your email: <%=@user.user_email %></th>
+</p>
+<p>
+  <th>your role: <%=@user.user_role %></th>
+</p>
+
+<p>
+  <table>
+    <thead>
+      <tr>
+        <th>Course </th>
+        <th>Course_id </th>
+        <th>Course_homeworks<th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @user.courses.each do |course| %>
+            <tr>
+              <td><%= course.course_name %></td>
+              <td><%= course.id %></td>
+              <% course.homeworks.each do |hw|%>
+                <td><%= hw.hw_name %></td>
+                <td><%= hw.hw_description %></td>
+                <td><%= hw.hw_release_time %></td>
+                <td><%= hw.hw_due_time %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= debug(params) if Rails.env.development? %>
+    </p>

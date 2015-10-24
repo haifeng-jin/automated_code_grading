@@ -11,18 +11,23 @@
 </p>
 
 <p>
+  <strong>Course:</strong>
+  <%= @submission.course %>
+</p>
+
+<p>
   <strong>Sm grade:</strong>
   <%= @submission.sm_grade %>
 </p>
 
 <p>
-  <strong>Sm date:</strong>
-  <%= @submission.sm_date %>
+  <strong>Sm time:</strong>
+  <%= @submission.sm_time %>
 </p>
 
 <p>
-  <strong>Sm src code dir:</strong>
-  <%= @submission.sm_src_code_dir %>
+  <strong>Sm src dir:</strong>
+  <%= @submission.sm_src_dir %>
 </p>
 
 <%= link_to 'Edit', edit_submission_path(@submission) %> |

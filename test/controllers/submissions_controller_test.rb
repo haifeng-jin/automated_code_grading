@@ -18,7 +18,7 @@ class SubmissionsControllerTest < ActionController::TestCase
 
   test "should create submission" do
     assert_difference('Submission.count') do
-      post :create, submission: { homework_id: @submission.homework_id, sm_date: @submission.sm_date, sm_grade: @submission.sm_grade, sm_src_code_dir: @submission.sm_src_code_dir, user_id: @submission.user_id }
+      post :create, submission: { course_id: @submission.course_id, homework_id: @submission.homework_id, sm_grade: @submission.sm_grade, sm_src_dir: @submission.sm_src_dir, sm_time: @submission.sm_time, user_id: @submission.user_id }
     end
 
     assert_redirected_to submission_path(assigns(:submission))
@@ -35,7 +35,7 @@ class SubmissionsControllerTest < ActionController::TestCase
   end
 
   test "should update submission" do
-    patch :update, id: @submission, submission: { homework_id: @submission.homework_id, sm_date: @submission.sm_date, sm_grade: @submission.sm_grade, sm_src_code_dir: @submission.sm_src_code_dir, user_id: @submission.user_id }
+    patch :update, id: @submission, submission: { course_id: @submission.course_id, homework_id: @submission.homework_id, sm_grade: @submission.sm_grade, sm_src_dir: @submission.sm_src_dir, sm_time: @submission.sm_time, user_id: @submission.user_id }
     assert_redirected_to submission_path(assigns(:submission))
   end
 
