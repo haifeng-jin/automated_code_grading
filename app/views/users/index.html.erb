@@ -5,9 +5,11 @@
 <table>
   <thead>
     <tr>
+      <th>User ID</th>
       <th>User email</th>
       <th>User password</th>
       <th>User name</th>
+      <th>User login name</th>
       <th>User role</th>
       <th colspan="3"></th>
     </tr>
@@ -16,9 +18,11 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.id %></td>
         <td><%= user.user_email %></td>
         <td><%= user.user_password %></td>
         <td><%= user.user_name %></td>
+        <td><%= user.user_login_name %></td>
         <td><%= user.user_role %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>

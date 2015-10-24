@@ -56,6 +56,17 @@
                   </ul>
                 </div>
             <% end %>
+
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
+              <%= f.text_field :user_name,class:'form-control',:placeholder => "Your Name" %>
+            </div>
+            <div class="clearfix"></div><br>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
+              <%= f.text_field :user_login_name,class:'form-control',:placeholder => "Your Login Name" %>
+            </div>
+            <div class="clearfix"></div><br>
             <div class="input-group input-group-lg">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user red"></i></span>
               <%= f.email_field :user_email, class: 'form-control', :placeholder => "Email address" %>
@@ -66,20 +77,6 @@
               <%= f.password_field :user_password, class: 'form-control',:placeholder => "Password" %>
             </div>
             <div class="clearfix"></div><br>
-
-            <div class="input-group input-group-lg">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
-              <%= f.text_field :user_name,class:'form-control',:placeholder => "User name" %>
-            </div>
-
-
-
-            <% if false %>
-                <div class="field">
-                  <%= f.label :user_role %><br>
-                  <%= f.text_field :user_role %>
-                </div>
-            <% end %>
 
             <p class="center col-md-5">
               <%= f.submit "Submit", class: "btn btn-primary"%>
