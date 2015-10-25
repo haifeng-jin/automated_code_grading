@@ -38,7 +38,16 @@ class User < ActiveRecord::Base
     Submission.where(user_id: self.id).where(course_id: courseID).where(homework_id: homeworkID)
   end
 
-  def get_homeworks(courseID)
+  def get_homeworks_by_course(courseID)
     self.courses.find(courseID).homeworks
+  end
+  
+  def get_homeworks
+    homework = {}
+    self.courses.each do |c|
+      puts c.id
+      homework[c.id] = self.get_homeworks_by_course(c.id)
+    end
+    return homework
   end
 end
