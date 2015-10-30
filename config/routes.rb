@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   post 'login'             => 'sessions#create'
   get 'logout'             => 'sessions#destroy'
   get 'signup'             => 'users#new'
-  get 'instructor_home'    => 'users#instructor_index'
   get 'show_student'       => 'users#show_student'
+  get 'show_instructor'    => 'users#show_instructor'
 
   root 'sessions#new'
   get 'static_pages/help'
