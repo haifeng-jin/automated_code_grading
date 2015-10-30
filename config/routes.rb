@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-  resources :submissions
-  resources :submissions
   get 'login'              => 'sessions#new'
   post 'login'             => 'sessions#create'
   get 'logout'             => 'sessions#destroy'
   get 'signup'             => 'users#new'
-  get 'instructor_home'    => 'users#instructor_index'
   get 'show_student'       => 'users#show_student'
+  get 'show_instructor'    => 'users#show_instructor'
 
   root 'sessions#new'
   get 'static_pages/help'
   get 'static_pages/about'
-  
+ 
+  resources :announcements
   resources :course_to_users
   resources :course_to_homeworks
   resources :submissions

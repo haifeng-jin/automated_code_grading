@@ -12,6 +12,15 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
   end
 
+  def show_instructor
+    @user = User.find(session[:user_id])
+    @students = User.get_students
+    if @user.user_role != 'instructor'
+      reset_session
+      redirect_to login_path 
+    end
+  end
+
   def new
     @user = User.new
   end
@@ -51,7 +60,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:user_email,:user_login_name, :user_password, :user_name, :user_role, :course_id)
   end
 
-#  def user_courseName(id)
-#    Course.get_courseName(id)
-#  end
+  #  def user_courseName(id)
+  #    Course.get_courseName(id)
+  #  end
 end

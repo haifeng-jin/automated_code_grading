@@ -26,6 +26,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.get_students
+    users = User.find_by user_role: 'student'
+    return users
+  end
+
   def authenticate(password)
     if self.user_password == password
       return true
