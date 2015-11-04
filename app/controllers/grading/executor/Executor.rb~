@@ -1,0 +1,11 @@
+class Executor
+  def initialize(programPath, inputPath, outputPath, programOutputPath)
+    @programPath = programPath
+    @inputPath = inputPath
+    @outputPath = outputPath
+    @programOutputPath = programOutputPath
+  end
+  
+  def execute
+  end
+end

@@ -1,0 +1,9 @@
+class JavaExecutor < Executor
+  def execute
+	compileResult = `sh java_compile.sh`
+	puts compileResult
+  end
+end
+
+a=JavaExecutor.new("","","","")
+
