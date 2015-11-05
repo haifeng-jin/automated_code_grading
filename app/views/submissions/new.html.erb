@@ -1,5 +1,16 @@
 <h1>New Submission</h1>
 
-<%= render 'form' %>
 
-<%= link_to 'Back', submissions_path %>
+
+<% flash.each do |key, msg| %>
+  <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
+<% end %>
+<%= form_tag '/submissions/create', { :multipart => true } do %>
+  <p>
+  <%= file_field_tag 'submissions[file]' %>
+  </p>
+  <p>
+  <%= submit_tag "submissions" %>
+  </p>
+<% end %></p></p></%></%=>
+
