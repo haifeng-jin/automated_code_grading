@@ -1,0 +1,16 @@
+<h1>Submit Homework Page</h1>
+<%= @user.user_name %>
+<%= @course.course_name %>
+<%= @homework.hw_name %>
+
+
+<%= form_for @submission, html: { multipart: true } do |f| %>
+    <%= f.label :Submit %>
+    <%= f.file_field :sm_src_dir %>
+    <%= f.submit "Upload" %>
+<% end %>
+
+<%= @submission.course_id %>
+<%= @submission.homework_id %>
+
+

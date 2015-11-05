@@ -14,15 +14,48 @@ class SubmissionsController < ApplicationController
 
   # GET /submissions/new
   def new
-    @submission = Submission.new
+    #@submission = Submission.new
   end
 
   # GET /submissions/1/edit
   def edit
   end
 
+  # Home submission for students
+  def submit_homework
+    @user = User.find_by(session[:user_id])
+    @course = Course.find_by(params[:course_id])
+    @homework = Homework.find_by(params[:homework_id])
+
+
+=begin
+    name = params[:file].original_filename
+    directory = "public/images/upload"
+    path = File.join(directory, name)
+    File.open(path, "wb") { |f| f.write(params[:upload][:file].read) }
+    flash[:notice] = "File uploaded"
+    redirect_to "/homeworks/show"
+=end
+    @submission = Submission.new
+    @submission['homework_id'] = 1234324124
+    @submission.user_id = session[:user_id]
+    @submission.course_id = params[:course_id]
+    @submission.sm_grade = 98.5
+    puts "******************************************"
+    puts @submission.homework_id
+    puts ".........................................."
+
+  end
+
+
+
+
+
+
   # POST /submissions
   # POST /submissions.json
+
+
   def create
     @submission = Submission.new(submission_params)
 

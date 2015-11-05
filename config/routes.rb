@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   root 'sessions#new'
   get 'static_pages/help'
   get 'static_pages/about'
+  get 'submit_homework'    => 'submissions#submit_homework'
+  get 'create_homework'    => 'homeworks#create_homework'
  
   resources :announcements
   resources :course_to_users
