@@ -4,13 +4,22 @@
 <%= @homework.hw_name %>
 
 
-<%= form_for @submission, html: { multipart: true } do |f| %>
-    <%= f.label :Submit %>
-    <%= f.file_field :sm_src_dir %>
-    <%= f.submit "Upload" %>
+
+<% flash.each do |key, msg| %>
+    <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
+<% end %>
+<%= form_tag '/submissions/create', { :multipart => true } do %>
+    <p>
+      <%= file_field_tag 'file' %>
+      <%= hidden_field_tag :course_id, @course.id %>
+      <%= hidden_field_tag :homework_id, @homework.id %>
+    </p>
+    <p>
+      <%= submit_tag "submissions" %>
+    </p>
 <% end %>
 
-<%= @submission.course_id %>
-<%= @submission.homework_id %>
+
+
 
 
