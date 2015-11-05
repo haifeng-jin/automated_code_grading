@@ -17,6 +17,11 @@ class HomeworksController < ApplicationController
     @homework = Homework.new
   end
 
+  def create_homework
+
+  end
+
+
   # GET /homeworks/1/edit
   def edit
   end

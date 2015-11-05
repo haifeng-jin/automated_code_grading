@@ -1,0 +1,25 @@
+<h1>Submit Homework Page</h1>
+<%= @user.user_name %>
+<%= @course.course_name %>
+<%= @homework.hw_name %>
+
+
+
+<% flash.each do |key, msg| %>
+    <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
+<% end %>
+<%= form_tag '/submissions/create', { :multipart => true } do %>
+    <p>
+      <%= file_field_tag 'file' %>
+      <%= hidden_field_tag :course_id, @course.id %>
+      <%= hidden_field_tag :homework_id, @homework.id %>
+    </p>
+    <p>
+      <%= submit_tag "submissions" %>
+    </p>
+<% end %>
+
+
+
+
+
