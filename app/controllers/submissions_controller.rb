@@ -37,8 +37,8 @@ class SubmissionsController < ApplicationController
     token = directory.split('/')
     1.upto(token.size)  do |n|
       dir = token[0...n].join('/')
-      puts '***************************************************'
-      puts dir
+      #puts '***************************************************'
+      #puts dir
       Dir.mkdir(dir) unless Dir.exist? (dir)
     end
   end
@@ -54,11 +54,20 @@ class SubmissionsController < ApplicationController
     file_name = time + '.' + file_type
 
     directory = './UPLOAD/' + @course.course_name + '/' + @homework.hw_name + '/' + @user.user_login_name
-    path_name = File.join(directory, file_name)
+    path_file = File.join(directory, file_name)
 
     mkdir(directory)
 
-    File.open(path_name, "w") { |f| f.write(params[:file].read.force_encoding('UTF-8')) }
+
+    puts '***************************************************'
+    puts path_file
+    abs_path = File.expand_path(File.dirname(path_file))
+    abs_path_file = File.join(abs_path, file_name)
+    puts '***************************************************'
+    puts abs_path_file
+
+
+    File.open(path_file, "w") { |f| f.write(params[:file].read.force_encoding('UTF-8')) }
 
     @submission = Submission.new
     @submission[:homework_id] = params[:homework_id]
@@ -71,7 +80,7 @@ class SubmissionsController < ApplicationController
 
     @submission[:sm_grade] = -1
 
-    @submission[:sm_src_dir] = path_name
+    @submission[:sm_src_dir] = path_file
 
     @submission.save
 
