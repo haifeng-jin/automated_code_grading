@@ -112,6 +112,7 @@
                   <th>Grade</th>
                   <th>View</th>
                   <th>Submission History</th>
+                  <th>Submit Homework</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -138,6 +139,8 @@
                               <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                               Submission Hisory
                             </a>
+                          </td>
+                          <td><%= link_to 'Submit_homework', submit_homework_path(:course_id => course.id, :homework_id => hw.id)%></td>
                       <% end %>
                     </tr>
                 <% end %>
@@ -154,7 +157,7 @@
 
 <!-- external javascript -->
 
-<%= link_to 'Submit_homework', submit_homework_path(:course_id => 1, :homework_id => 2)%>
+
 </body>
 </html>
 
