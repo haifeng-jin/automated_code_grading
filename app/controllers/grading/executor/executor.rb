@@ -3,6 +3,7 @@ class Executor
     @program_path = program_path
     @input_path = input_path
     @output_path = output_path
+    @mutex = Mutex.new
   end
   
   def execute
