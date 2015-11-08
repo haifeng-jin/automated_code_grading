@@ -1,4 +1,5 @@
 require_relative 'executor/java_executor'
+require_relative 'executor_factory'
 
 # How to use this demo
 #
@@ -25,11 +26,11 @@ end
 # In the show() method above, you can see how to access the values of the result
 
 puts "Success Example:"
-show(JavaExecutor.new("~/Desktop/success/abc.txt","~/Desktop/input","~/Desktop/output").execute)
+show(ExecutorFactory.get_executor("java", "~/Desktop/success/abc.txt","~/Desktop/input","~/Desktop/output").execute)
 
 puts "Compile Error Example:"
-show(JavaExecutor.new("~/Desktop/compile_error/Main.java","~/Desktop/input","~/Desktop/output").execute)
+show(ExecutorFactory.get_executor("java", "~/Desktop/compile_error/Main.java","~/Desktop/input","~/Desktop/output").execute)
 
 puts "Low Score Example:"
-show(JavaExecutor.new("~/Desktop/low_score/Main.java","~/Desktop/input","~/Desktop/output").execute)
+show(ExecutorFactory.get_executor("java", "~/Desktop/low_score/Main.java","~/Desktop/input","~/Desktop/output").execute)
 
