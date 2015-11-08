@@ -5,7 +5,7 @@ require_relative 'execute_result'
 class JavaExecutor < Executor
 
   def copy_command
-    "cp #{@program_path} #{TemporaryFilesInfo.get_copied_program_path}"
+    "cp #{@program_path} "
   end
 
   def compile_command
