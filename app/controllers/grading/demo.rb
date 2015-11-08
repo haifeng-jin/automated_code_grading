@@ -2,7 +2,7 @@ require_relative 'executor/java_executor'
 
 # How to use this demo
 #
-# unzip all the files to "~/Desktop"
+# unzip all the files to "/Users/Zhen/Desktop"
 # then run the demo
 #
 
@@ -25,11 +25,11 @@ end
 # In the show() method above, you can see how to access the values of the result
 
 puts "Success Example:"
-show(JavaExecutor.new("~/Desktop/success/abc.txt","~/Desktop/input","~/Desktop/output").execute)
+show(JavaExecutor.new("/Users/Zhen/Desktop/success/abc.txt","/Users/Zhen/Desktop/input","/Users/Zhen/Desktop/output").execute)
 
 puts "Compile Error Example:"
-show(JavaExecutor.new("~/Desktop/compile_error/Main.java","~/Desktop/input","~/Desktop/output").execute)
+show(JavaExecutor.new("/Users/Zhen/Desktop/compile_error/Main.java","/Users/Zhen/Desktop/input","/Users/Zhen/Desktop/output").execute)
 
 puts "Low Score Example:"
-show(JavaExecutor.new("~/Desktop/low_score/Main.java","~/Desktop/input","~/Desktop/output").execute)
+show(JavaExecutor.new("/Users/Zhen/Desktop/low_score/Main.java","/Users/Zhen/Desktop/input","/Users/Zhen/Desktop/output").execute)
 
