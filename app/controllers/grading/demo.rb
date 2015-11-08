@@ -25,7 +25,7 @@ end
 # In the show() method above, you can see how to access the values of the result
 
 puts "Success Example:"
-show(JavaExecutor.new("~/Desktop/success/Main.java","~/Desktop/input","~/Desktop/output").execute)
+show(JavaExecutor.new("~/Desktop/success/abc.txt","~/Desktop/input","~/Desktop/output").execute)
 
 puts "Compile Error Example:"
 show(JavaExecutor.new("~/Desktop/compile_error/Main.java","~/Desktop/input","~/Desktop/output").execute)

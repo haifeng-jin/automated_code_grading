@@ -4,8 +4,12 @@ require_relative 'execute_result'
 
 class JavaExecutor < Executor
 
+  def copy_command
+    "cp #{@program_path} #{TemporaryFilesInfo.get_copied_program_path}"
+  end
+
   def compile_command
-    "javac #{@program_path} -d #{TemporaryFilesInfo.get_runnable_path} 2> #{TemporaryFilesInfo.get_compile_message_path}"
+    "javac #{TemporaryFilesInfo.get_copied_program_path} -d #{TemporaryFilesInfo.get_runnable_path} 2> #{TemporaryFilesInfo.get_compile_message_path}"
   end
   
   def run_command
@@ -21,6 +25,7 @@ class JavaExecutor < Executor
   end
 
   def compile
+    `#{copy_command}`
     `#{compile_command}`
     file = File.new(TemporaryFilesInfo.get_compile_message_path, "r")
     message = ""
