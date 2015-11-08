@@ -49,24 +49,26 @@ class JavaExecutor < Executor
   end
 
   def execute
-    @relative_path = File.dirname(__FILE__)
-    @result = ExecuteResult.new()
-    @result.set_message(compile)
-
-    if (@result.has_message?)
-      @result.set_score(0)
-      @result.set_judgement("Compile Error")
+    @mutex.synchronize do
+      @relative_path = File.dirname(__FILE__)
+      @result = ExecuteResult.new()
+      @result.set_message(compile)
+  
+      if (@result.has_message?)
+        @result.set_score(0)
+        @result.set_judgement("Compile Error")
+        return @result
+      end
+  
+      if (run?)
+        @result.set_score(score)
+        @result.set_judgement("Success")
+      else
+        @result.set_score(0)
+        @result.set_judgement("Error")
+      end
       return @result
     end
-
-    if (run?)
-      @result.set_score(score)
-      @result.set_judgement("Success")
-    else
-      @result.set_score(0)
-      @result.set_judgement("Error")
-    end
-    return @result
   end
 end
 
