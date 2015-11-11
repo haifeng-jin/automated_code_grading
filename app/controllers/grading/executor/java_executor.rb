@@ -4,8 +4,12 @@ require_relative 'execute_result'
 
 class JavaExecutor < Executor
 
+  def copy_command
+    "cp #{@program_path} #{TemporaryFilesInfo.get_copied_program_path}"
+  end
+
   def compile_command
-    "javac #{@program_path} -d #{TemporaryFilesInfo.get_runnable_path} 2> #{TemporaryFilesInfo.get_compile_message_path}"
+    "javac #{TemporaryFilesInfo.get_copied_program_path} -d #{TemporaryFilesInfo.get_runnable_path} 2> #{TemporaryFilesInfo.get_compile_message_path}"
   end
   
   def run_command
@@ -21,6 +25,7 @@ class JavaExecutor < Executor
   end
 
   def compile
+    `#{copy_command}`
     `#{compile_command}`
     file = File.new(TemporaryFilesInfo.get_compile_message_path, "r")
     message = ""
@@ -44,24 +49,26 @@ class JavaExecutor < Executor
   end
 
   def execute
-    @relative_path = File.dirname(__FILE__)
-    @result = ExecuteResult.new()
-    @result.set_message(compile)
-
-    if (@result.has_message?)
-      @result.set_score(0)
-      @result.set_judgement("Compile Error")
+    @mutex.synchronize do
+      @relative_path = File.dirname(__FILE__)
+      @result = ExecuteResult.new()
+      @result.set_message(compile)
+  
+      if (@result.has_message?)
+        @result.set_score(0)
+        @result.set_judgement("Compile Error")
+        return @result
+      end
+  
+      if (run?)
+        @result.set_score(score)
+        @result.set_judgement("Success")
+      else
+        @result.set_score(0)
+        @result.set_judgement("Error")
+      end
       return @result
     end
-
-    if (run?)
-      @result.set_score(score)
-      @result.set_judgement("Success")
-    else
-      @result.set_score(0)
-      @result.set_judgement("Error")
-    end
-    return @result
   end
 end
 
