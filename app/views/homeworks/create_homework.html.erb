@@ -1,1 +1,30 @@
 <h1>Create Homework Page</h1>
+
+<%= @user.user_name %>
+<%= @course.course_name %>
+
+<% flash.each do |key, msg| %>
+  <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
+<% end %>
+<%= form_tag '/homeworks/create', { :multipart => true } do %>
+  <p>
+    <%= label_tag 'Homework_name'%><br>
+    <%= text_field_tag 'hw_name' %><br>
+    <%= label_tag 'Homework_description'%><br>
+    <%= text_area_tag 'hw_description' %><br>
+    <%= label_tag 'Test input'%><br>
+    <%= file_field_tag 'testcase_input' %><br>
+    <%= label_tag 'Test output'%><br>
+    <%= file_field_tag 'testcase_output' %><br>
+    <%= label_tag 'Due date'%><br>
+    <%= datetime_select(:time, 'due_time') %><br>
+    <%= label_tag 'Release date'%><br>
+    <%= datetime_select(:time, 'release_time') %><br>
+    <%= hidden_field_tag :course_id, @course.id %>
+  </p>
+</p>
+  </p>
+  <p>
+    <%= submit_tag "submissions" %>
+  </p>
+<% end %>
