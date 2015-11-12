@@ -1,19 +1,19 @@
 require_relative 'executor'
-require_relative '../temporary_files_info'
+require_relative 'temporary_files_info'
 require_relative 'execute_result'
 
 class JavaExecutor < Executor
 
   def copy_command
-    "cp #{@program_path} #{TemporaryFilesInfo.get_copied_program_path}"
+    "cp #{@program_path} #{@temp_files.get_copied_program_path}"
   end
 
   def compile_command
-    "javac #{TemporaryFilesInfo.get_copied_program_path} -d #{TemporaryFilesInfo.get_runnable_path} 2> #{TemporaryFilesInfo.get_compile_message_path}"
+    "javac #{@temp_files.get_copied_program_path} -d #{@temp_files.get_runnable_path} 2> #{@temp_files.get_compile_message_path}"
   end
   
   def run_command
-    "sh #{@relative_path}/run.sh #{TemporaryFilesInfo.get_runnable_path} #{@input_path} #{TemporaryFilesInfo.get_program_output_path}"
+    "sh #{@relative_path}/run.sh #{@temp_files.get_runnable_path} #{@input_path} #{@temp_files.get_program_output_path}"
   end
 
   def total_line_command
@@ -21,13 +21,13 @@ class JavaExecutor < Executor
   end
 
   def diff_line_command
-    "sh #{@relative_path}/count_diff.sh #{@output_path} #{TemporaryFilesInfo.get_program_output_path}"
+    "sh #{@relative_path}/count_diff.sh #{@output_path} #{@temp_files.get_program_output_path}"
   end
 
   def compile
     `#{copy_command}`
     `#{compile_command}`
-    file = File.new(TemporaryFilesInfo.get_compile_message_path, "r")
+    file = File.new(@temp_files.get_compile_message_path, "r")
     message = ""
     while (line = file.gets)
       message += line
@@ -49,26 +49,24 @@ class JavaExecutor < Executor
   end
 
   def execute
-    @mutex.synchronize do
-      @relative_path = File.dirname(__FILE__)
-      @result = ExecuteResult.new()
-      @result.set_message(compile)
-  
-      if (@result.has_message?)
-        @result.set_score(0)
-        @result.set_judgement("Compile Error")
-        return @result
-      end
-  
-      if (run?)
-        @result.set_score(score)
-        @result.set_judgement("Success")
-      else
-        @result.set_score(0)
-        @result.set_judgement("Error")
-      end
+    @relative_path = File.dirname(__FILE__)
+    @result = ExecuteResult.new()
+    @result.set_message(compile)
+
+    if (@result.has_message?)
+      @result.set_score(0)
+      @result.set_judgement("Compile Error")
       return @result
     end
+
+    if (run?)
+      @result.set_score(score)
+      @result.set_judgement("Success")
+    else
+      @result.set_score(0)
+      @result.set_judgement("Error")
+    end
+    return @result
   end
 end
 
