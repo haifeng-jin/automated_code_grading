@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024053555) do
+ActiveRecord::Schema.define(version: 20151112063322) do
 
   create_table "announcements", force: :cascade do |t|
     t.text     "announcement_description"
@@ -25,8 +25,9 @@ ActiveRecord::Schema.define(version: 20151024053555) do
   create_table "course_to_homeworks", force: :cascade do |t|
     t.integer  "course_id"
     t.integer  "homework_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "hw_test_case_dir"
   end
 
   add_index "course_to_homeworks", ["course_id"], name: "index_course_to_homeworks_on_course_id"
@@ -53,9 +54,8 @@ ActiveRecord::Schema.define(version: 20151024053555) do
     t.text     "hw_description"
     t.datetime "hw_release_time"
     t.datetime "hw_due_time"
-    t.string   "hw_test_case_dir", limit: 2047
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 20151024053555) do
     t.integer  "user_id"
     t.integer  "course_id"
     t.float    "sm_grade"
-    t.datetime "sm_time"
     t.string   "sm_src_dir",  limit: 2047
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false

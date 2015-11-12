@@ -19,5 +19,6 @@
 #Ignore all RubyMine configuration files
 /.idea/
 .DS_Store
+*~
 *.backup
 /UPLOAD
