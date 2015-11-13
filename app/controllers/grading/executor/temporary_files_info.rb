@@ -3,11 +3,20 @@ class TemporaryFilesInfo
   def initialize(temp_path)
     @temp_path = temp_path
     @runnable_path = @temp_path;
-    @compile_message_path = @temp_path + "/message"
-    @program_output_path = @temp_path + "/output2"
+    @compile_message_path = @temp_path + "/compile_message"
+    @program_output_path = @temp_path + "/output"
     @copied_program_path = @temp_path + "/Main.java"
+    @error_path = @temp_path + "/runtime_error"
   end
   
+  def get_temp_path
+    @temp_path
+  end
+
+  def get_error_path
+    @error_path
+  end
+
   def get_copied_program_path
     @copied_program_path
   end
