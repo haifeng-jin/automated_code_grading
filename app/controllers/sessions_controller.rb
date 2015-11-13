@@ -16,4 +16,11 @@ class SessionsController < ApplicationController
     else render 'new'
     end
   end
+
+  def destroy
+    reset_session
+    render 'new'
+  end
+
 end
+
