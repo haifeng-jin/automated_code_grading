@@ -1,4 +1,3 @@
-require_relative 'executor/java_executor'
 require_relative 'executor_factory'
 
 # How to use this demo
@@ -33,3 +32,9 @@ show(ExecutorFactory.get_executor("/home/rainydays/Desktop/temp", "java", "~/Des
 
 puts "Low Score Example:"
 show(ExecutorFactory.get_executor("/home/rainydays/Desktop/temp", "java", "~/Desktop/low_score/Main.java","~/Desktop/input","~/Desktop/output").execute)
+
+puts "Memory Limit Exceeded Example:"
+show(ExecutorFactory.get_executor("/home/rainydays/Desktop/temp", "java", "~/Desktop/mle/Main.java","~/Desktop/input","~/Desktop/output").execute)
+
+puts "Time Limit Exceeded Example:"
+show(ExecutorFactory.get_executor("/home/rainydays/Desktop/temp", "java", "~/Desktop/tle/Main.java","~/Desktop/input","~/Desktop/output").execute)

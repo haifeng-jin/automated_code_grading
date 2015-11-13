@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd $1
-java Main < $2 > $3
+java -Xmx256m Main < $2 > $3 2> $4
