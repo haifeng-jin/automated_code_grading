@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112063322) do
+ActiveRecord::Schema.define(version: 20151113224306) do
 
   create_table "announcements", force: :cascade do |t|
     t.text     "announcement_description"
@@ -63,9 +63,10 @@ ActiveRecord::Schema.define(version: 20151112063322) do
     t.integer  "user_id"
     t.integer  "course_id"
     t.float    "sm_grade"
-    t.string   "sm_src_dir",  limit: 2047
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "sm_src_dir",   limit: 2047
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "sm_judgement"
   end
 
   add_index "submissions", ["course_id"], name: "index_submissions_on_course_id"

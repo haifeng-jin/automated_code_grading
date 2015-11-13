@@ -74,9 +74,9 @@ class SubmissionsController < ApplicationController
     #`cp #{Rails.root.to_s + '/' + path_file} #{Rails.root.to_s + '/' + directory + '/main.java'}`
 
     testcase_path = Rails.root.to_s + '/' + @courseToHomework.hw_test_case_dir + '/'
-    grading_result = ExecutorFactory.get_executor("java", Rails.root.to_s + '/' + directory, Rails.root.to_s + '/' + path_file, testcase_path + 'input', testcase_path + 'output').execute
+    grading_result = ExecutorFactory.get_executor(Rails.root.to_s + '/' + directory, "java", Rails.root.to_s + '/' + path_file, testcase_path + 'input', testcase_path + 'output').execute
     @submission[:sm_grade] = grading_result.get_score
-
+    @submission[:sm_judgement] = grading_result.get_judgement
     @submission[:sm_src_dir] = path_file
 
     @submission.save

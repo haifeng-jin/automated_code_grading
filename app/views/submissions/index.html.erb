@@ -8,9 +8,10 @@
       <th>Homework</th>
       <th>User</th>
       <th>Course</th>
-      <th>Sm grade</th>
-      <th>Sm time</th>
-      <th>Sm src dir</th>
+      <th>Sm_grade</th>
+      <th>Sm_judgement</th>
+      <th>Sm_time</th>
+      <th>Sm_src_dir</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
         <td><%= submission.user %></td>
         <td><%= submission.course %></td>
         <td><%= submission.sm_grade %></td>
+        <td><%= submission.sm_judgement%></td>
         <td><%= submission.created_at%></td>
         <td><%= submission.sm_src_dir %></td>
         <td><%= link_to 'Show', submission %></td>
