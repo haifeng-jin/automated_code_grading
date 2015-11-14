@@ -20,13 +20,7 @@
 
   <%= stylesheet_link_tag "bootstrap-cerulean.min" %>
   <%= stylesheet_link_tag "charisma-app" %>
-  <%= stylesheet_link_tag "jquery.noty" %>
-  <%= stylesheet_link_tag "noty_theme_default" %>
-  <%= stylesheet_link_tag "elfinder.min" %>
-  <%= stylesheet_link_tag "elfinder.theme" %>
-  <%= stylesheet_link_tag "jquery.iphone.toggle" %>
-  <%= stylesheet_link_tag "uploadify" %>
-  <%= stylesheet_link_tag "animate.min" %>
+
 
 
   <!-- The styles -->
@@ -62,13 +56,13 @@
     <!-- user dropdown starts -->
     <div class="btn-group pull-right">
       <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
+        <%= @user.user_name %>
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
         <li><a href="#">Profile</a></li>
         <li class="divider"></li>
-        <li><a href="login.html">Logout</a></li>
+        <li><a href=logout>Logout</a></li>
       </ul>
     </div>
     <!-- user dropdown ends -->
@@ -105,7 +99,7 @@
             </li>
             <li><a class="ajax-link" href="homeworktable.html"><i class="glyphicon glyphicon-list-alt"></i><span> Homework History</span></a></li>
             <li><a class="ajax-link" href="studenttable.html"><i class="glyphicon glyphicon-eye-open"></i><span> Student History</span></a></li>
-            <li><a href="login.html"><i class="glyphicon glyphicon-off"></i><span> Logout</span></a></li>
+            <li><a href=logout><i class="glyphicon glyphicon-off"></i><span> Logout</span></a></li>
           </ul>
         </div>
       </div>
@@ -149,15 +143,14 @@
               <% end %>
               <div class="row">
                 <div class="col-md-6">
-                  <h4>Instructor</h4>
-                  <%= @user.user_name %>
+
                   <h4>Course Name</h4><%= @course.course_name %>
               <%= form_tag '/homeworks/create', { :multipart => true } do %>
                     <p>
                       <h3>Homework Name</h3>
-                    <%= text_field_tag 'hw_name','',size:25 %>
+                    <%= text_area_tag 'hw_name','',size:25 %>
                     <h3>Homework Description</h3>
-                    <%=text_area_tag 'hw_descriotion', nil, rows: 12, cols: 120 , placeholder: "Create Your Note..."%>
+                    <%=text_area_tag 'hw_descriotion', nil, rows: 8, cols: 120 , placeholder: "Create Your Note..."%>
                       <div class="row">
                         <div class="col-md-6">
                     <h4> Test input </h4>
