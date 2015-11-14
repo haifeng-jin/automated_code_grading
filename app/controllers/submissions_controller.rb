@@ -25,17 +25,26 @@ class SubmissionsController < ApplicationController
   def edit
   end
 
+  def time_diff_string(diff_sec)
+    mm, ss = diff_sec.divmod(60)
+    hh, mm = mm.divmod(60)
+    dd, hh = hh.divmod(24)
+    diff_string = "%d days, %d hours, %d minutes and %d seconds" % [dd, hh, mm, ss]
+    return diff_string
+  end
+
   # Home submission for students
   def submit_homework
     @user = User.find(session[:user_id])
     @course = Course.find(params[:course_id])
     @homework = Homework.find(params[:homework_id])
-
-
+    @time_left = time_diff_string(@homework.hw_due_time - Time.new)
   end
 
-  # POST /submissions
-  # POST /submissions.json
+  def submission_history
+    @username = User.find(session[:user_id]).user_name
+    @submissions = Submission.where(:user_id => session[:user_id]).where(:course_id => params[:course_id]).where(:homework_id => params[:homework_id]) 
+  end
 
   def mkdir(directory)
     token = directory.split('/')
