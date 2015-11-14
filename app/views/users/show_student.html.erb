@@ -164,7 +164,6 @@
                       <th class="sort-alpha">Grade</th>
                       <th>View</th>
                       <th>Submission History</th>
-                      <th>Submit Homework</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -176,18 +175,21 @@
                               <td><%= hw.hw_due_time %></td>
                               <td></td>
                               <td></td>
-                              <td>
-                                <a class="btn btn-success" href="student view assignment.html">
+                            <td class="center">
+                            <%= link_to submit_homework_path(:course_id => course.id, :homework_id => hw.id) do%>
+                                <button type="button" class="btn btn-success">
                                   <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                                   View
-                                </a>
-                              </td>
-                          <td><%= link_to submission_history_path(:course_id => course.id, :homework_id => hw.id) do%>
-                                <button type="button" class="btn btn-danger">Submit</button>
+                                </button>
                             <% end %></td>
-                              <td><%= link_to submit_homework_path(:course_id => course.id, :homework_id => hw.id) do%>
-                                    <button type="button" class="btn btn-danger">Submit</button>
-                                <% end %></td>
+                          <td class="center">
+                            <%= link_to submission_history_path(:course_id => course.id, :homework_id => hw.id) do%>
+                                <button type="button" class="btn btn-info">
+                                  <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                                  Submission History
+                                </button>
+                            <% end %>
+                          </td>
                         </tr>
                     <% end %>
 

@@ -1,20 +1,179 @@
-<h1>Submit Homework Page</h1>
-<%= @user.user_name %>
-<%= @course.course_name %>
-<%= @homework.hw_name %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+      ===
+      This comment should NOT be removed.
 
+      Charisma v2.0.0
 
+      Copyright 2012-2014 Muhammad Usman
+      Licensed under the Apache License v2.0
+      http://www.apache.org/licenses/LICENSE-2.0
 
-<% flash.each do |key, msg| %>
-    <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
-<% end %>
-<%= form_tag '/submissions/create', { :multipart => true } do %>
-    <p>
-      <%= file_field_tag 'file' %>
-      <%= hidden_field_tag :course_id, @course.id %>
-      <%= hidden_field_tag :homework_id, @homework.id %>
-    </p>
-    <p>
-      <%= submit_tag "submissions" %>
-    </p>
-<% end %>
+      http://usman.it
+      http://twitter.com/halalit_usman
+      ===
+  -->
+  <meta charset="utf-8">
+  <title>Student Main</title>
+  <!-- The styles -->
+  <%= stylesheet_link_tag "bootstrap-cerulean.min" %>
+  <%= stylesheet_link_tag "charisma-app" %>
+
+  <!-- The fav icon -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+</head>
+<body>
+<!-- topbar starts -->
+<div class="navbar navbar-default" role="navigation">
+  <div class="navbar-inner">
+    <button type="button" class="navbar-toggle pull-left animated flip">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="index.html">
+      <img alt="Charisma Logo" src="img/logo16.ico" class="hidden-xs" />
+      <span>Welcome!</span>
+    </a>
+    <!-- user dropdown starts -->
+    <div class="btn-group pull-right">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">Profile</a></li>
+        <li class="divider"></li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+    </div>
+    <!-- user dropdown ends -->
+    <ul class="collapse navbar-collapse nav navbar-nav top-menu">
+      <li><a href="http://www.google.com/"><i class="glyphicon glyphicon-globe"></i> Visit Site</a></li>
+      <li>
+        <form class="navbar-search pull-left">
+          <input placeholder="Search" class="search-query form-control col-md-10" name="query"
+                 type="text">
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- topbar ends -->
+<div class="ch-container" style="width: 1200px; margin: 0 auto;">
+  <div class="row">
+    <noscript>
+      <div class="alert alert-block col-md-12">
+        <h4 class="alert-heading">Warning!</h4>
+        <p>
+          You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+          enabled to use this site.
+        </p>
+      </div>
+    </noscript>
+    <div id="content">
+      <!-- content starts -->
+      <div>
+        <ul class="breadcrumb">
+          <li>
+            <a href=show_student>Home</a>
+          </li>
+          <li>
+            View <%= @homework.hw_name%>
+          </li>
+        </ul>
+      </div>
+      <h2>Welcome,<%= @user.user_name%></h2>
+      <div class="row">
+        <div class="box">
+          <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+              <h2><i class="glyphicon glyphicon-user"></i> <%= @homework.hw_name%></h2>
+            </div>
+            <div class="box-content">
+              <div class="clearfix"></div><br>
+              <form>
+                <center>
+                  <h2><%= @homework.hw_name %>
+                  </h2>
+                </center>
+              </form>
+
+              <center>
+                <div class="clearfix"></div><br>
+                <form action="/html/tags/html_form_tag_action.cfm" method="post">
+
+                  <div class="box-content row" style="width: 50%; text-align: justify; ">
+                    BDD, TDD Cycle
+                    In this assignment you will use a combination of Behavior-Driven Design (BDD) and Test-Driven Development (TDD) with the Cucumber and RSpec tools to add a "find movies with same director" feature to RottenPotatoes, and deploy the resulting app on Heroku.
+
+                    To get the initial RottenPotatoes code please clone this bdd-tdd-cycle GitHub repo as follows:
+
+                    git clone https://github.com/saasbook/bdd-tdd-cycle
+
+                    Please now follow the instructions below to get setup:
+
+                    1) Change into the rottenpotatoes directory: cd bdd-tdd-cycle/rottenpotatoes
+                    2) Run bundle install --without production to make sure all gems are properly installed.
+                    3) Run bundle exec rake db:migrate to apply database migrations.
+                    4) Finally, run these commands to set up the Cucumber directories (under features/) and RSpec directories (under spec/) if they don't already exist, allowing overwrite of any existing files:
+
+                    rails generate cucumber:install capybara
+                    rails generate cucumber_rails_training_wheels:install
+                    rails generate rspec:install
+                    5) You can double-check if everything was installed by running the tasks rake spec and rake cucumber.
+
+                    Since presumably you have no features or specs yet, both tasks should execute correctly reporting that there are zero tests to run. Depending on your version of rspec, it may also display a message stating that it was not able to find any _spec.rb files.
+                  </div>
+                </form>
+              </center>
+              <center>
+                <h4>Status:1 day 11 hours remaining </h4>
+                <h4>Test Results: </h4>
+                <h4>Compile Error: </h4>
+                <h4>Check first line </h4>
+              </center>
+              <div class="clearfix"></div><br>
+
+              <center>
+              <div>
+                <p class="center col-md-5">
+                  <% flash.each do |key, msg| %>
+                      <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
+                  <% end %>
+                  <%= form_tag '/submissions/create', { :multipart => true } do %>
+                    <p>
+                      <%= file_field_tag 'file' %>
+                      <%= hidden_field_tag :course_id, @course.id %>
+                      <%= hidden_field_tag :homework_id, @homework.id %>
+                    </p>
+                    <p>
+                      <button class="btn btn-primary" style="width:200px">Submit</button>
+                    </p>
+                <% end %>
+                </p>
+                </div>
+               </center>
+              <form action="student submission history.html">
+                <p class="center col-md-5">
+                  <button type="submit" id="view my submission button" class="btn btn-primary" style="width:200px">View my submission</button>
+                </p>
+              </form>
+              <form action="student index.html">
+                <p class="center col-md-5">
+                  <button class="btn btn-primary" style="width:200px">Back</button>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!--/.fluid-container-->
+
+</body>
+</html>
