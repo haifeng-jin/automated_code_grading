@@ -29,7 +29,11 @@
   <![endif]-->
   <!-- The fav icon -->
   <link rel="shortcut icon" href="img/favicon.ico">
-
+  <style>
+      table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
+      content: " \25B4\25BE"
+  }
+  </style>
 </head>
 <body>
 <!-- topbar starts -->
@@ -116,30 +120,28 @@
               </div>
 
               <% @user.courses.each do |course| %>
-                  <table
-                  <% if course.id == @user.courses.first.id %>
-                  id="course_<%= course.id %>"
-                         class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+                  <table  id="course_<%= course.id %>"
+                          class="table table-striped table-bordered bootstrap-datatable datatable responsive"
+                  <% if course.id != @user.courses.first.id %>
+                          style="display: none">
                   <% else %>
-                      id="course_<%= course.id %>"
-                             class="table table-striped table-bordered bootstrap-datatable datatable responsive"
-                             style="display: none">
+                            >
                   <% end %>
                 <thead>
                 <tr>
-                  <th>Homework</th>
+                  <th class="sort-alpha">Homework</th>
                   <th>Description</th>
-                  <th>ReleaseTime</th>
-                  <th>Deadline</th>
-                  <th>Status</th>
-                  <th>Grade</th>
+                  <th class="sort-alpha">ReleaseTime</th>
+                  <th class="sort-alpha">Deadline</th>
+                  <th class="sort-alpha">Status</th>
+                  <th class="sort-alpha">Grade</th>
                   <th>View</th>
                   <th>Submission History</th>
                   <th>Submit Homework</th>
                 </tr>
                 </thead>
                 <tbody>
-                <% course.homeworks.each do |hw|%>
+                <% course.homeworks.where("homeworks.hw_release_time <= CURRENT_TIMESTAMP").each do |hw|%>
                     <tr>
                           <td><%= hw.hw_name %></td>
                           <td><%= hw.hw_description %></td>
@@ -191,6 +193,7 @@
             return false; });
     <% end %>
 </script>
+
 
 </body>
 </html>
