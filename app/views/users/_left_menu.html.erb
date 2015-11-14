@@ -11,12 +11,12 @@
               <a class="ajax-link" href=show_instructor><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
             </li>
             <li>
-              <%= link_to create_homework_path(:course_id => 1, :homework_id => 1) do %>
+              <%= link_to create_homework_path() do %>
                   <span class="glyphicon glyphicon-edit"></span> Assign New Homework
               <% end %>
             </li>
             <li>
-              <%= link_to homework_history_path(:course_id => 1, :homework_id => 1) do %>
+              <%= link_to homework_history_path() do %>
                   <span class="glyphicon glyphicon-list-alt"></span> Homework History
               <%end%>
             </li>

@@ -34,7 +34,6 @@ class HomeworksController < ApplicationController
       redirect_to login_path
     else
       @user = User.find(session[:user_id])
-      @course = Course.find(params[:course_id])
     end
   end
 
@@ -43,7 +42,6 @@ class HomeworksController < ApplicationController
       redirect_to login_path
     else
       @user = User.find(session[:user_id])
-      @course = Course.find(params[:course_id])
     end
   end
 

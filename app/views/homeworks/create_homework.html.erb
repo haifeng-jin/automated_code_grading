@@ -40,7 +40,6 @@
               <div class="row">
                 <div class="col-md-6">
 
-
                   <div class="dropdown">
                     Course:
                     <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -53,7 +52,10 @@
                       <% end %>
                     </ul>
                   </div>
+
               <%= form_tag '/homeworks/create', { :multipart => true } do %>
+
+
                     <p>
                       <h3>Homework Name</h3>
                     <%= text_field_tag 'hw_name','',size:15 %>
@@ -73,16 +75,19 @@
                     <%= datetime_select(:time, 'due_time') %>
                     <h4>Release date</h4>
                     <%= datetime_select(:time, 'release_time') %>
-                    <%= hidden_field_tag :course_id, @course.id %>
-                  </p>
-                  </p>
-                  </p>
-                    <p class="col-md-5">
-                      <%= submit_tag "Submissions", class: "btn btn-primary"%>
-                    </p>
-                    <p class="col-md-5">
-                      <button class="btn btn-primary" style="width:106px">Cancel</button>
-                    </p>
+                      <input type="hidden" id="course_id" name="course_id" value="1">
+
+                      <br/>
+                      <br/>
+                      <div class="row">
+                        <div  class="col-md-3">
+                          <%= submit_tag "Submit", class: "btn btn-primary"%>
+                        </div>
+                        <div  class="col-md-3">
+                          <button class="btn btn-default" style="width:106px">Cancel</button>
+                        </div>
+
+                      </div>
 
               <% end %>
                   </div>
@@ -99,6 +104,9 @@
         $('#course_displayed').html('<%= course.course_name %>')
                 .attr('aria-expanded', 'false');
         $('.open').attr('class', 'dropdown');
+
+        $('#course_id').attr('value', '<%= course.id %>')
+        
         return false; });
     <% end %>
 </script>
