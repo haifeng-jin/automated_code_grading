@@ -16,22 +16,29 @@
       ===
   -->
   <meta charset="utf-8">
-  <title>Instructor Homework History</title>
+  <title>Instructor View Homework</title>
+
   <!-- The styles -->
   <%= stylesheet_link_tag "bootstrap-cerulean.min" %>
   <%= stylesheet_link_tag "charisma-app" %>
+
   <!-- jQuery -->
   <script src="bower_components/jquery/jquery.min.js"></script>
+
   <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+
   <!-- The fav icon -->
   <link rel="shortcut icon" href="img/favicon.ico">
+
 </head>
+
 <body>
 <!-- topbar starts -->
 <div class="navbar navbar-default" role="navigation">
+
   <div class="navbar-inner">
     <button type="button" class="navbar-toggle pull-left animated flip">
       <span class="sr-only">Toggle navigation</span>
@@ -39,10 +46,9 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href=show_instructor>
-      <img alt="Charisma Logo" src="img/logo16.ico" class="hidden-xs" />
-      <span>Welcome!</span>
-    </a>
+    <a class="navbar-brand" href="index.html"> <img alt="Charisma Logo" src="img/logo16.ico" class="hidden-xs"/>
+      <span>Welcome!</span></a>
+
     <!-- user dropdown starts -->
     <div class="btn-group pull-right">
       <%= link_to logout_path do%>
@@ -53,6 +59,7 @@
       <% end %>
     </div>
     <!-- user dropdown ends -->
+
     <ul class="collapse navbar-collapse nav navbar-nav top-menu">
       <li><a href="http://www.google.com/"><i class="glyphicon glyphicon-globe"></i> Visit Site</a></li>
       <li>
@@ -62,6 +69,7 @@
         </form>
       </li>
     </ul>
+
   </div>
 </div>
 <!-- topbar ends -->
@@ -92,7 +100,7 @@
             <li>
               <a class="ajax-link" href=view_students><i class="glyphicon glyphicon-eye-open"></i><span> Students </span></a>
             </li>
-            <li><a href="login.html"><i class="glyphicon glyphicon-off"></i><span> Logout</span></a></li>
+            <li><a href=logout><i class="glyphicon glyphicon-off"></i><span> Logout</span></a></li>
           </ul>
         </div>
       </div>
@@ -116,7 +124,12 @@
             <a href=show_instructor>Home</a>
           </li>
           <li>
-            Homework History
+            <%= link_to homework_history_path(:course_id => 1, :homework_id => 1) do %>
+                <span class="glyphicon glyphicon-list-alt"></span> Homework History
+            <%end%>
+          </li>
+          <li>
+            <%= @homework.hw_name%>
           </li>
         </ul>
       </div>
@@ -124,93 +137,56 @@
         <div class="box col-md-12">
           <div class="box-inner">
             <div class="box-header well" data-original-title="">
-              <h2><i class="glyphicon glyphicon-user"></i> Homework History</h2>
+              <h2><i class="glyphicon glyphicon-user"></i> <%= @homework.hw_name%> Description</h2>
             </div>
-            <br>
-            <div class="dropdown">
-              <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <%= @user.courses.first.course_name %>
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <% @user.courses.each do |course| %>
-                    <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
-                <% end %>
-              </ul>
-            </div>
-            <br>
-            <% @user.courses.each do |course| %>
-                <table  id="hw_course_<%= course.id %>"
-                        class="table table-striped table-bordered bootstrap-datatable datatable responsive"
-                        <% if course.id != @user.courses.first.id %>
-                        style="display: none">
-                <% else %>
-                >
-                <% end %>
+            <div class="box-content">
+              <div class="clearfix"></div><br>
+              <form>
+                <center>
+                  <h2><%= @homework.hw_name%></h2>
+                </center>
+              </form>
 
+              <center>
+                <div class="clearfix"></div><br>
+                <form action="/html/tags/html_form_tag_action.cfm" method="post">
 
-                <thead>
-                <tr>
-                  <th>Homework</th>
-                  <th>Release Date</th>
-                  <th>Due Date</th>
-                  <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% course.homeworks.each do |hw| %>
-                    <tr>
-                      <td><%= hw.hw_name %></td>
-                      <td><%= hw.hw_release_time %></td>
-                      <td><%= hw.hw_due_time %></td>
-                      <td class="center">
-                        <%= link_to view_assignment_path(:course_id => course.id, :homework_id => hw.id) do%>
-                            <button type="button" class="btn btn-success">
-                              <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                              View
-                            </button>
-                        <% end %>
-                        <%= link_to edit_homework_path(:course_id => course.id, :homework_id => hw.id) do%>
-                            <button type="button" class="btn btn-info">
-                              <i class="glyphicon glyphicon-edit icon-white"></i>
-                              Edit
-                            </button>
-                        <% end %>
-                        <a class="btn btn-danger" href="#">
-                          <i class="glyphicon glyphicon-trash icon-white"></i>
-                          Delete
-                        </a>
-                      </td>
-                    </tr>
-                    <%end%>
-                </tbody>
-
-
-                </tbody>
-              </table>
-            <% end %>
+                  <div class="box-content row" style="width: 50%; text-align: justify; ">
+                    <%=@homework.hw_description%>
+                  </div>
+                  <div class="clearfix"></div><br>
+                </form>
+              </center>
+              <center>
+                <h3>Status:<%= @time_left%> </h3>
+                <h3>80/100 students has submited </h3>
+                <h3>Average Grade: 80/100 </h3>
+              </center>
+              <div class="clearfix"></div><br>
+              <tbody>
+                 <%= link_to edit_homework_path( :homework_id => @homework.id) do %>
+                     <center> <button type="button" class="btn btn-success">
+                    <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                    View
+                  </button>
+                         </center>
+                      <%end%>
+              </tbody>
+              <br>
+              <form action=show_instructor>
+                <p class="center col-md-5">
+                  <button class="btn btn-primary" style="width:70px">Back</button>
+                </p>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div><!--/.fluid-container-->
-<!-- external javascript -->
-<script>
-    <% @user.courses.each do |course| %>
-    $('#dropdown_<%= course.id%>').click(function(){
-        $('#course_displayed').html('<%= course.course_name %>')
-                .attr('aria-expanded', 'false');
-        $('.open').attr('class', 'dropdown');
-        $('table').hide();
-        $('#hw_course_<%= course.id %>').show();
-        return false; });
-    <% end %>
-</script>
+</div>
+
+
 
 </body>
 </html>
-
-
-
