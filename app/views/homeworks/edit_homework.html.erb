@@ -1,0 +1,68 @@
+<div class="row">
+  <noscript>
+    <div class="alert alert-block col-md-12">
+      <h4 class="alert-heading">Warning!</h4>
+      <p>
+        You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+        enabled to use this site.
+      </p>
+    </div>
+  </noscript>
+  <div id="content" class="col-lg-10 col-sm-10">
+    <!-- content starts -->
+    <div>
+      <ul class="breadcrumb">
+        <li>
+          <a href=show_instructor>Home</a>
+        </li>
+        <li>
+          Edit Homework
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="box col-md-12">
+        <div class="box-inner">
+          <div class="box-header well" data-original-title="">
+            <h2><i class="glyphicon glyphicon-user"></i> <%=@homework.hw_name%> Description</h2>
+          </div>
+          <div class="box-content">
+            <div class="clearfix"></div><br>
+            <form>
+              <center>
+                <h2><%=@homework.hw_name%></h2>
+              </center>
+            </form>
+
+            <center>
+              <div class="clearfix"></div><br>
+              <form action="/html/tags/html_form_tag_action.cfm" method="post">
+
+                                 <textarea name="contents" id="contents" style="width: 50%;text-align:justify; padding: 2%; height: 500px; font:20px italic; border: 10px double gray; ">
+<%=@homework.hw_description%>
+                                  </textarea><br>
+                <div class="clearfix"></div><br>
+              </form>
+            </center>
+            <center>
+              <div class="form-group">
+                <label for="exampleInputFile">Upload testcase</label>
+                <input type="file" id="upload file" name="upload file"/>
+              </div>
+            </center>
+            <form action="homeworktable.html">
+              <p class="center col-md-5">
+                <button type="submit" id="finish button" class="btn btn-primary" style="width:150px">Finish</button>
+              </p>
+            </form>
+            <form action=show_instructor>
+              <p class="center col-md-5">
+                <button class="btn btn-primary" style="width:150px">Cancel</button>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
