@@ -41,17 +41,17 @@ class HomeworksController < ApplicationController
     @homework = Homework.new
     @homework[:hw_name] = params[:hw_name]
     @homework[:hw_description] = params[:hw_description]
-    due_time = DateTime.new(params[:time]["due_time(1i)"].to_i, 
+    due_time = Time.zone.local(params[:time]["due_time(1i)"].to_i,
                             params[:time]["due_time(2i)"].to_i,
                             params[:time]["due_time(3i)"].to_i,
                             params[:time]["due_time(4i)"].to_i,
                             params[:time]["due_time(5i)"].to_i)
-    release_time = DateTime.new(params[:time]["release_time(1i)"].to_i, 
+    release_time = Time.zone.local(params[:time]["release_time(1i)"].to_i,
                             params[:time]["release_time(2i)"].to_i,
                             params[:time]["release_time(3i)"].to_i,
                             params[:time]["release_time(4i)"].to_i,
                             params[:time]["release_time(5i)"].to_i)
-    @homework[:hw_release_time] = release_time 
+    @homework[:hw_release_time] = release_time
     @homework[:hw_due_time] = due_time 
     @homework.save
 

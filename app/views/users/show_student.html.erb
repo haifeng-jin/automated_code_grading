@@ -141,7 +141,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% course.homeworks.where("homeworks.hw_release_time <= CURRENT_TIMESTAMP").each do |hw|%>
+                <% course.homeworks.where(["homeworks.hw_release_time <= ?", Time.zone.now]).each do |hw|%>
                     <tr>
                           <td><%= hw.hw_name %></td>
                           <td><%= hw.hw_description %></td>
