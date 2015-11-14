@@ -1,36 +1,6 @@
 <div class="row">
 
-  <!-- left menu starts -->
-  <div class="col-sm-2 col-lg-2">
-    <div class="sidebar-nav">
-      <div class="nav-canvas">
-        <div class="nav-sm nav nav-stacked">
-        </div>
-        <ul class="nav nav-pills nav-stacked main-menu">
-          <li class="nav-header">Main</li>
-          <li>
-            <a class="ajax-link" href=show_instructor><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
-          </li>
-          <li>
-            <%= link_to create_homework_path(:course_id => 1, :homework_id => 1) do %>
-                <span class="glyphicon glyphicon-edit"></span> Assign New Homework
-            <% end %>
-          </li>
-          <li>
-            <%= link_to homework_history_path(:course_id => 1, :homework_id => 1) do %>
-                <span class="glyphicon glyphicon-list-alt"></span> Homework History
-            <%end%>
-          </li>
-          <li>
-            <a class="ajax-link" href=view_students><i class="glyphicon glyphicon-eye-open"></i><span> Students </span></a>
-          </li>
-          <li><a href="login.html"><i class="glyphicon glyphicon-off"></i><span> Logout</span></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!--/span-->
-  <!-- left menu ends -->
+
   <noscript>
     <div class="alert alert-block col-md-12">
       <h4 class="alert-heading">Warning!</h4>
@@ -61,7 +31,7 @@
           <br>
           <div class="dropdown">
             <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <%= @user.courses.first.course_name %>
+              <%= @user.courses.first.course_name if @user.courses.first %>
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
