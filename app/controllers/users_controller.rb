@@ -9,7 +9,11 @@ class UsersController < ApplicationController
   end
 
   def show_student
-    @user = User.find(session[:user_id])
+    if(session[:user_id].nil?)
+      redirect_to login_path
+    else
+      @user = User.find(session[:user_id])
+    end
   end
 
   def show_instructor
