@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'signup'             => 'users#new'
   get 'show_student'       => 'users#show_student'
   get 'show_instructor'    => 'users#show_instructor'
+  get 'homework_history'   => 'homeworks#homework_history'
 
   root 'sessions#new'
   get 'display_submission_file' =>'submissions#display_submission'
