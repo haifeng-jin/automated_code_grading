@@ -92,7 +92,11 @@
                   <span class="glyphicon glyphicon-edit"></span> Assign New Homework
               <% end %>
             </li>
-            <li><a class="ajax-link" href="homeworktable.html"><i class="glyphicon glyphicon-list-alt"></i><span> Homework History</span></a></li>
+            <li>
+              <%= link_to homework_history_path(:course_id => 1, :homework_id => 1) do %>
+                  <span class="glyphicon glyphicon-list-alt"></span> Homework History
+                  <%end%>
+            </li>
             <li>
               <%= link_to view_students_path do %>
                   <i class="glyphicon glyphicon-eye-open"></i><span> Students</span>
