@@ -124,17 +124,16 @@
                 </div>
                 <div class="panel-body">
                   <% @user.courses.each do |course| %>
-                      <p id="annm_course_<%= course.id %>" class="annm"
-                              <% if course.id != @user.courses.first.id %>
-                              style="display: none">
+                      <ul id="annm_course_<%= course.id %>" class="annm"
+                          <% if course.id != @user.courses.first.id %>
+                          style="display: none">
                       <% else %>
-                      >
+                          >
                       <% end %>
-
-                      <% course.announcements.each do |annm|%>
-                          <%= annm.announcement_description %>
-                      <% end %>
-                     </p>
+                          <% course.announcements.each do |annm|%>
+                              <li><p><%= annm.announcement_description %></p></li>
+                          <% end %>
+                        </ul>
 
                   <% end %>
                 </div>
@@ -201,6 +200,7 @@
                   </table>
                   <% end %>
                 </div>
+              </div>
             </div>
           </div>
         </div>
