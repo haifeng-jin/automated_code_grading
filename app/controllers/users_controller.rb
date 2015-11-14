@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @students = User.get_students
     if @user.user_role != 'instructor'
       reset_session
-      redirect_to login_path 
+      redirect_to login_path
     end
   end
 

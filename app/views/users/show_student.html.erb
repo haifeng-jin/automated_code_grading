@@ -29,7 +29,6 @@
   <![endif]-->
   <!-- The fav icon -->
   <link rel="shortcut icon" href="img/favicon.ico">
-
 </head>
 <body>
 <!-- topbar starts -->
@@ -100,33 +99,11 @@
               <h2><i class="glyphicon glyphicon-user"></i> Homework</h2>
             </div>
             <div class="box-content">
-
-              <div class="dropdown">
-                <h4>Course:
-                <button id="course_displayed" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <%= @user.courses.first.course_name %>
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <% @user.courses.each do |course| %>
-                  <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
-                  <% end %>
-                </ul>
-                </h4>
-              </div>
-
-              <% @user.courses.each do |course| %>
-                  <table
-                  <% if course.id == @user.courses.first.id %>
-                  id="course_<%= course.id %>"
-                         class="table table-striped table-bordered bootstrap-datatable datatable responsive">
-                  <% else %>
-                      id="course_<%= course.id %>"
-                             class="table table-striped table-bordered bootstrap-datatable datatable responsive"
-                             style="display: none">
-                  <% end %>
+              <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
                 <thead>
                 <tr>
+                  <th>CourseName</th>
+                  <th>CourseID</th>
                   <th>Homework</th>
                   <th>Description</th>
                   <th>ReleaseTime</th>
@@ -139,37 +116,37 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% course.homeworks.each do |hw|%>
+                <% @user.courses.each do |course| %>
                     <tr>
+                      <td><%= course.course_name %></td>
+                      <td><%= course.id %></td>
+                      <% course.homeworks.each do |hw|%>
                           <td><%= hw.hw_name %></td>
                           <td><%= hw.hw_description %></td>
                           <td><%= hw.hw_release_time %></td>
                           <td><%= hw.hw_due_time %></td>
                           <td></td>
                           <td></td>
-                          <td>
+                          <td class="center">
                             <a class="btn btn-success" href="student view assignment.html">
                               <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                               View
                             </a>
                           </td>
-                          <td>
+                          <td class="center">
 
                             <a class="btn btn-info" href="Student submission history.html">
                               <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                               Submission Hisory
                             </a>
                           </td>
-                          <td><%= link_to submit_homework_path(:course_id => course.id, :homework_id => hw.id) do%>
-                                <button type="button" class="btn btn-danger">Submit</button>
-                            <% end %></td>
+                          <td><%= link_to 'Submit_homework', submit_homework_path(:course_id => course.id, :homework_id => hw.id)%></td>
+                      <% end %>
                     </tr>
                 <% end %>
 
-
                 </tbody>
               </table>
-              <% end %>
             </div>
           </div>
         </div>
@@ -179,18 +156,7 @@
 </div><!--/.fluid-container-->
 
 <!-- external javascript -->
-<script>
-    <% @user.courses.each do |course| %>
-        $('#dropdown_<%= course.id%>').click(function(){
-            $('#course_displayed').html('<%= course.course_name %>')
-                    .attr('aria-expanded', 'false');
-            $('.open').attr('class', 'dropdown');
-            $('table').hide();
-            $('#course_<%= course.id %>').show();
 
-            return false; });
-    <% end %>
-</script>
 
 </body>
 </html>
