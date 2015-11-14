@@ -34,21 +34,17 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index.html">
-      <img alt="Charisma Logo" src="img/logo16.ico" class="hidden-xs" />
+    <a class="navbar-brand" href=show_student>
       <span>Welcome!</span>
     </a>
     <!-- user dropdown starts -->
     <div class="btn-group pull-right">
-      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li><a href="#">Profile</a></li>
-        <li class="divider"></li>
-        <li><a href="login.html">Logout</a></li>
-      </ul>
+      <%= link_to logout_path do%>
+          <button type="button" class="btn btn-default">
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+            logout
+          </button>
+      <% end %>
     </div>
     <!-- user dropdown ends -->
     <ul class="collapse navbar-collapse nav navbar-nav top-menu">
@@ -86,12 +82,11 @@
           </li>
         </ul>
       </div>
-      <h2>Welcome,<%= @user.user_name%></h2>
       <div class="row">
         <div class="box">
           <div class="box-inner">
             <div class="box-header well" data-original-title="">
-              <h2><i class="glyphicon glyphicon-user"></i> <%= @homework.hw_name%></h2>
+              <h2><i class="glyphicon glyphicon-book"></i> <%= @homework.hw_name%></h2>
             </div>
             <div class="box-content">
               <div class="clearfix"></div><br>
@@ -111,7 +106,7 @@
                 </form>
               </center>
               <center>
-                <h4>Status:1 day 11 hours remaining </h4>
+                <h4>Status:<%= @time_left%></h4>
                 <h4>Test Results: </h4>
                 <h4>Compile Error: </h4>
                 <h4>Check first line </h4>
@@ -137,11 +132,6 @@
                 </p>
                 </div>
                </center>
-              <form action="student submission history.html">
-                <p class="center col-md-5">
-                  <button type="submit" id="view my submission button" class="btn btn-primary" style="width:200px">View my submission</button>
-                </p>
-              </form>
               <form action=show_student>
                 <p class="center col-md-5">
                   <button class="btn btn-primary" style="width:200px">Back</button>
