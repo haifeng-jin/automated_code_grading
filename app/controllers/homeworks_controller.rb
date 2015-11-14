@@ -39,6 +39,17 @@ class HomeworksController < ApplicationController
     @course = Course.find(params[:course_id])
   end
 
+  def view_assignment
+    @user = User.find(session[:user_id])
+    @course = Course.find(params[:course_id])
+    @homework = Homework.find(params[:homework_id])
+  end
+
+  def edit_homework
+    @homework = Homework.find(params[:homework_id])
+  end
+
+
   def create
     @user = User.find(session[:user_id])
     @course = Course.find(params[:course_id])
