@@ -99,7 +99,9 @@
               <a class="ajax-link" href="index.html"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
             </li>
             <li>
-              <a class="ajax-link" href="new assignment.html"><i class="glyphicon glyphicon-edit"></i><span> Assign New Homework</span></a>
+              <%= link_to create_homework_path(:course_id => 1, :homework_id => 1) do %>
+                  <span class="glyphicon glyphicon-edit"></span> Assign New Homework
+              <% end %>
             </li>
             <li><a class="ajax-link" href="homeworktable.html"><i class="glyphicon glyphicon-list-alt"></i><span> Homework History</span></a></li>
             <li><a class="ajax-link" href="studenttable.html"><i class="glyphicon glyphicon-eye-open"></i><span> Student History</span></a></li>
@@ -147,6 +149,8 @@
           <div class="box-inner">
             <div class="box-header well">
               <h2><i class="glyphicon glyphicon-info-sign"></i> Introduction</h2>
+              <select id="credit_card" name="credit_card"><option>Course1</option>
+                #    <option selected="selected">Course2</option></select>
             </div>
             <div class="box-content row">
               <div class="col-lg-7 col-md-12">

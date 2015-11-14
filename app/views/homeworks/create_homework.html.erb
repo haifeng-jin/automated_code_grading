@@ -1,30 +1,188 @@
-<h1>Create Homework Page</h1>
 
-<%= @user.user_name %>
-<%= @course.course_name %>
+<html lang="en">
+<head>
+  <!--
+      ===
+      This comment should NOT be removed.
 
-<% flash.each do |key, msg| %>
-  <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
-<% end %>
-<%= form_tag '/homeworks/create', { :multipart => true } do %>
-  <p>
-    <%= label_tag 'Homework_name'%><br>
-    <%= text_field_tag 'hw_name' %><br>
-    <%= label_tag 'Homework_description'%><br>
-    <%= text_area_tag 'hw_description' %><br>
-    <%= label_tag 'Test input'%><br>
-    <%= file_field_tag 'testcase_input' %><br>
-    <%= label_tag 'Test output'%><br>
-    <%= file_field_tag 'testcase_output' %><br>
-    <%= label_tag 'Due date'%><br>
-    <%= datetime_select(:time, 'due_time') %><br>
-    <%= label_tag 'Release date'%><br>
-    <%= datetime_select(:time, 'release_time') %><br>
-    <%= hidden_field_tag :course_id, @course.id %>
-  </p>
-</p>
-  </p>
-  <p>
-    <%= submit_tag "submissions" %>
-  </p>
-<% end %>
+      Charisma v2.0.0
+
+      Copyright 2012-2014 Muhammad Usman
+      Licensed under the Apache License v2.0
+      http://www.apache.org/licenses/LICENSE-2.0
+
+      http://usman.it
+      http://twitter.com/halalit_usman
+      ===
+  -->
+  <meta charset="utf-8">
+  <title>Instructor Assign New Homework</title>
+
+  <%= stylesheet_link_tag "bootstrap-cerulean.min" %>
+  <%= stylesheet_link_tag "charisma-app" %>
+  <%= stylesheet_link_tag "jquery.noty" %>
+  <%= stylesheet_link_tag "noty_theme_default" %>
+  <%= stylesheet_link_tag "elfinder.min" %>
+  <%= stylesheet_link_tag "elfinder.theme" %>
+  <%= stylesheet_link_tag "jquery.iphone.toggle" %>
+  <%= stylesheet_link_tag "uploadify" %>
+  <%= stylesheet_link_tag "animate.min" %>
+
+
+  <!-- The styles -->
+
+
+  <!-- jQuery -->
+  <script src="bower_components/jquery/jquery.min.js"></script>
+
+  <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- The fav icon -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+</head>
+
+<body>
+<!-- topbar starts -->
+<div class="navbar navbar-default" role="navigation">
+
+  <div class="navbar-inner">
+    <button type="button" class="navbar-toggle pull-left animated flip">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="index.html"> <img alt="Charisma Logo" src="img/logo16.ico" class="hidden-xs"/>
+      <span>Welcome!</span></a>
+
+    <!-- user dropdown starts -->
+    <div class="btn-group pull-right">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">Profile</a></li>
+        <li class="divider"></li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+    </div>
+    <!-- user dropdown ends -->
+
+    <ul class="collapse navbar-collapse nav navbar-nav top-menu">
+      <li><a href="http://www.google.com/"><i class="glyphicon glyphicon-globe"></i> Visit Site</a></li>
+      <li>
+        <form class="navbar-search pull-left">
+          <input placeholder="Search" class="search-query form-control col-md-10" name="query"
+                 type="text">
+        </form>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<!-- topbar ends -->
+<div class="ch-container">
+  <div class="row">
+
+    <!-- left menu starts -->
+    <div class="col-sm-2 col-lg-2">
+      <div class="sidebar-nav">
+        <div class="nav-canvas">
+          <div class="nav-sm nav nav-stacked">
+          </div>
+          <ul class="nav nav-pills nav-stacked main-menu">
+            <li class="nav-header">Main</li>
+            <li>
+              <a class="ajax-link" href="index.html"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
+            </li>
+            <li>
+              <a class="ajax-link" href="new assignment.html"><i class="glyphicon glyphicon-edit"></i><span> Assign New Homework</span></a>
+            </li>
+            <li><a class="ajax-link" href="homeworktable.html"><i class="glyphicon glyphicon-list-alt"></i><span> Homework History</span></a></li>
+            <li><a class="ajax-link" href="studenttable.html"><i class="glyphicon glyphicon-eye-open"></i><span> Student History</span></a></li>
+            <li><a href="login.html"><i class="glyphicon glyphicon-off"></i><span> Logout</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--/span-->
+    <!-- left menu ends -->
+    <noscript>
+      <div class="alert alert-block col-md-12">
+        <h4 class="alert-heading">Warning!</h4>
+        <p>
+          You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+          enabled to use this site.
+        </p>
+      </div>
+    </noscript>
+    <div id="content" class="col-lg-10 col-sm-10">
+      <!-- content starts -->
+      <div>
+        <ul class="breadcrumb">
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            Assign new homework
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="box col-md-12">
+          <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+              <h2><i class="glyphicon glyphicon-user"></i> Homework Description</h2>
+            </div>
+            <div class="box-content">
+              <div class="clearfix"></div><br>
+
+
+
+              <% flash.each do |key, msg| %>
+                  <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
+              <% end %>
+              <div class="row">
+                <div class="col-md-6">
+                  <h4>Instructor</h4>
+                  <%= @user.user_name %>
+                  <h4>Course Name</h4><%= @course.course_name %>
+              <%= form_tag '/homeworks/create', { :multipart => true } do %>
+                    <p>
+                      <h3>Homework Name</h3>
+                    <%= text_field_tag 'hw_name','',size:25 %>
+                    <h3>Homework Description</h3>
+                    <%=text_area_tag 'hw_descriotion', nil, rows: 12, cols: 120 , placeholder: "Create Your Note..."%>
+                      <div class="row">
+                        <div class="col-md-6">
+                    <h4> Test input </h4>
+                    <%= file_field_tag 'testcase_input' %>
+                        </div>
+                        <div class="col-md-6">
+                    <h4>Test output </h4>
+                    <%= file_field_tag 'testcase_output' %>
+                        </div>
+                      </div>
+                    <h4>Due date   </h4>
+                    <%= datetime_select(:time, 'due_time') %>
+                    <h4>Release date</h4>
+                    <%= datetime_select(:time, 'release_time') %>
+                    <%= hidden_field_tag :course_id, @course.id %>
+                  </p>
+                  </p>
+                  </p>
+                    <p class="col-md-5">
+                      <%= submit_tag "Submissions", class: "btn btn-primary"%>
+                    </p>
+                    <p class="col-md-5">
+                      <button class="btn btn-primary" style="width:106px">Cancel</button>
+                    </p>
+
+              <% end %>
+                  </div>
+              </div>
