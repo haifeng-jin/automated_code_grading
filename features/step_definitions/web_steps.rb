@@ -73,7 +73,7 @@ end
 #     | Note           | Nice guy   |
 #     | Wants Email?   |            |
 #
-# 
+#
 # based on naming conventions.
 #
 When /^(?:|I )fill in the following:$/ do |fields|

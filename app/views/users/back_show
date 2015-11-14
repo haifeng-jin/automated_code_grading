@@ -139,6 +139,7 @@
                 </div>
               </div>
 
+
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   <h3 class="panel-title">Homework</h3>
@@ -155,15 +156,24 @@
                       <% end %>
                     <thead>
                     <tr>
-                      <th class="sort-alpha">Homework</th>
-                      <th>Description</th>
-                      <th class="sort-alpha">ReleaseTime</th>
-                      <th class="sort-alpha">Deadline</th>
-                      <th class="sort-alpha">Status</th>
-                      <th class="sort-alpha">Grade</th>
-                      <th>View</th>
-                      <th>Submission History</th>
-                      <th>Submit Homework</th>
+                          <td><%= hw.hw_name %></td>
+                          <td><%= hw.hw_description %></td>
+                          <td><%= hw.hw_release_time %></td>
+                          <td><%= hw.hw_due_time %></td>
+                          <td></td>
+                          <td></td>
+                          <td>
+                            <a class="btn btn-success" href="student view assignment.html">
+                              <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                              View
+                            </a>
+                          </td>
+                          <td><%= link_to submission_history_path(:course_id => course.id, :homework_id => hw.id) do%>
+                                <button type="button" class="btn btn-danger">Submit</button>
+                            <% end %></td>
+                          <td><%= link_to submit_homework_path(:course_id => course.id, :homework_id => hw.id) do%>
+                                <button type="button" class="btn btn-danger">Submit</button>
+                            <% end %></td>
                     </tr>
                     </thead>
                     <tbody>
@@ -181,9 +191,13 @@
                                   View
                                 </a>
                               </td>
-                          <td><%= link_to submission_history_path(:course_id => course.id, :homework_id => hw.id) do%>
-                                <button type="button" class="btn btn-danger">Submit</button>
-                            <% end %></td>
+                              <td>
+
+                                <a class="btn btn-info" href="Student submission history.html">
+                                  <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                                  Submission Hisory
+                                </a>
+                              </td>
                               <td><%= link_to submit_homework_path(:course_id => course.id, :homework_id => hw.id) do%>
                                     <button type="button" class="btn btn-danger">Submit</button>
                                 <% end %></td>
