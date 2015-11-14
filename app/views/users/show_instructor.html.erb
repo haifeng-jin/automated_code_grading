@@ -91,23 +91,29 @@
           <div class="box-inner">
             <div class="box-header well">
 
-              <h2><i class="glyphicon glyphicon-info-sign"></i> Introduction</h2>
+              <h2><i class="glyphicon glyphicon-info-sign"></i> Announcement</h2>
 
             </div>
             <div class="box-content row">
               <div class="col-lg-7 col-md-12">
-                <h1>
-                  Memo <br>
-                </h1>
-                <p>
-                  1.Assignment1 will be assigned on xx/xx/xxxx.<br>
-                  2.blablablabla<br>
-                </p>
-                <p class="center-block download-buttons">
-                  <a href="#" class="btn btn-default btn-lg">
-                    <i class="glyphicon glyphicon-edit"></i> Edit
-                  </a>
-                </p>
+
+
+
+                    <% @user.courses.each do |course| %>
+                        <h4><%= course.course_name %></h4>
+                        <ul id="annm_course_<%= course.id %>" class="annm"
+                            <% if course.id != @user.courses.first.id %>
+                            style="display: none">
+                        <% else %>
+                        >
+                        <% end %>
+                        <% course.announcements.each do |annm|%>
+                        <li><p><%= annm.announcement_description %></p></li>
+                        <% end %>
+                        </ul>
+
+                    <% end %>
+
               </div>
             </div>
           </div>
