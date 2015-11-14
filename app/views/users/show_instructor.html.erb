@@ -117,26 +117,7 @@
     </noscript>
     <div id="content" class="col-lg-10 col-sm-10">
       <!-- content starts -->
-      <div>
-        <ul class="breadcrumb">
-          <li>
-            Home
-          </li>
-        </ul>
-      </div>
       <div class=" row">
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <a data-toggle="tooltip" class="well top-block" href="studenttable.html">
-            <i class="glyphicon glyphicon-user blue"></i>
-            <div>Students</div>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <a data-toggle="tooltip" class="well top-block" href="homeworktable.html">
-            <i class="glyphicon glyphicon-star green"></i>
-            <div>Homework History</div>
-          </a>
-        </div>
       </div>
       <br>
       <div class="dropdown">
@@ -150,6 +131,62 @@
               <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
           <% end %>
         </ul>
+      </div>
+      <br>
+      <div class=" row">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Homework</h3>
+          </div>
+          <div class="panel-body">
+
+            <% @user.courses.each do |course| %>
+                <table  id="hw_course_<%= course.id %>"
+                        class="table table-striped table-bordered bootstrap-datatable datatable responsive"
+                        <% if course.id != @user.courses.first.id %>
+                        style="display: none">
+                <% else %>
+                >
+                <% end %>
+                <thead>
+                <tr>
+                  <th class="sort-alpha">Homework</th>
+                  <th>Description</th>
+                  <th class="sort-alpha">ReleaseTime</th>
+                  <th class="sort-alpha">Deadline</th>
+                  <th>View</th>
+                  <th>Submission History</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <% course.homeworks.where("homeworks.hw_release_time <= CURRENT_TIMESTAMP").each do |hw|%>
+                    <tr>
+                      <td><%= hw.hw_name %></td>
+                      <td><%= hw.hw_description %></td>
+                      <td><%= hw.hw_release_time %></td>
+                      <td><%= hw.hw_due_time %></td>
+                      <td>
+                        <a class="btn btn-success" href="student view assignment.html">
+                          <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                          View
+                        </a>
+                      </td>
+                      <td>
+
+                        <a class="btn btn-info" href="Student submission history.html">
+                          <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                          Submission Hisory
+                        </a>
+                      </td>
+                    </tr>
+                <% end %>
+
+
+                </tbody>
+                </table>
+            <% end %>
+          </div>
       </div>
       <div class="row">
         <div class="box col-md-12">
@@ -181,59 +218,7 @@
     </div>
   </div>
   </div>
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title">Homework</h3>
-  </div>
-  <div class="panel-body">
 
-    <% @user.courses.each do |course| %>
-        <table  id="hw_course_<%= course.id %>"
-                class="table table-striped table-bordered bootstrap-datatable datatable responsive"
-                <% if course.id != @user.courses.first.id %>
-                style="display: none">
-        <% else %>
-        >
-        <% end %>
-        <thead>
-        <tr>
-          <th class="sort-alpha">Homework</th>
-          <th>Description</th>
-          <th class="sort-alpha">ReleaseTime</th>
-          <th class="sort-alpha">Deadline</th>
-          <th>View</th>
-          <th>Submission History</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <% course.homeworks.where("homeworks.hw_release_time <= CURRENT_TIMESTAMP").each do |hw|%>
-            <tr>
-              <td><%= hw.hw_name %></td>
-              <td><%= hw.hw_description %></td>
-              <td><%= hw.hw_release_time %></td>
-              <td><%= hw.hw_due_time %></td>
-              <td>
-                <a class="btn btn-success" href="student view assignment.html">
-                  <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                  View
-                </a>
-              </td>
-              <td>
-
-                <a class="btn btn-info" href="Student submission history.html">
-                  <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                  Submission Hisory
-                </a>
-              </td>
-            </tr>
-        <% end %>
-
-
-        </tbody>
-        </table>
-    <% end %>
-  </div>
 <%= link_to 'Create_homework', create_homework_path(:course_id => 1, :homework_id => 1)%>
 
   <script>
