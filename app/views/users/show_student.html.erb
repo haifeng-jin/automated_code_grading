@@ -1,16 +1,27 @@
+Skip to content
+This repository
+Pull requests
+Issues
+Gist
+@liz425
+Unwatch 9
+Unstar 3
+Fork 5 jhfjhfj1/automated_code_grading
+Branch: master automated_code_grading/app/views/users/show_student.html.erb
+db9bd7c  20 minutes ago
+@llq76731235 llq76731235 Modify show_student.html.erb
+5 contributors @liz425 @ganyfml @garyko @zhenghaoqian1993 @llq76731235
+RawBlameHistory     229 lines (210 sloc)  8.21 KB
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <!--
       ===
       This comment should NOT be removed.
-
       Charisma v2.0.0
-
       Copyright 2012-2014 Muhammad Usman
       Licensed under the Apache License v2.0
       http://www.apache.org/licenses/LICENSE-2.0
-
       http://usman.it
       http://twitter.com/halalit_usman
       ===
@@ -96,15 +107,15 @@
 
               <div class="dropdown">
                 Course:
-                  <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <%= @user.courses.first.course_name %>
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <% @user.courses.each do |course| %>
-                        <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
-                    <% end %>
-                  </ul>
+                <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <%= @user.courses.first.course_name %>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <% @user.courses.each do |course| %>
+                      <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
+                  <% end %>
+                </ul>
               </div>
 
             </div>
@@ -120,12 +131,12 @@
                           <% if course.id != @user.courses.first.id %>
                           style="display: none">
                       <% else %>
-                          >
+                      >
                       <% end %>
-                          <% course.announcements.each do |annm|%>
-                              <li><p><%= annm.announcement_description %></p></li>
-                          <% end %>
-                        </ul>
+                      <% course.announcements.each do |annm|%>
+                      <li><p><%= annm.announcement_description %></p></li>
+                      <% end %>
+                      </ul>
 
                   <% end %>
                 </div>
@@ -138,14 +149,54 @@
                 </div>
                 <div class="panel-body">
 
-                  <% @user.courses.each do |course| %>
-                      <table  id="hw_course_<%= course.id %>"
+                  <% @courses.each do |course_id, course| %>
+                      <table  id="hw_course_<%= course_id %>"
                               class="table table-striped table-bordered bootstrap-datatable datatable responsive"
-                      <% if course.id != @user.courses.first.id %>
+                              <% if course_id != @courses.keys[0] %>
                               style="display: none">
                       <% else %>
-                                >
+                      >
                       <% end %>
+                      <thead>
+                      <tr>
+                        <th class="sort-alpha">Homework</th>
+                        <th>Description</th>
+                        <th class="sort-alpha">ReleaseTime</th>
+                        <th class="sort-alpha">Deadline</th>
+                        <th class="sort-alpha">Status</th>
+                        <th class="sort-alpha">Grade</th>
+                        <th>View</th>
+                        <th>Submission History</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <% course[:homeworks].each do |homework_id, hw|%>
+                          <tr>
+                            <td><%= hw[:hw_name] %></td>
+                            <td><%= hw[:hw_description] %></td>
+                            <td><%= hw[:hw_release_time] %></td>
+                            <td><%= hw[:hw_due_time] %></td>
+                            <td></td>
+                            <td></td>
+                            <td class="center">
+                              <%= link_to submit_homework_path(:course_id => course_id, :homework_id => homework_id) do%>
+                                  <button type="button" class="btn btn-success">
+                                    <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                                    View
+                                  </button>
+                              <% end %></td>
+                            <td class="center">
+                              <%= link_to submission_history_path(:course_id => course_id, :homework_id => homework_id) do%>
+                                  <button type="button" class="btn btn-info">
+                                    <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                                    Submission History
+                                  </button>
+                              <% end %>
+                            </td>
+                          </tr>
+                      <% end %>
+<<<<<<< HEAD
+=======
                     <thead>
                     <tr>
                       <th class="sorting">Homework</th>
@@ -182,10 +233,11 @@
                           </td>
                         </tr>
                     <% end %>
+>>>>>>> upstream/master
 
 
-                    </tbody>
-                  </table>
+                      </tbody>
+                      </table>
                   <% end %>
                 </div>
               </div>
@@ -200,19 +252,20 @@
 <!-- external javascript -->
 <script>
     <% @user.courses.each do |course| %>
-        $('#dropdown_<%= course.id%>').click(function(){
-            $('#course_displayed').html('<%= course.course_name %>')
-                    .attr('aria-expanded', 'false');
-            $('.open').attr('class', 'dropdown');
-            $('table').hide();
-            $('.annm').hide();
-            $('#hw_course_<%= course.id %>').show();
-            $('#annm_course_<%= course.id %>').show();
-
-            return false; });
+    $('#dropdown_<%= course.id%>').click(function(){
+        $('#course_displayed').html('<%= course.course_name %>')
+                .attr('aria-expanded', 'false');
+        $('.open').attr('class', 'dropdown');
+        $('table').hide();
+        $('.annm').hide();
+        $('#hw_course_<%= course.id %>').show();
+        $('#annm_course_<%= course.id %>').show();
+        return false; });
     <% end %>
 </script>
 
 
 </body>
 </html>
+Status API Training Shop Blog About Pricing
+© 2015 GitHub, Inc. Terms Privacy Security Contact Help
