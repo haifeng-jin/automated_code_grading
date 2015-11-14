@@ -11,6 +11,7 @@ Rails.application.config.assets.precompile += %w( elfinder.theme.css )
 Rails.application.config.assets.precompile += %w( jquery.iphone.toggle.css )
 Rails.application.config.assets.precompile += %w( uploadify.css )
 Rails.application.config.assets.precompile += %w( animate.min.css )
+Rails.application.config.assets.precompile += %w( jquery.dataTables.min.js )
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path

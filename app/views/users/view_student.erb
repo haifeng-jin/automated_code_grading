@@ -31,7 +31,6 @@
 
 
   <!-- jQuery -->
-  <script src="bower_components/jquery/jquery.min.js"></script>
 
   <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -127,49 +126,59 @@
     </noscript>
     <div id="content" class="col-lg-10 col-sm-10">
       <!-- content starts -->
-      <div>
-        <ul class="breadcrumb">
-          <li>
-            Home
-          </li>
-        </ul>
-      </div>
-      <div class=" row">
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <a data-toggle="tooltip" class="well top-block" href="studenttable.html">
-            <i class="glyphicon glyphicon-user blue"></i>
-            <div>Students</div>
-          </a>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <a data-toggle="tooltip" class="well top-block" href="homeworktable.html">
-            <i class="glyphicon glyphicon-star green"></i>
-            <div>Homework History</div>
-          </a>
-        </div>
-      </div>
       <div class="row">
         <div class="box col-md-12">
           <div class="box-inner">
             <div class="box-header well">
-              <h2><i class="glyphicon glyphicon-info-sign"></i> Introduction</h2>
-              <select id="credit_card" name="credit_card"><option>Course1</option>
-                #    <option selected="selected">Course2</option></select>
+              <h2>Students</h2>
             </div>
+
             <div class="box-content row">
-              <div class="col-lg-7 col-md-12">
-                <h1>
-                  Memo <br>
-                </h1>
-                <p>
-                  1.Assignment1 will be assigned on xx/xx/xxxx.<br>
-                  2.blablablabla<br>
-                </p>
-                <p class="center-block download-buttons">
-                  <a href="#" class="btn btn-default btn-lg">
-                    <i class="glyphicon glyphicon-edit"></i> Edit
-                  </a>
-                </p>
+              <div class="box col-md-12">
+
+                <form class="form-inline">
+                  <div class="form-group">
+                    <label class="sr-only" for="exampleInputAmount">Search Students</label>
+
+
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="search_val" placeholder="Search">
+                      <select id="search_type" class="form-control">
+                        <option>By ID</option>
+                        <option>By Name</option>
+                        <option>By E-mail</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>#ID</th>
+                  <th>Name</th>
+                  <th>E-mail</th>
+                  <th>Courses</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @students.each do |stu|%>
+                <tr class="active">
+                  <th scope="row"><%= stu.id %></th>
+                  <td><%= stu.user_name %></td>
+                  <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></td>
+                  <td>
+                    <ul>
+                    <% stu.courses.each do |course| %>
+                      <li><%= course.course_name %></li>
+                    <% end %>
+                    </ul>
+                  </td>
+                </tr>
+                <% end %>
+                </tbody>
+              </table>
               </div>
             </div>
           </div>
@@ -177,8 +186,7 @@
       </div>
     </div>
   </div>
-  </div>
-<%= link_to 'Create_homework', create_homework_path(:course_id => 1, :homework_id => 1)%>
+</div>
 
 </body>
 </html>
