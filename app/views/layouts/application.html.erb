@@ -36,7 +36,7 @@
   <%= render 'layouts/shim'%>
 </head>
 <body>
-    <%= render 'layouts/header' if session[:id]%>
+    <%= render 'layouts/header' if session[:user_id]%>
 
     <%= render 'users/left_menu' %>
     <div class="ch-container">
