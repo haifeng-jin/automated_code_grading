@@ -1,0 +1,35 @@
+<% if @user and @user.user_role == "instructor" %>
+    <!-- left menu starts -->
+    <div class="col-sm-2 col-lg-2">
+      <div class="sidebar-nav">
+        <div class="nav-canvas">
+          <div class="nav-sm nav nav-stacked">
+          </div>
+          <ul class="nav nav-pills nav-stacked main-menu">
+            <li class="nav-header">Main</li>
+            <li>
+              <a class="ajax-link" href=show_instructor><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
+            </li>
+            <li>
+              <%= link_to create_homework_path(:course_id => 1, :homework_id => 1) do %>
+                  <span class="glyphicon glyphicon-edit"></span> Assign New Homework
+              <% end %>
+            </li>
+            <li>
+              <%= link_to homework_history_path(:course_id => 1, :homework_id => 1) do %>
+                  <span class="glyphicon glyphicon-list-alt"></span> Homework History
+              <%end%>
+            </li>
+            <li>
+              <%= link_to view_students_path do %>
+                  <i class="glyphicon glyphicon-eye-open"></i><span> Students</span>
+              <% end %>
+            </li>
+            <li><a href="login.html"><i class="glyphicon glyphicon-off"></i><span> Logout</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--/span-->
+    <!-- left menu ends -->
+<% end %>

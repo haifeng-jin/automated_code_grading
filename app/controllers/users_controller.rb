@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+
   def index
     @users = User.all
   end
@@ -13,13 +14,6 @@ class UsersController < ApplicationController
       redirect_to login_path
     else
       @user = User.find(session[:user_id])
-      @courses = {}
-      @user.courses.each do |id, value|
-        @courses[:id] = {
-            :course_name => User.find(session[:user_id]).courses.find(id).course_name,
-            :homeworks => User.find(session[:user_id]).courses.find(id).homeworks.where(["homeworks.hw_release_time <= ?", Time.zone.now])
-        }
-      end
     end
   end
 

@@ -1,102 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!--
-      ===
-      This comment should NOT be removed.
 
-      Charisma v2.0.0
-
-      Copyright 2012-2014 Muhammad Usman
-      Licensed under the Apache License v2.0
-      http://www.apache.org/licenses/LICENSE-2.0
-
-      http://usman.it
-      http://twitter.com/halalit_usman
-      ===
-  -->
-  <meta charset="utf-8">
-  <title>Instructor Homework History</title>
-  <!-- The styles -->
-  <%= stylesheet_link_tag "bootstrap-cerulean.min" %>
-  <%= stylesheet_link_tag "charisma-app" %>
-  <!-- jQuery -->
-  <script src="bower_components/jquery/jquery.min.js"></script>
-  <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <!-- The fav icon -->
-  <link rel="shortcut icon" href="img/favicon.ico">
-</head>
-<body>
-<!-- topbar starts -->
-<div class="navbar navbar-default" role="navigation">
-  <div class="navbar-inner">
-    <button type="button" class="navbar-toggle pull-left animated flip">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="index.html">
-      <img alt="Charisma Logo" src="img/logo16.ico" class="hidden-xs" />
-      <span>Welcome!</span>
-    </a>
-    <!-- user dropdown starts -->
-    <div class="btn-group pull-right">
-      <%= link_to logout_path do%>
-          <button type="button" class="btn btn-default">
-            <i class="glyphicon glyphicon-circle-arrow-right"></i>
-            logout
-          </button>
-      <% end %>
-    </div>
-    <!-- user dropdown ends -->
-    <ul class="collapse navbar-collapse nav navbar-nav top-menu">
-      <li><a href="http://www.google.com/"><i class="glyphicon glyphicon-globe"></i> Visit Site</a></li>
-      <li>
-        <form class="navbar-search pull-left">
-          <input placeholder="Search" class="search-query form-control col-md-10" name="query"
-                 type="text">
-        </form>
-      </li>
-    </ul>
-  </div>
-</div>
-<!-- topbar ends -->
-<div class="ch-container">
   <div class="row">
 
-    <!-- left menu starts -->
-    <div class="col-sm-2 col-lg-2">
-      <div class="sidebar-nav">
-        <div class="nav-canvas">
-          <div class="nav-sm nav nav-stacked">
-          </div>
-          <ul class="nav nav-pills nav-stacked main-menu">
-            <li class="nav-header">Main</li>
-            <li>
-              <a class="ajax-link" href=show_instructor><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
-            </li>
-            <li>
-              <%= link_to create_homework_path(:course_id => 1, :homework_id => 1) do %>
-                  <span class="glyphicon glyphicon-edit"></span> Assign New Homework
-              <% end %>
-            </li>
-            <li>
-              <%= link_to homework_history_path(:course_id => 1, :homework_id => 1) do %>
-                  <span class="glyphicon glyphicon-list-alt"></span> Homework History
-              <%end%>
-            </li>
-            <li><a class="ajax-link" href="studenttable.html"><i class="glyphicon glyphicon-eye-open"></i><span> Student History</span></a></li>
-            <li><a href="login.html"><i class="glyphicon glyphicon-off"></i><span> Logout</span></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!--/span-->
-    <!-- left menu ends -->
     <noscript>
       <div class="alert alert-block col-md-12">
         <h4 class="alert-heading">Warning!</h4>
@@ -127,7 +31,7 @@
             <br>
             <div class="dropdown">
               <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <%= @user.courses.first.course_name %>
+                <%= @user.courses.first.course_name if @user.courses.first %>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -189,7 +93,6 @@
       </div>
     </div>
   </div>
-</div><!--/.fluid-container-->
 <!-- external javascript -->
 <script>
     <% @user.courses.each do |course| %>
@@ -202,9 +105,5 @@
         return false; });
     <% end %>
 </script>
-
-</body>
-</html>
-
 
 
