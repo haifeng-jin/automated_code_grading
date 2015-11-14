@@ -1,5 +1,13 @@
 class SessionsController < ApplicationController
   def new
+    if session[:user_id]
+      user = User.find_by id: session[:user_id]
+      if user.user_role == 'student'
+        redirect_to :controller => 'users', :action => 'show_student'
+      elsif user.user_role == 'instructor'
+        redirect_to :controller => 'users', :action => 'show_instructor'
+      end
+    end
   end
 
   def create

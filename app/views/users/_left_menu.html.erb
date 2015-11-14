@@ -25,7 +25,11 @@
                   <i class="glyphicon glyphicon-eye-open"></i><span> Students</span>
               <% end %>
             </li>
-            <li><a href="login.html"><i class="glyphicon glyphicon-off"></i><span> Logout</span></a></li>
+            <li>
+              <%= link_to logout_path do%>
+                  <i class="glyphicon glyphicon-off"></i><span> Logout</span>
+              <% end %>
+            </li>
           </ul>
         </div>
       </div>
