@@ -67,7 +67,7 @@ class HomeworksController < ApplicationController
                             params[:time]["release_time(3i)"].to_i,
                             params[:time]["release_time(4i)"].to_i,
                             params[:time]["release_time(5i)"].to_i)
-    @homework[:hw_release_time] = release_time 
+    @homework[:hw_release_time] = release_time
     @homework[:hw_due_time] = due_time 
     @homework.save
 

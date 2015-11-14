@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AutomatedCodeGrading</title>
+  <title>Automated Code Grading - <%= yield(:title)%></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <!--
+    ===
+    This comment should NOT be removed.
+
+    Charisma v2.0.0
+
+    Copyright 2012-2014 Muhammad Usman
+    Licensed under the Apache License v2.0
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    http://usman.it
+    http://twitter.com/halalit_usman
+    ===
+-->
+  <meta charset="utf-8">
+  <title>Instructor Main</title>
+
+  <!-- The styles -->
+  <%= stylesheet_link_tag "bootstrap-cerulean.min" %>
+  <%= stylesheet_link_tag "charisma-app" %>
+
+
+  <!-- jQuery -->
+
+  <!-- The fav icon -->
+  <%= favicon_link_tag 'favicon.ico' %>
+
+  <%= render 'layouts/shim'%>
 </head>
 <body>
+    <%= render 'layouts/header' if session[:id]%>
 
-<%= yield %>
-
+    <%= render 'users/left_menu' %>
+    <div class="ch-container">
+    <%= yield %>
+    </div>
+    <%= render 'layouts/footer' %>
 </body>
 </html>
