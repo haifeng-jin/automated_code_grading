@@ -48,7 +48,8 @@ class SubmissionsController < ApplicationController
 
   def submission_history
     @username = User.find(session[:user_id]).user_name
-    @submissions = Submission.where(:user_id => session[:user_id]).where(:course_id => params[:course_id]).where(:homework_id => params[:homework_id]) 
+    @submissions = Submission.where(:user_id => session[:user_id]).where(:course_id => params[:course_id]).where(:homework_id => params[:homework_id])
+    @homework = Homework.find(params[:homework_id])
   end
 
   def mkdir(directory)

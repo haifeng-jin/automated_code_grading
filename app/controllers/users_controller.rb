@@ -25,6 +25,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def view_student
+    @user = User.find(session[:user_id])
+    @courses = Course.all
+    @students = User.get_students
+    if @user.user_role != 'instructor'
+      redirect_to show_student_path
+    end
+  end
+
   def new
     @user = User.new
   end
