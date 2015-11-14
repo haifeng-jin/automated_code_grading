@@ -11,9 +11,10 @@ Rails.application.routes.draw do
   get 'static_pages/about'
   get 'submit_homework'    => 'submissions#submit_homework'
   get 'create_homework'    => 'homeworks#create_homework'
-  post 'submissions/create'
-  post 'homeworks/create'
- 
+
+  post '/submissions/create'  => 'submissions#create'
+  post '/homeworks/create'     => 'homeworks#create'
+
   resources :announcements
   resources :course_to_users
   resources :course_to_homeworks

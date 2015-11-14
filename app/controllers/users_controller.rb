@@ -9,7 +9,11 @@ class UsersController < ApplicationController
   end
 
   def show_student
-    @user = User.find(session[:user_id])
+    if(session[:user_id].nil?)
+      redirect_to login_path
+    else
+      @user = User.find(session[:user_id])
+    end
   end
 
   def show_instructor
@@ -17,7 +21,7 @@ class UsersController < ApplicationController
     @students = User.get_students
     if @user.user_role != 'instructor'
       reset_session
-      redirect_to login_path 
+      redirect_to login_path
     end
   end
 
