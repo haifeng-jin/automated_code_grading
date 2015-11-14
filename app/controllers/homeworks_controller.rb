@@ -30,23 +30,41 @@ class HomeworksController < ApplicationController
   end
 
   def create_homework
-    @user = User.find(session[:user_id])
-    @course = Course.find(params[:course_id])
+    if session[:user_role] != 'instructor'
+      redirect_to login_path
+    else
+      @user = User.find(session[:user_id])
+      @course = Course.find(params[:course_id])
+    end
   end
 
   def homework_history
-    @user = User.find(session[:user_id])
-    @course = Course.find(params[:course_id])
+    if session[:user_role] != 'instructor'
+      redirect_to login_path
+    else
+      @user = User.find(session[:user_id])
+      @course = Course.find(params[:course_id])
+    end
   end
 
   def view_assignment
-    @user = User.find(session[:user_id])
-    @course = Course.find(params[:course_id])
-    @homework = Homework.find(params[:homework_id])
+    if session[:user_role] != 'instructor'
+      redirect_to login_path
+    else
+      @user = User.find(session[:user_id])
+      @course = Course.find(params[:course_id])
+      @homework = Homework.find(params[:homework_id])
+    end
   end
 
   def edit_homework
-    @homework = Homework.find(params[:homework_id])
+    if session[:user_role] != 'instructor'
+      redirect_to login_path
+    else
+      @user = User.find(session[:user_id])
+      @course = Course.find(params[:course_id])
+      @homework = Homework.find(params[:homework_id])
+    end
   end
 
 
@@ -89,17 +107,7 @@ class HomeworksController < ApplicationController
 
   # PATCH/PUT /homeworks/1
   # PATCH/PUT /homeworks/1.json
-  def update
-    respond_to do |format|
-      if @homework.update(homework_params)
-        format.html { redirect_to @homework, notice: 'Homework was successfully updated.' }
-        format.json { render :show, status: :ok, location: @homework }
-      else
-        format.html { render :edit }
-        format.json { render json: @homework.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+
 
   # DELETE /homeworks/1
   # DELETE /homeworks/1.json
