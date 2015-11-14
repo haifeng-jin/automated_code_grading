@@ -13,15 +13,26 @@ class UsersController < ApplicationController
       redirect_to login_path
     else
       @user = User.find(session[:user_id])
+      @courses = {}
+      @user.courses.each do |id, value|
+        @courses[:id] = {
+            :course_name => User.find(session[:user_id]).courses.find(id).course_name,
+            :homeworks => User.find(session[:user_id]).courses.find(id).homeworks.where(["homeworks.hw_release_time <= ?", Time.zone.now])
+        }
+      end
     end
   end
 
   def show_instructor
-    @user = User.find(session[:user_id])
-    @students = User.get_students
-    if @user.user_role != 'instructor'
-      reset_session
+    if(session[:user_id].nil?)
       redirect_to login_path
+    else
+      @user = User.find(session[:user_id])
+      @students = User.get_students
+      if @user.user_role != 'instructor'
+        reset_session
+        redirect_to login_path
+      end
     end
   end
 
