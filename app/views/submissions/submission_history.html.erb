@@ -19,9 +19,9 @@
       <tr>
         <td><%= submission.id %></td>
         <td><%= submission.created_at%></td>
-        <td><%= submission.sm_src_dir %></td>
         <th><%= submission.sm_judgement%></th>
         <th><%= submission.sm_grade%></th>
+        <th><%= link_to 'download', display_submission_file_path(:path => submission.sm_src_dir) %></th>
       </tr>
     <% end %>
   </tbody>

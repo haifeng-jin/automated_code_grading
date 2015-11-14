@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'show_instructor'    => 'users#show_instructor'
 
   root 'sessions#new'
+  get 'display_submission_file' =>'submissions#display_submission'
   get 'static_pages/help'
   get 'static_pages/about'
   get 'submission_history' => 'submissions#submission_history'
