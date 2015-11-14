@@ -99,24 +99,17 @@
               <h2><i class="glyphicon glyphicon-user"></i> Homework</h2>
             </div>
             <div class="box-content">
-              <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
-                <thead>
-                <tr>
-                  <th>CourseName</th>
-                  <th>CourseID</th>
-                  <th>Homework</th>
                   <th>Description</th>
-                  <th>ReleaseTime</th>
-                  <th>Deadline</th>
-                  <th>Status</th>
-                  <th>Grade</th>
+                  <th class="sort-alpha">ReleaseTime</th>
+                  <th class="sort-alpha">Deadline</th>
+                  <th class="sort-alpha">Status</th>
+                  <th class="sort-alpha">Grade</th>
                   <th>View</th>
                   <th>Submission History</th>
                   <th>Submit Homework</th>
                 </tr>
                 </thead>
                 <tbody>
-                <% @user.courses.each do |course| %>
                     <tr>
                       <td><%= course.course_name %></td>
                       <td><%= course.id %></td>
@@ -156,6 +149,7 @@
 </div><!--/.fluid-container-->
 
 <!-- external javascript -->
+
 
 
 </body>
