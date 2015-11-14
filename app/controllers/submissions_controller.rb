@@ -25,6 +25,11 @@ class SubmissionsController < ApplicationController
   def edit
   end
 
+  def display_submission
+    path = Rails.root.to_s + '/' + params[:path]
+    send_file path 
+  end
+
   def time_diff_string(diff_sec)
     mm, ss = diff_sec.divmod(60)
     hh, mm = mm.divmod(60)
@@ -43,7 +48,8 @@ class SubmissionsController < ApplicationController
 
   def submission_history
     @username = User.find(session[:user_id]).user_name
-    @submissions = Submission.where(:user_id => session[:user_id]).where(:course_id => params[:course_id]).where(:homework_id => params[:homework_id]) 
+    @submissions = Submission.where(:user_id => session[:user_id]).where(:course_id => params[:course_id]).where(:homework_id => params[:homework_id])
+    @homework = Homework.find(params[:homework_id])
   end
 
   def mkdir(directory)

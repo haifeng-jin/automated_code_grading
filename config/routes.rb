@@ -5,13 +5,17 @@ Rails.application.routes.draw do
   get 'signup'             => 'users#new'
   get 'show_student'       => 'users#show_student'
   get 'show_instructor'    => 'users#show_instructor'
+  get 'homework_history'   => 'homeworks#homework_history'
 
   root 'sessions#new'
+  get 'display_submission_file' =>'submissions#display_submission'
   get 'static_pages/help'
   get 'static_pages/about'
   get 'submission_history' => 'submissions#submission_history'
   get 'submit_homework'    => 'submissions#submit_homework'
   get 'create_homework'    => 'homeworks#create_homework'
+
+  get 'view_students'      => 'users#view_student'
 
   post '/submissions/create'  => 'submissions#create'
   post '/homeworks/create'     => 'homeworks#create'

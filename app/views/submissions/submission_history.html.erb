@@ -1,29 +1,141 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+      ===
+      This comment should NOT be removed.
 
-<%=@username%>
-<h1>Listing Submissions</h1>
+      Charisma v2.0.0
 
-<table>
-  <thead>
-    <tr>
-      <th>Homework Index</th>
-      <th>Sm_time</th>
-      <th>Result</th>
-      <th>Grade</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      Copyright 2012-2014 Muhammad Usman
+      Licensed under the Apache License v2.0
+      http://www.apache.org/licenses/LICENSE-2.0
 
-  <tbody>
-    <% @submissions.each do |submission| %>
-      <tr>
-        <td><%= submission.id %></td>
-        <td><%= submission.created_at%></td>
-        <td><%= submission.sm_src_dir %></td>
-        <th><%= submission.sm_judgement%></th>
-        <th><%= submission.sm_grade%></th>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
+      http://usman.it
+      http://twitter.com/halalit_usman
+      ===
+  -->
+  <meta charset="utf-8">
+  <title>Student Submission History</title>
+  <!-- The styles -->
+  <%= stylesheet_link_tag "bootstrap-cerulean.min" %>
+  <%= stylesheet_link_tag "charisma-app" %>
+  <!-- jQuery -->
+  <script src="bower_components/jquery/jquery.min.js"></script>
+  <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <!-- The fav icon -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+</head>
+<body>
+<!-- topbar starts -->
+<div class="navbar navbar-default" role="navigation">
+  <div class="navbar-inner">
+    <button type="button" class="navbar-toggle pull-left animated flip">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href=show_student>
+      <span>Welcome!</span>
+    </a>
+    <!-- user dropdown starts -->
+    <div class="btn-group pull-right">
+      <%= link_to logout_path do%>
+      <button type="button" class="btn btn-default">
+        <i class="glyphicon glyphicon-circle-arrow-right"></i>
+        logout
+      </button>
+      <% end %>
+    </div>
+    <!-- user dropdown ends -->
+    <ul class="collapse navbar-collapse nav navbar-nav top-menu">
+      <li><a href="http://www.google.com/"><i class="glyphicon glyphicon-globe"></i> Visit Site</a></li>
+      <li>
+        <form class="navbar-search pull-left">
+          <input placeholder="Search" class="search-query form-control col-md-10" name="query"
+                 type="text">
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- topbar ends -->
+<div class="ch-container" style="width: 1200px; margin: 0 auto;">
+  <div class="row">
+    <noscript>
+      <div class="alert alert-block col-md-12">
+        <h4 class="alert-heading">Warning!</h4>
+        <p>
+          You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+          enabled to use this site.
+        </p>
+      </div>
+    </noscript>
+    <div id="content">
+      <!-- content starts -->
+      <div>
+        <ul class="breadcrumb">
+          <li>
+            <a href=show_student>Home</a>
+          </li>
+          <li>
+            <%= @homework.hw_name%> Submission
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="box">
+          <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+              <h2><i class="glyphicon glyphicon-book"></i> <%= @homework.hw_name%></h2>
+            </div>
+            <div class="box-content">
+              <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+                <thead>
+                <tr>
+                  <th>Submission index</th>
+                  <th>Submit time</th>
+                  <th>Result</th>
+                  <th>Grade</th>
+                  <th>Download Code</th>
+                </tr>
+                </thead>
+                <% @submissions.each do |submission| %>
+                    <tr>
+                      <td><%= submission.id %></td>
+                      <td><%= submission.created_at%></td>
+                      <th><%= submission.sm_judgement%></th>
+                      <th><%= submission.sm_grade%></th>
+                      <td class="center">
+                        <%= link_to display_submission_file_path(:path => submission.sm_src_dir) do %>
+                        <button type="button" class="btn btn-info">
+                          <i class="glyphicon glyphicon-download-alt icon-white"></i>
+                          Download
+                        </button>
+                        <% end %>
+                      </td>
+                    </tr>
+                <% end %>
+                </tr>
+                </tbody>
+              </table>
+              <div class="clearfix"></div><br>
+              <form action=show_student>
+                <p class="center col-md-5">
+                  <button class="btn btn-primary" style="width:200px">Back</button>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!--/.fluid-container-->
+
+</body>
+</html>

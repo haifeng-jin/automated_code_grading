@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def self.get_students
-    users = User.find_by user_role: 'student'
+    users = User.where user_role: 'student'
     return users
   end
 

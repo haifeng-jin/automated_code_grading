@@ -1,20 +1,149 @@
-<h1>Submit Homework Page</h1>
-<%= @user.user_name %>
-<%= @course.course_name %>
-<%= @homework.hw_name %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+      ===
+      This comment should NOT be removed.
 
+      Charisma v2.0.0
 
+      Copyright 2012-2014 Muhammad Usman
+      Licensed under the Apache License v2.0
+      http://www.apache.org/licenses/LICENSE-2.0
 
-<% flash.each do |key, msg| %>
-    <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
-<% end %>
-<%= form_tag '/submissions/create', { :multipart => true } do %>
-    <p>
-      <%= file_field_tag 'file' %>
-      <%= hidden_field_tag :course_id, @course.id %>
-      <%= hidden_field_tag :homework_id, @homework.id %>
-    </p>
-    <p>
-      <%= submit_tag "submissions" %>
-    </p>
-<% end %>
+      http://usman.it
+      http://twitter.com/halalit_usman
+      ===
+  -->
+  <meta charset="utf-8">
+  <title>Student Main</title>
+  <!-- The styles -->
+  <%= stylesheet_link_tag "bootstrap-cerulean.min" %>
+  <%= stylesheet_link_tag "charisma-app" %>
+
+  <!-- The fav icon -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+</head>
+<body>
+<!-- topbar starts -->
+<div class="navbar navbar-default" role="navigation">
+  <div class="navbar-inner">
+    <button type="button" class="navbar-toggle pull-left animated flip">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href=show_student>
+      <span>Welcome!</span>
+    </a>
+    <!-- user dropdown starts -->
+    <div class="btn-group pull-right">
+      <%= link_to logout_path do%>
+          <button type="button" class="btn btn-default">
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+            logout
+          </button>
+      <% end %>
+    </div>
+    <!-- user dropdown ends -->
+    <ul class="collapse navbar-collapse nav navbar-nav top-menu">
+      <li><a href="http://www.google.com/"><i class="glyphicon glyphicon-globe"></i> Visit Site</a></li>
+      <li>
+        <form class="navbar-search pull-left">
+          <input placeholder="Search" class="search-query form-control col-md-10" name="query"
+                 type="text">
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- topbar ends -->
+<div class="ch-container" style="width: 1200px; margin: 0 auto;">
+  <div class="row">
+    <noscript>
+      <div class="alert alert-block col-md-12">
+        <h4 class="alert-heading">Warning!</h4>
+        <p>
+          You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+          enabled to use this site.
+        </p>
+      </div>
+    </noscript>
+    <div id="content">
+      <!-- content starts -->
+      <div>
+        <ul class="breadcrumb">
+          <li>
+            <a href=show_student>Home</a>
+          </li>
+          <li>
+            View <%= @homework.hw_name%>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="box">
+          <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+              <h2><i class="glyphicon glyphicon-book"></i> <%= @homework.hw_name%></h2>
+            </div>
+            <div class="box-content">
+              <div class="clearfix"></div><br>
+              <form>
+                <center>
+                  <h2><%= @homework.hw_name %>
+                  </h2>
+                </center>
+              </form>
+
+              <center>
+                <div class="clearfix"></div><br>
+                <form action="/html/tags/html_form_tag_action.cfm" method="post">
+                  <div class="box-content row" style="width: 50%; text-align: justify; ">
+                    <%=@homework.hw_description%>
+                  </div>
+                </form>
+              </center>
+              <center>
+                <h4>Status:<%= @time_left%></h4>
+                <h4>Test Results: </h4>
+                <h4>Compile Error: </h4>
+                <h4>Check first line </h4>
+              </center>
+              <div class="clearfix"></div><br>
+
+              <center>
+              <div>
+                <p class="center col-md-5">
+                  <% flash.each do |key, msg| %>
+                      <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
+                  <% end %>
+                  <%= form_tag '/submissions/create', { :multipart => true } do %>
+                    <p>
+                      <%= file_field_tag 'file' %>
+                      <%= hidden_field_tag :course_id, @course.id %>
+                      <%= hidden_field_tag :homework_id, @homework.id %>
+                    </p>
+                    <p>
+                      <button type="submit" class="btn btn-primary" style="width:200px">Submit</button>
+                    </p>
+                <% end %>
+                </p>
+                </div>
+               </center>
+              <form action=show_student>
+                <p class="center col-md-5">
+                  <button class="btn btn-primary" style="width:200px">Back</button>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!--/.fluid-container-->
+
+</body>
+</html>

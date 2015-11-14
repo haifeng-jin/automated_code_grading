@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <!--
@@ -16,18 +16,14 @@
       ===
   -->
   <meta charset="utf-8">
-  <title>Instructor Assign New Homework</title>
+  <title>Instructor Main</title>
 
+  <!-- The styles -->
   <%= stylesheet_link_tag "bootstrap-cerulean.min" %>
   <%= stylesheet_link_tag "charisma-app" %>
 
 
-
-  <!-- The styles -->
-
-
   <!-- jQuery -->
-  <script src="bower_components/jquery/jquery.min.js"></script>
 
   <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -35,7 +31,7 @@
   <![endif]-->
 
   <!-- The fav icon -->
-  <link rel="shortcut icon" href="img/favicon.ico">
+  <%= favicon_link_tag 'favicon.ico' %>
 
 </head>
 
@@ -96,12 +92,12 @@
                   <span class="glyphicon glyphicon-edit"></span> Assign New Homework
               <% end %>
             </li>
+            <li><a class="ajax-link" href="homeworktable.html"><i class="glyphicon glyphicon-list-alt"></i><span> Homework History</span></a></li>
             <li>
-              <%= link_to homework_history_path(:course_id => 1, :homework_id => 1) do %>
-                  <span class="glyphicon glyphicon-list-alt"></span> Homework History
-              <%end%>
+              <%= link_to view_students_path do %>
+                  <i class="glyphicon glyphicon-eye-open"></i><span> Students</span>
+              <% end %>
             </li>
-            <li><a class="ajax-link" href=view_students><i class="glyphicon glyphicon-eye-open"></i><span> Student</span></a></li>
             <li><a href=logout><i class="glyphicon glyphicon-off"></i><span> Logout</span></a></li>
           </ul>
         </div>
@@ -126,73 +122,75 @@
             <a href=show_instructor>Home</a>
           </li>
           <li>
-            Assign new homework
+            Student
           </li>
         </ul>
       </div>
       <div class="row">
         <div class="box col-md-12">
           <div class="box-inner">
-            <div class="box-header well" data-original-title="">
-              <h2><i class="glyphicon glyphicon-user"></i> Homework Description</h2>
+            <div class="box-header well">
+              <h2>Students</h2>
             </div>
-            <div class="box-content">
-              <div class="clearfix"></div><br>
+
+            <div class="box-content row">
+              <div class="box col-md-12">
+
+                <form class="form-inline">
+                  <div class="form-group">
+                    <label class="sr-only" for="exampleInputAmount">Search Students</label>
 
 
+                    <div class="form-group">
 
-              <% flash.each do |key, msg| %>
-                  <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
-              <% end %>
-              <div class="row">
-                <div class="col-md-6">
+                      <select id="search_type" class="form-control">
+                        <option>ID</option>
+                        <option>Name</option>
+                        <option>E-mail</option>
+                      </select>
+                      <input type="text" class="form-control" id="search_val" placeholder="Search Content">
 
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
 
-                  <div class="dropdown">
-                    Course:
-                    <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      <%= @user.courses.first.course_name %>
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <% @user.courses.each do |course| %>
-                          <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
-                      <% end %>
+                    <div class="form-group">
+
+                      <select id="search_by_course" class="form-control">
+                        <% @courses.each do |course|%>
+                            <option><%= course.course_name %></option>
+                        <% end %>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Select by Course</button>
+                  </div>
+                </form>
+
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>#ID</th>
+                  <th>Name</th>
+                  <th>E-mail</th>
+                  <th>Courses</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @students.each do |stu|%>
+                <tr class="active">
+                  <th scope="row"><%= stu.id %></th>
+                  <td><%= stu.user_name %></td>
+                  <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></td>
+                  <td>
+                    <ul>
+                    <% stu.courses.each do |course| %>
+                      <li><%= course.course_name %></li>
+                    <% end %>
                     </ul>
-                  </div>
-              <%= form_tag '/homeworks/create', { :multipart => true } do %>
-                    <p>
-                      <h3>Homework Name</h3>
-                    <%= text_field_tag 'hw_name','',size:15 %>
-                    <h3>Homework Description</h3>
-                    <%=text_area_tag 'hw_description', nil, rows: 8, cols: 120 , placeholder: "Create Your Note..."%>
-                      <div class="row">
-                        <div class="col-md-6">
-                    <h4> Test input </h4>
-                    <%= file_field_tag 'testcase_input' %>
-                        </div>
-                        <div class="col-md-6">
-                    <h4>Test output </h4>
-                    <%= file_field_tag 'testcase_output' %>
-                        </div>
-                      </div>
-                    <h4>Due date   </h4>
-                    <%= datetime_select(:time, 'due_time') %>
-                    <h4>Release date</h4>
-                    <%= datetime_select(:time, 'release_time') %>
-                    <%= hidden_field_tag :course_id, @course.id %>
-                  </p>
-                  </p>
-                  </p>
-                    <p class="col-md-5">
-                      <%= submit_tag "Submissions", class: "btn btn-primary"%>
-                    </p>
-                    <p class="col-md-5">
-                      <button class="btn btn-primary" style="width:106px">Cancel</button>
-                    </p>
-
-              <% end %>
-                  </div>
+                  </td>
+                </tr>
+                <% end %>
+                </tbody>
+              </table>
               </div>
             </div>
           </div>
@@ -202,15 +200,6 @@
   </div>
 </div>
 
-<script>
-    <% @user.courses.each do |course| %>
-    $('#dropdown_<%= course.id%>').click(function(){
-        $('#course_displayed').html('<%= course.course_name %>')
-                .attr('aria-expanded', 'false');
-        $('.open').attr('class', 'dropdown');
-        return false; });
-    <% end %>
-</script>
 </body>
 </html>
 

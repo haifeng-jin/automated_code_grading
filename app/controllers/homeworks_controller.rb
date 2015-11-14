@@ -34,6 +34,11 @@ class HomeworksController < ApplicationController
     @course = Course.find(params[:course_id])
   end
 
+  def homework_history
+    @user = User.find(session[:user_id])
+    @course = Course.find(params[:course_id])
+  end
+
   def create
     @user = User.find(session[:user_id])
     @course = Course.find(params[:course_id])
