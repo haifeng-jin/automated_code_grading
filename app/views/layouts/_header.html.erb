@@ -1,0 +1,34 @@
+<!-- topbar starts -->
+<div class="navbar navbar-default" role="navigation">
+  <div class="navbar-inner">
+    <button type="button" class="navbar-toggle pull-left animated flip">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href=show_student>
+      <span>Welcome!</span>
+    </a>
+    <!-- user dropdown starts -->
+    <div class="btn-group pull-right">
+      <%= link_to logout_path do%>
+          <button type="button" class="btn btn-default">
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+            logout
+          </button>
+      <% end %>
+    </div>
+    <!-- user dropdown ends -->
+    <ul class="collapse navbar-collapse nav navbar-nav top-menu">
+      <li><a href="http://www.google.com/"><i class="glyphicon glyphicon-globe"></i> Visit Site</a></li>
+      <li>
+        <form class="navbar-search pull-left">
+          <input placeholder="Search" class="search-query form-control col-md-10" name="query"
+                 type="text">
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- topbar ends -->
