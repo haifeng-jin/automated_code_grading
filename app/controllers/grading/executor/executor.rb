@@ -59,6 +59,7 @@ class Executor
     if (@result.has_message?)
       @result.set_score(0)
       @result.set_judgement("Compile Error")
+      remove_files
       return @result
     end
 

@@ -5,7 +5,6 @@ class TemporaryFilesInfo
     @runnable_path = @temp_path;
     @compile_message_path = @temp_path + "/compile_message"
     @program_output_path = @temp_path + "/output"
-    @copied_program_path = @temp_path + "/Main.java"
     @error_path = @temp_path + "/runtime_error"
   end
   
@@ -15,10 +14,6 @@ class TemporaryFilesInfo
 
   def get_error_path
     @error_path
-  end
-
-  def get_copied_program_path
-    @copied_program_path
   end
 
   def get_compile_message_path
