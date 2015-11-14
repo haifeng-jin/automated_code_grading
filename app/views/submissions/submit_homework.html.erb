@@ -105,9 +105,9 @@
               <center>
                 <div class="clearfix"></div><br>
                 <form action="/html/tags/html_form_tag_action.cfm" method="post">
-
                   <div class="box-content row" style="width: 50%; text-align: justify; ">
                     <%=@homework.hw_description%>
+                  </div>
                 </form>
               </center>
               <center>
@@ -131,7 +131,7 @@
                       <%= hidden_field_tag :homework_id, @homework.id %>
                     </p>
                     <p>
-                      <button class="btn btn-primary" style="width:200px">Submit</button>
+                      <button type="submit" class="btn btn-primary" style="width:200px">Submit</button>
                     </p>
                 <% end %>
                 </p>
@@ -142,7 +142,7 @@
                   <button type="submit" id="view my submission button" class="btn btn-primary" style="width:200px">View my submission</button>
                 </p>
               </form>
-              <form action="student index.html">
+              <form action=show_student>
                 <p class="center col-md-5">
                   <button class="btn btn-primary" style="width:200px">Back</button>
                 </p>
