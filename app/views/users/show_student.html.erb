@@ -100,49 +100,63 @@
       <div class="row">
         <div class="box">
           <div class="box-inner">
-            <div class="box-header well" data-original-title="">
-              <h2><i class="glyphicon glyphicon-user"></i> Homework</h2>
+            <div class="box-header well" data-original-title="" style="height: 50px">
+
+              <div class="dropdown">
+                Course:
+                  <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <%= @user.courses.first.course_name %>
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <% @user.courses.each do |course| %>
+                        <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
+                    <% end %>
+                  </ul>
+              </div>
+
             </div>
             <div class="box-content">
 
-              <div class="dropdown">
-                <h4>Course:
-                <button id="course_displayed" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <%= @user.courses.first.course_name %>
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <div class="panel panel-danger">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Announcement</h3>
+                </div>
+                <div class="panel-body">
                   <% @user.courses.each do |course| %>
-                  <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
+                      <ul id="annm_course_<%= course.id %>" class="annm"
+                          <% if course.id != @user.courses.first.id %>
+                          style="display: none">
+                      <% else %>
+                          >
+                      <% end %>
+                          <% course.announcements.each do |annm|%>
+                              <li><p><%= annm.announcement_description %></p></li>
+                          <% end %>
+                        </ul>
+
                   <% end %>
-                </ul>
-                </h4>
+                </div>
               </div>
 
-              <% @user.courses.each do |course| %>
-                  <table  id="course_<%= course.id %>"
-                          class="table table-striped table-bordered bootstrap-datatable datatable responsive"
-                  <% if course.id != @user.courses.first.id %>
-                          style="display: none">
-                  <% else %>
-                            >
-                  <% end %>
-                <thead>
-                <tr>
-                  <th class="sort-alpha">Homework</th>
-                  <th>Description</th>
-                  <th class="sort-alpha">ReleaseTime</th>
-                  <th class="sort-alpha">Deadline</th>
-                  <th class="sort-alpha">Status</th>
-                  <th class="sort-alpha">Grade</th>
-                  <th>View</th>
-                  <th>Submission History</th>
-                  <th>Submit Homework</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% course.homeworks.where("homeworks.hw_release_time <= CURRENT_TIMESTAMP").each do |hw|%>
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Homework</h3>
+                </div>
+                <div class="panel-body">
+
+                  <% @user.courses.each do |course| %>
+                      <table  id="hw_course_<%= course.id %>"
+                              class="table table-striped table-bordered bootstrap-datatable datatable responsive"
+                      <% if course.id != @user.courses.first.id %>
+                              style="display: none">
+                      <% else %>
+                                >
+                      <% end %>
+                    <thead>
                     <tr>
+<<<<<<< HEAD
                           <td><%= hw.hw_name %></td>
                           <td><%= hw.hw_description %></td>
                           <td><%= hw.hw_release_time %></td>
@@ -162,12 +176,41 @@
                                 <button type="button" class="btn btn-danger">Submit</button>
                             <% end %></td>
                     </tr>
-                <% end %>
+                    </thead>
+                    <tbody>
+                    <% course.homeworks.where(["homeworks.hw_release_time <= ?", Time.zone.now]).each do |hw|%>
+                        <tr>
+                              <td><%= hw.hw_name %></td>
+                              <td><%= hw.hw_description %></td>
+                              <td><%= hw.hw_release_time %></td>
+                              <td><%= hw.hw_due_time %></td>
+                              <td></td>
+                              <td></td>
+                              <td>
+                                <a class="btn btn-success" href="student view assignment.html">
+                                  <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                                  View
+                                </a>
+                              </td>
+                              <td>
+
+                                <a class="btn btn-info" href="Student submission history.html">
+                                  <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                                  Submission Hisory
+                                </a>
+                              </td>
+                              <td><%= link_to submit_homework_path(:course_id => course.id, :homework_id => hw.id) do%>
+                                    <button type="button" class="btn btn-danger">Submit</button>
+                                <% end %></td>
+                        </tr>
+                    <% end %>
 
 
-                </tbody>
-              </table>
-              <% end %>
+                    </tbody>
+                  </table>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -184,7 +227,9 @@
                     .attr('aria-expanded', 'false');
             $('.open').attr('class', 'dropdown');
             $('table').hide();
-            $('#course_<%= course.id %>').show();
+            $('.annm').hide();
+            $('#hw_course_<%= course.id %>').show();
+            $('#annm_course_<%= course.id %>').show();
 
             return false; });
     <% end %>
