@@ -155,13 +155,9 @@
                               View
                             </a>
                           </td>
-                          <td>
-
-                            <a class="btn btn-info" href="Student submission history.html">
-                              <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                              Submission Hisory
-                            </a>
-                          </td>
+                          <td><%= link_to submission_history_path(:course_id => course.id, :homework_id => hw.id) do%>
+                                <button type="button" class="btn btn-danger">Submit</button>
+                            <% end %></td>
                           <td><%= link_to submit_homework_path(:course_id => course.id, :homework_id => hw.id) do%>
                                 <button type="button" class="btn btn-danger">Submit</button>
                             <% end %></td>
