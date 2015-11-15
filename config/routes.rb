@@ -17,12 +17,15 @@ Rails.application.routes.draw do
   get 'submit_homework'    => 'submissions#submit_homework'
   get 'create_homework'    => 'homeworks#create_homework'
 
-  get 'create_course'    => 'courses#create_course'
+  get 'create_course'      => 'courses#create_course'
+  get 'edit_course'        => 'courses#edit_course'
   get 'view_students'      => 'users#view_student'
+  get 'view_courses'      => 'courses#view_course'
 
   post '/submissions/create'  => 'submissions#create'
   post '/homeworks/create'     => 'homeworks#create'
   post '/courses/create'     => 'courses#create'
+  post '/courses/update'     => 'courses#update'
 
   resources :announcements
   resources :course_to_users
