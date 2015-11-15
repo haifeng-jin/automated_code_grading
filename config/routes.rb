@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'homework_history'   => 'homeworks#homework_history'
   get 'view_assignment'    => 'homeworks#view_assignment'
   get 'edit_homework'      => 'homeworks#edit_homework'
+  get 'destroy_homework'   => 'homeworks#destroy_homework'
 
   root 'sessions#new'
   get 'display_submission_file' =>'submissions#display_submission'
