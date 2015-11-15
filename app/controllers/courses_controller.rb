@@ -36,6 +36,12 @@ class CoursesController < ApplicationController
           end
         end
 
+        User.get_instructors.each do |ist|
+          if params["select_ist_#{ist.id}"] == "on"
+            CourseToUser.new(course_id: @course.id, user_id: ist.id).save
+          end
+        end
+
         Homework.all.each do |hw|
           if params["select_stu_#{hw.id}"] == "on"
             CourseToHomework.new(course_id: @course.id, homework_id: hw.id).save
@@ -60,6 +66,7 @@ class CoursesController < ApplicationController
     else
       @user = User.find(session[:user_id])
       @students = User.get_students
+      @instructors = User.get_instructors
       @homeworks = Homework.all
     end
   end
