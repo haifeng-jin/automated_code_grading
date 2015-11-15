@@ -17,6 +17,7 @@ class CoursesController < ApplicationController
     @course = Course.new
   end
 
+
   # GET /courses/1/edit
   def edit
   end
@@ -24,16 +25,42 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    @course = Course.new(course_params)
-
+    @course = Course.new
+    @course[:course_name] = params[:course_name]
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
+        CourseToUser.new(course_id: @course.id, user_id: session[:user_id]).save
+        User.get_students.each do |stu|
+          if params["select_stu_#{stu.id}"] == "on"
+            CourseToUser.new(course_id: @course.id, user_id: stu.id).save
+          end
+        end
+
+        Homework.all.each do |hw|
+          if params["select_stu_#{hw.id}"] == "on"
+            CourseToHomework.new(course_id: @course.id, homework_id: hw.id).save
+          end
+        end
+
+
+        format.html { redirect_to "/show_instructor" }
         format.json { render :show, status: :created, location: @course }
+
       else
         format.html { render :new }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # GET /create_course
+  def create_course
+    if session[:user_role] != 'instructor'
+      redirect_to login_path
+    else
+      @user = User.find(session[:user_id])
+      @students = User.get_students
+      @homeworks = Homework.all
     end
   end
 

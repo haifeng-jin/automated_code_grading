@@ -22,9 +22,16 @@
             </li>
             <li>
               <%= link_to view_students_path do %>
-                  <i class="glyphicon glyphicon-eye-open"></i><span> Students</span>
+                  <span class="glyphicon glyphicon-user"></span> Students
               <% end %>
             </li>
+
+            <li>
+              <%= link_to create_course_path() do %>
+                  <span class="glyphicon glyphicon-plus"></span> Add New Course
+              <% end %>
+            </li>
+
             <li>
               <%= link_to logout_path do%>
                   <i class="glyphicon glyphicon-off"></i><span> Logout</span>
