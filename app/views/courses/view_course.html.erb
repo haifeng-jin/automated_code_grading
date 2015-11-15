@@ -1,0 +1,228 @@
+
+<div class="row">
+
+
+  <noscript>
+    <div class="alert alert-block col-md-12">
+      <h4 class="alert-heading">Warning!</h4>
+      <p>
+        You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+        enabled to use this site.
+      </p>
+    </div>
+  </noscript>
+  <div id="content" class="col-lg-10 col-sm-10">
+    <!-- content starts -->
+    <div>
+      <ul class="breadcrumb">
+        <li>
+          <a href=show_instructor>Home</a>
+        </li>
+        <li>
+          Student
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="box col-md-12">
+        <div class="box-inner">
+          <div class="box-header well">
+            <h2>Courses</h2>
+          </div>
+
+          <div class="box-content row">
+            <div class="box col-md-12">
+
+              <!--<form class="form-inline">-->
+                <!--<div class="form-group">-->
+                  <!--<label class="sr-only" for="exampleInputAmount">Search Students</label>-->
+
+
+                  <!--<div class="form-group">-->
+
+                    <!--<select id="search_type" class="form-control">-->
+                      <!--<option>ID</option>-->
+                      <!--<option>Name</option>-->
+                      <!--<option>E-mail</option>-->
+                    <!--</select>-->
+                    <!--<input type="text" class="form-control" id="search_val" placeholder="Search Content">-->
+
+                  <!--</div>-->
+                  <!--<button type="submit" class="btn btn-primary">Search</button>-->
+
+                  <!--<div class="form-group">-->
+
+                    <!--<select id="search_by_course" class="form-control">-->
+                      <!--<option>All</option>-->
+                      <!--<% @user.courses.each do |course|%>-->
+                          <!--<option><%= course.course_name %></option>-->
+                      <!--<% end %>-->
+                    <!--</select>-->
+                  <!--</div>-->
+                  <!--<button type="submit" class="btn btn-primary">Select by Course</button>-->
+                <!--</div>-->
+              <!--</form>-->
+
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>#ID</th>
+                  <th>Name</th>
+                  <th>Instructors</th>
+                  <th>Students</th>
+                  <th>Homework</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @user.courses.each do |course|%>
+                    <tr class="active">
+                      <th scope="row"><%= course.id %></th>
+                      <td><%= course.course_name %></td>
+                      <td>
+                        <ul>
+                          <% course.users.where(user_role: "instructor").each do |ist| %>
+                              <li><%= ist.user_name %></li>
+                          <% end %>
+                        </ul>
+                      </td>
+                      <td>
+                        <a c_s_"<%= course.id %>"
+                                            class="btn btn-default"
+                                            type="button"
+                                            data-toggle="collapse"
+                                            data-target="#c_s_<%= course.id %>"
+                                            aria-expanded="true"
+                                            aria-controls="#c_s_<%= course.id %>">View</a>
+                      </td>
+                      <td>
+                        <a c_s_"<%= course.id %>"
+                        class="btn btn-default"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#c_h_<%= course.id %>"
+                        aria-expanded="true"
+                        aria-controls="#c_h_<%= course.id %>">View</a>
+                      </td>
+                      <td>
+                      <%= link_to edit_course_path(course_id: course.id) do %>
+                          <button id=c_s_"<%= course.id %>" type="button" class="btn btn-warning">
+                            Edit
+                          </button>
+                      <% end %>
+                      </td>
+
+                    <tr>
+                    <th colspan="6">
+                        <div class="collapse" id="c_s_<%= course.id %>">
+                          <div class="row">
+                          <div class="col-md-12">
+                            <table class="table table-bordered">
+                              <thead>
+                                <th>#ID</th>
+                                <th>Name</th>
+                                <th>E-mail</th>
+                                <th>#ID</th>
+                                <th>Name</th>
+                                <th>E-mail</th>
+                                <th>#ID</th>
+                                <th>Name</th>
+                                <th>E-mail</th>
+                                <th>#ID</th>
+                                <th>Name</th>
+                                <th>E-mail</th>
+                              </thead>
+                              <tbody>
+                                <% course.users.where(user_role: "student").each_with_index do |stu, i| %>
+                                  <% if i % 4 == 0 %>
+                                    <tr>
+                                      <td><%= stu.id %></td>
+                                      <td><%= stu.user_name %></td>
+                                      <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></a></td>
+                                  <% elsif i % 4 == 3%>
+                                      <td><%= stu.id %></td>
+                                      <td><%= stu.user_name %></td>
+                                      <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></a></td>
+                                    </tr>
+                                  <% else %>
+                                      <td><%= stu.id %></td>
+                                      <td><%= stu.user_name %></td>
+                                      <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></a></td>
+                                  <% end %>
+                                <% end %>
+                              </tbody>
+                            </table>
+                          </div>
+                          </div>
+                        </div>
+                    </th>
+                    </tr>
+
+                    <tr>
+                    <th colspan="6">
+                        <div class="collapse" id="c_h_<%= course.id %>" >
+                          <div class="row">
+                          <div class="col-md-12">
+                            <table class="table">
+                              <thead>
+                              <tr class="active">
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Release Time</th>
+                                <th>Deadline</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Release Time</th>
+                                <th>Deadline</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <% course.homeworks.each_with_index do |hw, i| %>
+                                <% if i % 2 == 0 %>
+                                      <tr>
+                                        <td><%= hw.hw_name %></td>
+                                        <td>
+                                          <a href="/view_assignment?course_id=<%= hw.courses.first.id%>&homework_id=<%= hw.id %>" target="_blank">
+                                            <button id="dsct<%= hw.id %>" type="button" class="btn btn-success">
+                                              <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                                              View
+                                            </button>
+                                          </a>
+                                        </td>
+                                        <td><%= hw.hw_release_time %></td>
+                                        <td><%= hw.hw_due_time %></td>
+                                <% else %>
+                                        <td><%= hw.hw_name %></td>
+                                        <td>
+                                          <a href="/view_assignment?course_id=<%= hw.courses.first.id%>&homework_id=<%= hw.id %>" target="_blank">
+                                            <button id="dsct<%= hw.id %>" type="button" class="btn btn-success">
+                                              <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                                              View
+                                            </button>
+                                          </a>
+                                        </td>
+                                        <td><%= hw.hw_release_time %></td>
+                                        <td><%= hw.hw_due_time %></td>
+                                      </tr>
+                                <% end %>
+                              <% end %>
+                              </tbody>
+                            </table>
+                          </div>
+                          </div>
+                        </div>
+                    </th>
+                    </tr>
+
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

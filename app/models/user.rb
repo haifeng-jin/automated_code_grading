@@ -31,6 +31,11 @@ class User < ActiveRecord::Base
     return users
   end
 
+  def self.get_instructors
+    users = User.where user_role: 'instructor'
+    return users
+  end
+
   def authenticate(password)
     if self.user_password == password
       return true

@@ -50,9 +50,9 @@
                 <% end %>
                 <thead>
                 <tr>
-                  <th class="sort-alpha">Homework</th>
-                  <th class="sort-alpha">ReleaseTime</th>
-                  <th class="sort-alpha">Deadline</th>
+                  <th>Homework</th>
+                  <th>ReleaseTime</th>
+                  <th>Deadline</th>
                   <th>View</th>
                   <th>Submission History</th>
 
@@ -64,12 +64,14 @@
                       <td><%= hw.hw_name %></td>
                       <td><%= hw.hw_release_time %></td>
                       <td><%= hw.hw_due_time %></td>
-                      <td>
-                        <a class="btn btn-success" href="student view assignment.html">
-                          <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                          View
-                        </a>
-                      </td>
+                      <td class="center">
+                        <%= link_to view_assignment_path(:course_id => course.id, :homework_id => hw.id) do%>
+                            <button type="button" class="btn btn-success">
+                              <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                              View
+                            </button>
+                        <% end %>
+                        </td>
                       <td>
 
                         <a class="btn btn-info" href="Student submission history.html">

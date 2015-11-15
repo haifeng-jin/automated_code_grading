@@ -20,6 +20,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+
   end
 
   # POST /courses
@@ -33,6 +34,12 @@ class CoursesController < ApplicationController
         User.get_students.each do |stu|
           if params["select_stu_#{stu.id}"] == "on"
             CourseToUser.new(course_id: @course.id, user_id: stu.id).save
+          end
+        end
+
+        User.get_instructors.each do |ist|
+          if params["select_ist_#{ist.id}"] == "on"
+            CourseToUser.new(course_id: @course.id, user_id: ist.id).save
           end
         end
 
@@ -60,6 +67,28 @@ class CoursesController < ApplicationController
     else
       @user = User.find(session[:user_id])
       @students = User.get_students
+      @instructors = User.get_instructors
+      @homeworks = Homework.all
+    end
+  end
+
+  def view_course
+    if session[:user_role] != 'instructor'
+      redirect_to login_path
+    else
+      @user = User.find(session[:user_id])
+    end
+  end
+
+  def edit_course
+    @course_to_user = CourseToUser.where(course_id: params[:course_id], user_id: session[:user_id]).first
+    if session[:user_role] != 'instructor' or @course_to_user.nil?
+      redirect_to login_path
+    else
+      @course = Course.find params[:course_id]
+      @user = User.find session[:user_id]
+      @students = User.get_students
+      @instructors = User.get_instructors
       @homeworks = Homework.all
     end
   end
@@ -67,10 +96,40 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
+    @course = Course.find(params[:id])
     respond_to do |format|
-      if @course.update(course_params)
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
-        format.json { render :show, status: :ok, location: @course }
+      if @course.update(:course_name => params[:course_name])
+        CourseToUser.update(course_id: @course.id, user_id: session[:user_id])
+        User.get_students.each do |stu|
+          course_to_student = CourseToUser.where(course_id: @course.id, user_id: stu.id).first
+          if params["select_stu_#{stu.id}"] == "on"
+            CourseToUser.new(course_id: @course.id, user_id: stu.id).save
+          # else
+          #   course_to_student.destroy if course_to_student
+          end
+        end
+
+        User.get_instructors.each do |ist|
+          course_to_instructor = CourseToUser.where(course_id: @course.id, user_id: ist.id).first
+          if params["select_ist_#{ist.id}"] == "on"
+            CourseToUser.new(course_id: @course.id, user_id: ist.id).save
+          # else
+          #   course_to_instructor.destroy if course_to_instructor
+          end
+        end
+
+        Homework.all.each do |hw|
+          if params["select_stu_#{hw.id}"] == "on"
+            course_to_homework = CourseToHomework.where(course_id: @course.id, homework_id: hw.id).first
+            CourseToHomework.new(course_id: @course.id, homework_id: hw.id).save
+          # else
+          #   course_to_homework.destroy if course_to_homework
+          end
+        end
+
+
+        format.html { redirect_to "/show_instructor" }
+        format.json { render :show, status: :created, location: @course }
       else
         format.html { render :edit }
         format.json { render json: @course.errors, status: :unprocessable_entity }
@@ -78,12 +137,13 @@ class CoursesController < ApplicationController
     end
   end
 
+
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
     @course.destroy
     respond_to do |format|
-      format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
+      format.html { redirect_to show_instructor_path, notice: 'Course was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
