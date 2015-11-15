@@ -99,7 +99,6 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     respond_to do |format|
       if @course.update(:course_name => params[:course_name])
-        CourseToUser.update(course_id: @course.id, user_id: session[:user_id])
         User.get_students.each do |stu|
           course_to_student = CourseToUser.where(course_id: @course.id, user_id: stu.id).first
           if params["select_stu_#{stu.id}"] == "on"
@@ -119,7 +118,7 @@ class CoursesController < ApplicationController
         end
 
         Homework.all.each do |hw|
-          if params["select_stu_#{hw.id}"] == "on"
+          if params["select_hw_#{hw.id}"] == "on"
             course_to_homework = CourseToHomework.where(course_id: @course.id, homework_id: hw.id).first
             CourseToHomework.new(course_id: @course.id, homework_id: hw.id).save
           # else

@@ -45,6 +45,14 @@ class HomeworksController < ApplicationController
     end
   end
 
+  def time_diff_string(diff_sec)
+    mm, ss = diff_sec.divmod(60)
+    hh, mm = mm.divmod(60)
+    dd, hh = hh.divmod(24)
+    diff_string = "%d days, %d hours, %d minutes and %d seconds" % [dd, hh, mm, ss]
+    return diff_string
+  end
+
   def view_assignment
     if session[:user_role] != 'instructor'
       redirect_to login_path
@@ -52,6 +60,10 @@ class HomeworksController < ApplicationController
       @user = User.find(session[:user_id])
       @course = Course.find(params[:course_id])
       @homework = Homework.find(params[:homework_id])
+      @time_left = time_diff_string(@homework.hw_due_time - Time.zone.now)
+      @user_in_course = @course.users.size
+      @user_valid = Submission.where(course_id: params[:course_id], homework_id: params[:homework_id]).select(:user_id).map(&:user_id).uniq.size
+      @average_grade = Submission.where(course_id: params[:course_id], homework_id: params[:homework_id]).average(:sm_grade)
     end
   end
 

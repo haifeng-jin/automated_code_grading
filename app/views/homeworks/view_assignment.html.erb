@@ -51,8 +51,8 @@
             </center>
             <center>
               <h3>Status:<%= @time_left%> </h3>
-              <h3>80/100 students has submited </h3>
-              <h3>Average Grade: 80/100 </h3>
+              <h3><%= @user_valid %>/<%= @user_in_course %> students has submited </h3>
+              <h3>Average Grade: <%= @average_grade %>/100 </h3>
             </center>
             <div class="clearfix"></div><br>
             <tbody>

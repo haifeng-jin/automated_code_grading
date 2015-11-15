@@ -43,7 +43,7 @@ class SubmissionsController < ApplicationController
     @user = User.find(session[:user_id])
     @course = Course.find(params[:course_id])
     @homework = Homework.find(params[:homework_id])
-    @time_left = time_diff_string(@homework.hw_due_time - Time.new)
+    @time_left = time_diff_string(@homework.hw_due_time - Time.zone.now)
   end
 
   def submission_history
