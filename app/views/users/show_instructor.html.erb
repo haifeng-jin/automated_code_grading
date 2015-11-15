@@ -73,11 +73,13 @@
                         <% end %>
                         </td>
                       <td>
+                        <%= link_to all_submission_history_path(:course_id => course.id, :homework_id => hw.id) do%>
+                            <button type="button" class="btn btn-info">
+                              <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                              View Submission History
+                            </button>
+                        <% end %>
 
-                        <a class="btn btn-info" href="Student submission history.html">
-                          <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                          Submission Hisory
-                        </a>
                       </td>
                     </tr>
                 <% end %>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'submission_history' => 'submissions#submission_history'
   get 'submit_homework'    => 'submissions#submit_homework'
   get 'create_homework'    => 'homeworks#create_homework'
+  get 'all_submission_history'  => 'submissions#all_submission_history'
 
   get 'create_course'      => 'courses#create_course'
   get 'edit_course'        => 'courses#edit_course'

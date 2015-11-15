@@ -1,0 +1,78 @@
+<div class="row">
+  <noscript>
+    <div class="alert alert-block col-md-12">
+      <h4 class="alert-heading">Warning!</h4>
+      <p>
+        You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+        enabled to use this site.
+      </p>
+    </div>
+  </noscript>
+  <div id="content" class="col-lg-10. col-sm-10">
+    <!-- content starts -->
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-12">
+        <div>
+          <ul class="breadcrumb">
+            <li>
+              <a href=show_instructor>Home</a>
+            </li>
+            <li>
+              <%= @homework.hw_name%> Submission
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="box">
+            <div class="box-inner">
+              <div class="box-header well" data-original-title="">
+                <h2><i class="glyphicon glyphicon-book"></i> <%= @homework.hw_name%></h2>
+              </div>
+              <div class="box-content">
+                <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+                  <thead>
+                  <tr>
+                    <th>Submission index</th>
+                    <th>Submit time</th>
+                    <th>Result</th>
+                    <th>Grade</th>
+                    <th>Student Name</th>
+                    <th>Download Code</th>
+                  </tr>
+                  </thead>
+                  <% @submissions.each do |submission| %>
+                      <tr>
+                        <td><%= submission.id %></td>
+                        <td><%= submission.created_at%></td>
+                        <th><%= submission.sm_judgement%></th>
+                        <th><%= submission.sm_grade%></th>
+                        <th><%= @username = User.find(submission.user_id).user_name %></th>
+                        <td class="center">
+                          <%= link_to display_submission_file_path(:path => submission.sm_src_dir) do %>
+                              <button type="button" class="btn btn-info">
+                                <i class="glyphicon glyphicon-download-alt icon-white"></i>
+                                Download
+                              </button>
+                          <% end %>
+                        </td>
+                      </tr>
+                  <% end %>
+                  </tr>
+                  </tbody>
+                </table>
+                <div class="clearfix"></div><br>
+                <form action=show_instructor>
+                  <p class="center col-md-5">
+                    <button class="btn btn-primary" style="width:200px">Back</button>
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
