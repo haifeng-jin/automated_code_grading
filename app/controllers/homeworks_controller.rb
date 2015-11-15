@@ -60,7 +60,7 @@ class HomeworksController < ApplicationController
       redirect_to login_path
     else
       @user = User.find(session[:user_id])
-      @course = Course.find(params[:course_id])
+      #@course = Course.find(params[:course_id])
       @homework = Homework.find(params[:homework_id])
     end
   end
@@ -90,9 +90,13 @@ class HomeworksController < ApplicationController
     directory = './UPLOAD/' + @course.course_name + '/' + @homework[:hw_name] + '/'
 
     mkdir(directory)
+    if !params[:testcase_input].nil?
+      File.open(directory + 'input', "w") { |f| f.write(params[:testcase_input].read.force_encoding('UTF-8')) }
+    end
 
-    File.open(directory + 'input', "w") { |f| f.write(params[:testcase_input].read.force_encoding('UTF-8')) }
-    File.open(directory + 'output', "w") { |f| f.write(params[:testcase_output].read.force_encoding('UTF-8')) }
+    if !params[:testcase_output].nil?
+      File.open(directory + 'output', "w") { |f| f.write(params[:testcase_output].read.force_encoding('UTF-8')) }
+    end
 
     @courseToHomework = CourseToHomework.new
     @courseToHomework.course_id = params[:course_id]
@@ -109,10 +113,28 @@ class HomeworksController < ApplicationController
 
   # DELETE /homeworks/1
   # DELETE /homeworks/1.json
+
   def destroy
     @homework.destroy
+
     respond_to do |format|
       format.html { redirect_to homeworks_url, notice: 'Homework was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+
+  def destroy_homework
+    @course_to_homework = CourseToHomework.where(course_id: params[:course_id], homework_id: params[:homework_id]).first
+    @course_to_homework.destroy
+    @remainder = CourseToHomework.where(homework_id: params[:homework_id]).first
+    if @remainder.nil?
+      @homework = Homework.find(params[:homework_id])
+      @homework.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to homework_history_path, notice: 'Homework was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -28,7 +28,9 @@
           <div class="box-header well" data-original-title="">
             <h2><i class="glyphicon glyphicon-user"></i> Homework History</h2>
           </div>
-          <br>
+          <div class="box-content row">
+            <div class="col-md-12">
+  
           <div class="dropdown">
             <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               <%= @user.courses.first.course_name if @user.courses.first %>
@@ -78,10 +80,12 @@
                             Edit
                           </button>
                       <% end %>
-                      <a class="btn btn-danger" href="#">
+                      <%= link_to destroy_homework_path(:course_id => course.id, :homework_id => hw.id), data: { confirm: 'Are you sure?' } do%>
+                        <button type="button" class="btn btn-danger">
                         <i class="glyphicon glyphicon-trash icon-white"></i>
                         Delete
-                      </a>
+                        </button>
+                      <% end %>
                     </td>
                   </tr>
               <%end%>
@@ -96,7 +100,8 @@
     </div>
   </div>
 </div>
-
+  </div>
+</div>
 <script>
     <% @user.courses.each do |course| %>
     $('#dropdown_<%= course.id%>').click(function(){
