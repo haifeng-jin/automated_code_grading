@@ -78,7 +78,7 @@ class SubmissionsController < ApplicationController
     file_name = time + '.' + file_type
 
     directory = './UPLOAD/' + @course.course_name + '/' + @homework.hw_name + '/' + @user.user_login_name + '/' + num_submission.to_s
-    path_file = File.join(directory, file_name)
+    path_file = File.join(directory, file_name).tr(' ', '_')
 
     mkdir(directory)
 

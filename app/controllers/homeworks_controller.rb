@@ -100,6 +100,7 @@ class HomeworksController < ApplicationController
     @homework.save
 
     directory = './UPLOAD/' + @course.course_name + '/' + @homework[:hw_name] + '/'
+    directory = directory.tr(' ', '_')
 
     mkdir(directory)
     if !params[:testcase_input].nil?
