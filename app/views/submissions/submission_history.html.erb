@@ -39,9 +39,9 @@
                   <th>Download Code</th>
                 </tr>
                 </thead>
-                <% @submissions.each do |submission| %>
+                <% @submissions.each_with_index do |submission, index| %>
                     <tr>
-                      <td><%= submission.id %></td>
+                      <td><%= index + 1 %></td>
                       <td><%= submission.created_at%></td>
                       <th><%= submission.sm_judgement%></th>
                       <th><%= submission.sm_grade%></th>
