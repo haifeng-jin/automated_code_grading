@@ -58,6 +58,13 @@ class SubmissionsController < ApplicationController
     @homework = Homework.find(params[:homework_id])
   end
 
+  def specific_stu_hw_submissions
+    @user = User.find(session[:user_id])
+    @submissions = Submission.where(:user_id => params[:student_id]).where(:homework_id => params[:homework_id])
+    @homework = Homework.find(params[:homework_id])
+    @student = User.find(params[:student_id])
+  end
+
   def mkdir(directory)
     token = directory.split('/')
     1.upto(token.size)  do |n|
