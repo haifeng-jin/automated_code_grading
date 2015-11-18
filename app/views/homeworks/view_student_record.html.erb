@@ -12,13 +12,13 @@
   <div>
     <ul class="breadcrumb">
       <li>
-        <a href=show_instructor>Home</a>
+        <i class="glyphicon glyphicon-home"></i>&nbsp<a href=show_instructor>Home</a>
       </li>
       <li>
-        <a href=view_students>Student History</a>
+        <span class="glyphicon glyphicon-list-alt"></span>&nbsp<a href=view_students>Student History</a>
       </li>
       <li>
-        <%= @username = User.find(params[:student_id]).user_name %>
+        <span class="glyphicon glyphicon-user"></span>&nbsp<%= @username = User.find(params[:student_id]).user_name %>
       </li>
     </ul>
   </div>
