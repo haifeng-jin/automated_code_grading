@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   get 'create_course'      => 'courses#create_course'
   get 'edit_course'        => 'courses#edit_course'
   get 'view_students'      => 'users#view_student'
-  get 'view_courses'      => 'courses#view_course'
+  get 'view_courses'       => 'courses#view_course'
+  get 'drop_course'        => 'course_to_users#drop_course'
 
   post '/submissions/create'  => 'submissions#create'
   post '/homeworks/create'     => 'homeworks#create'

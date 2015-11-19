@@ -103,31 +103,22 @@ class CoursesController < ApplicationController
           course_to_student = CourseToUser.where(course_id: @course.id, user_id: stu.id).first
           if params["select_stu_#{stu.id}"] == "on"
             CourseToUser.new(course_id: @course.id, user_id: stu.id).save
-          # else
-          #   course_to_student.destroy if course_to_student
+          elsif course_to_student
+            CourseToUser.find(course_to_student.id).destroy
           end
         end
-
-        User.get_instructors.each do |ist|
-          course_to_instructor = CourseToUser.where(course_id: @course.id, user_id: ist.id).first
-          if params["select_ist_#{ist.id}"] == "on"
-            CourseToUser.new(course_id: @course.id, user_id: ist.id).save
-          # else
-          #   course_to_instructor.destroy if course_to_instructor
-          end
-        end
-
+        
         Homework.all.each do |hw|
           if params["select_hw_#{hw.id}"] == "on"
             course_to_homework = CourseToHomework.where(course_id: @course.id, homework_id: hw.id).first
             CourseToHomework.new(course_id: @course.id, homework_id: hw.id).save
-          # else
-          #   course_to_homework.destroy if course_to_homework
+          elsif course_to_homework
+            CourseToHomework.find(course_to_homework.id).destroy
           end
         end
 
 
-        format.html { redirect_to "/show_instructor" }
+        format.html { redirect_to "/view_courses" }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :edit }
