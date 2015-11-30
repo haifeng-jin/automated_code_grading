@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'view_assignment'    => 'homeworks#view_assignment'
   get 'edit_homework'      => 'homeworks#edit_homework'
   get 'destroy_homework'   => 'homeworks#destroy_homework'
+  get 'view_student_record'  => 'homeworks#view_student_record'
 
   root 'sessions#new'
   get 'display_submission_file' =>'submissions#display_submission'
@@ -18,11 +19,13 @@ Rails.application.routes.draw do
   get 'submit_homework'    => 'submissions#submit_homework'
   get 'create_homework'    => 'homeworks#create_homework'
   get 'all_submission_history'  => 'submissions#all_submission_history'
+  get 'specific_stu_hw_submissions' => 'submissions#specific_stu_hw_submissions'
 
   get 'create_course'      => 'courses#create_course'
   get 'edit_course'        => 'courses#edit_course'
   get 'view_students'      => 'users#view_student'
-  get 'view_courses'      => 'courses#view_course'
+  get 'view_courses'       => 'courses#view_course'
+  get 'drop_course'        => 'course_to_users#drop_course'
 
   post '/submissions/create'  => 'submissions#create'
   post '/homeworks/create'     => 'homeworks#create'

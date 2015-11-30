@@ -77,6 +77,18 @@ class HomeworksController < ApplicationController
     end
   end
 
+  def view_student_record
+    if session[:user_role] != 'instructor'
+      redirect_to login_path
+    else
+    @user = User.find(session[:user_id])
+    @username = User.find(session[:user_id]).user_name
+    @student = User.find(params[:student_id])
+      end
+    #@submissions = Submission.where(:course_id => params[:course_id]).where(:homework_id => params[:homework_id])
+    #@homework = Homework.find(params[:homework_id])
+  end
+
 
   def create
     @user = User.find(session[:user_id])

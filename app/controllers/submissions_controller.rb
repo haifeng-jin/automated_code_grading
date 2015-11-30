@@ -52,10 +52,26 @@ class SubmissionsController < ApplicationController
     @homework = Homework.find(params[:homework_id])
   end
 
+  #  instructor view student's submission history
   def all_submission_history
+    if session[:user_role] != 'instructor'
+      redirect_to login_path
+    else
     @user = User.find(session[:user_id])
     @submissions = Submission.where(:course_id => params[:course_id]).where(:homework_id => params[:homework_id])
     @homework = Homework.find(params[:homework_id])
+    end
+  end
+
+  def specific_stu_hw_submissions
+    if session[:user_role] != 'instructor'
+      redirect_to login_path
+    else
+    @user = User.find(session[:user_id])
+    @submissions = Submission.where(:user_id => params[:student_id]).where(:homework_id => params[:homework_id])
+    @homework = Homework.find(params[:homework_id])
+    @student = User.find(params[:student_id])
+    end
   end
 
   def mkdir(directory)

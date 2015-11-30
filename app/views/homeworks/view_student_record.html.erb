@@ -1,0 +1,112 @@
+<noscript>
+  <div class="alert alert-block col-md-12">
+    <h4 class="alert-heading">Warning!</h4>
+    <p>
+      You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+      enabled to use this site.
+    </p>
+  </div>
+</noscript>
+<div id="content" class="col-lg-10 col-sm-10">
+  <!-- content starts -->
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <i class="glyphicon glyphicon-home"></i>&nbsp<a href=show_instructor>Home</a>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-list-alt"></span>&nbsp<a href=view_students>Student History</a>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-user"></span>&nbsp<%= @username = User.find(params[:student_id]).user_name %>
+      </li>
+    </ul>
+  </div>
+  <div class="dropdown">
+    Course:
+    <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <%= @student.courses.first.course_name if @student.courses.first %>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <% @student.courses.each do |course| %>
+          <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="box col-md-12">
+      <div class="box-inner">
+        <div class="box-header well" data-original-title="">
+          <h2><i class="glyphicon glyphicon-user"></i> <%= @username = User.find(params[:student_id]).user_name %></h2>
+        </div>
+        <div class="box-content">
+
+            <% @student.courses.each do |course| %>
+                <table  id="hw_course_<%= course.id %>"
+                        class="table table-striped table-bordered bootstrap-datatable datatable responsive"
+                        <% if course.id != @student.courses.first.id %>
+                        style="display: none">
+                <% else %>
+                >
+                <% end %>
+
+            <thead>
+            <tr>
+              <th>Homework</th>
+              <th>Deadline</th>
+              <th>Grade</th>
+              <th>Test case result</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%course.homeworks.each do |hw|%>
+            <tr>
+              <td><%= hw.hw_name %></td>
+              <td class="center"><%= hw.hw_due_time %></td>
+              <td class="center"></td>
+              <td class="center"></td>
+              <td class="center">
+                <%= link_to specific_stu_hw_submissions_path(:student_id => @student.id,:homework_id => hw.id) do%>
+                    <button type="button" class="btn btn-success">
+                      <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                      View All Submissions
+                    </button>
+                <% end %>
+              </td>
+            </tr>
+            <%end%>
+            </tbody>
+          </table>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div><!--/.fluid-container-->
+
+</body>
+</html>
+
+<script>
+    <%= @student_id = User.find(params[:student_id]) %>
+
+</script>
+<script>
+    <% @user.courses.each do |course| %>
+    $('#dropdown_<%= course.id%>').click(function(){
+        $('#course_displayed').html('<%= course.course_name %>')
+                .attr('aria-expanded', 'false');
+        $('.open').attr('class', 'dropdown');
+        $('table').hide();
+
+        $('#hw_course_<%= course.id %>').show();
+
+
+        return false; });
+    <% end %>
+
+</script>

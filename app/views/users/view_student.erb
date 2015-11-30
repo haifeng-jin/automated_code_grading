@@ -16,10 +16,10 @@
       <div>
         <ul class="breadcrumb">
           <li>
-            <a href=show_instructor>Home</a>
+            <i class="glyphicon glyphicon-home"></i>&nbsp<a href=show_instructor>Home</a>
           </li>
           <li>
-            Student
+            <span class="glyphicon glyphicon-user"></span>&nbspStudent
           </li>
         </ul>
       </div>
@@ -70,6 +70,7 @@
                   <th>Name</th>
                   <th>E-mail</th>
                   <th>Courses</th>
+                  <th>View</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -85,6 +86,14 @@
                     <% end %>
                     </ul>
                   </td>
+                  <td class="center">
+                    <%= link_to view_student_record_path(:student_id => stu.id) do%>
+                        <button type="button" class="btn btn-success">
+                          <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                          View This Student's Record
+                        </button>
+                    <% end %>
+                  </td>
                 </tr>
                 <% end %>
                 </tbody>
@@ -96,4 +105,5 @@
       </div>
     </div>
   </div>
+
 

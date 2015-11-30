@@ -1,0 +1,79 @@
+<noscript>
+  <div class="alert alert-block col-md-12">
+    <h4 class="alert-heading">Warning!</h4>
+    <p>
+      You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+      enabled to use this site.
+    </p>
+  </div>
+</noscript>
+<div id="content" class="col-lg-10 col-sm-10">
+  <!-- content starts -->
+  <div>
+    <ul class="breadcrumb">
+      <li>
+        <i class="glyphicon glyphicon-home"></i>&nbsp<a href=show_student>Home</a>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-list-alt"></span>&nbsp<a href=view_students>Student History</a>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-user"></span>&nbsp
+        <%= link_to view_student_record_path(:student_id => @student.id) do%>
+
+              <%=@student_name= User.find(params[:student_id]).user_name%></a>
+
+            <% end %>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-book"></span>&nbsp<%=@hw_name= Homework.find(params[:homework_id]).hw_name%>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="box col-md-12">
+      <div class="box-inner">
+        <div class="box-header well" data-original-title="">
+          <h2><i class="glyphicon glyphicon-user"></i> <%=@student_name= User.find(params[:student_id]).user_name%> - <%=@hw_name= Homework.find(params[:homework_id]).hw_name%></h2>
+        </div>
+        <div class="box-content">
+          <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+            <thead>
+            <tr>
+              <th>Submission index</th>
+              <th>Date</th>
+              <th>Test case result</th>
+              <th>Grade</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @submissions.each_with_index do |submission, index| %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= submission.created_at%></td>
+                  <th><%= submission.sm_judgement%></th>
+                  <th><%= submission.sm_grade%></th>
+                  <td class="center">
+                    <%= link_to display_submission_file_path(:path => submission.sm_src_dir) do %>
+                        <button type="button" class="btn btn-info">
+                          <i class="glyphicon glyphicon-download-alt icon-white"></i>
+                          Download
+                        </button>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div><!--/.fluid-container-->
+
+
+</body>
+</html>

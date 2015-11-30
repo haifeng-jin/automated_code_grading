@@ -61,6 +61,12 @@ class CourseToUsersController < ApplicationController
     end
   end
 
+  def drop_course
+    course_to_user = CourseToUser.where(:course_id => params[:course_id], :user_id => params[:user_id]).first
+    course_to_user.destroy if course_to_user
+    redirect_to view_courses_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course_to_user
