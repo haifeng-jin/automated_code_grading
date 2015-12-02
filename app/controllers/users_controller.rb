@@ -51,8 +51,8 @@ class UsersController < ApplicationController
           if params[:search_type] == "ID"
             @students = @students + course.users.get_student_by_id(params[:search_val])
           elsif params[:search_type] == "Name"
-            student = course.users.get_student_by_name(params[:search_val])
-            @students = @students + (student ? [student] : [])
+            students = course.users.get_student_by_name(params[:search_val])
+            @students = @students + students
           elsif params[:search_type] == "E-mail"
             @students = @students + course.users.get_student_by_email(params[:search_val])
           end
