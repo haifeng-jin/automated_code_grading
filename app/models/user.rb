@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   def self.get_user(loginname_or_email)
     user = User.find_by user_login_name: loginname_or_email
     if user == nil
-      return User.find_by user_email: loginname_or_email  
+      return User.find_by user_email: loginname_or_email
     else
       return user
     end
@@ -28,6 +28,34 @@ class User < ActiveRecord::Base
 
   def self.get_students
     users = User.where user_role: 'student'
+    return users
+  end
+
+  def self.get_student_by_id(id)
+    return self.where user_role: 'student', id: id
+  end
+
+  def self.get_student_by_name(name)
+    users = self.where user_role: 'student'
+    users.each do |user|
+      if user.user_name.include? name
+        return user
+      end
+    end
+    return nil
+  end
+
+  def self.get_student_by_email(email)
+    users = self.where user_role: 'student', user_email: email
+    return users
+  end
+
+  def self.get_student_by_course(course_id)
+    courses = Course.where id: course_id
+    users = []
+    courses.each do |course|
+      users = users + course.users.where(user_role: 'student')
+    end
     return users
   end
 

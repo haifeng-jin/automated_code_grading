@@ -32,8 +32,44 @@ class UsersController < ApplicationController
 
   def view_student
     @user = User.find(session[:user_id])
-    @courses = Course.all
-    @students = User.get_students
+    # @courses = Course.all
+
+    @filtered_courses = Hash.new
+
+    if params[:commit] == 'Submit'
+      @students = Set.new
+      @user.courses.each do |course|
+        if params["course_#{course.id}"]
+          @students = @students + User.get_student_by_course(course.id)
+          @filtered_courses[course.id] = true
+        end
+      end
+    elsif params[:commit] == 'Search'
+      @students = Set.new
+      @user.courses.each do |course|
+        if params["hidden_course_#{course.id}"]
+          if params[:search_type] == "ID"
+            @students = @students + course.users.get_student_by_id(params[:search_val])
+          elsif params[:search_type] == "Name"
+            student = course.users.get_student_by_name(params[:search_val])
+            @students = @students + (student ? [student] : [])
+          elsif params[:search_type] == "E-mail"
+            @students = @students + course.users.get_student_by_email(params[:search_val])
+          end
+
+          @filtered_courses[course.id] = true
+        end
+      end
+
+      @search_type = params[:search_type]
+      @search_val = params[:search_val]
+
+    else
+      @user.courses.each do |course|
+        @filtered_courses[course.id] = true
+      end
+      @students = User.get_students
+    end
     if @user.user_role != 'instructor'
       redirect_to show_student_path
     end

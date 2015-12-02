@@ -31,74 +31,108 @@
             </div>
 
             <div class="box-content row">
-              <div class="box col-md-12">
+              <div class="box col-md-5">
+                <%= form_tag "#{view_students_path}" do %>
+                  <div class="row">
+                    <div class="col-md-3">
 
-                <form class="form-inline">
-                  <div class="form-group">
-                    <label class="sr-only" for="exampleInputAmount">Search Students</label>
-
-
-                    <div class="form-group">
-
-                      <select id="search_type" class="form-control">
-                        <option>ID</option>
-                        <option>Name</option>
-                        <option>E-mail</option>
+                      <select name="search_type" id="search_type" class="form-control">
+                        <option <% if @search_type == 'ID' %>selected="selected"<% end %>>ID</option>
+                        <option <% if @search_type == 'Name' %>selected="selected"<% end %>>Name</option>
+                        <option <% if @search_type == 'E-mail' %>selected="selected"<% end %>>E-mail</option>
                       </select>
-                      <input type="text" class="form-control" id="search_val" placeholder="Search Content">
-
                     </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
 
-                    <div class="form-group">
-
-                      <select id="search_by_course" class="form-control">
-                        <option>All</option>
-                        <% @courses.each do |course|%>
-                            <option><%= course.course_name %></option>
+                    <div class="col-md-6">
+                      <input name="search_val" <% if @search_val %>value="<%= @search_val%>" <% else %> placeholder="Search Content" <% end %> type="text" class="form-control" id="search_val">
+                      <% @user.courses.each do |course| %>
+                        <% if @filtered_courses[course.id] %>
+                          <input type="hidden" name="hidden_course_<%= course.id %>">
                         <% end %>
-                      </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Select by Course</button>
-                  </div>
-                </form>
+                      <% end %>
 
-              <table class="table">
-                <thead>
-                <tr>
-                  <th>#ID</th>
-                  <th>Name</th>
-                  <th>E-mail</th>
-                  <th>Courses</th>
-                  <th>View</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% @students.each do |stu|%>
-                <tr class="active">
-                  <th scope="row"><%= stu.id %></th>
-                  <td><%= stu.user_name %></td>
-                  <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></td>
-                  <td>
-                    <ul>
-                    <% stu.courses.each do |course| %>
-                      <li><%= course.course_name %></li>
-                    <% end %>
-                    </ul>
-                  </td>
-                  <td class="center">
-                    <%= link_to view_student_record_path(:student_id => stu.id) do%>
-                        <button type="button" class="btn btn-success">
-                          <i class="glyphicon glyphicon-zoom-in icon-white"></i>
-                          View This Student's Record
-                        </button>
-                    <% end %>
-                  </td>
-                </tr>
+                    </div>
+
+                    <div class="col-md-3">
+                      <%= submit_tag "Search", class: "btn btn-primary"%>
+                    </div>
+                  </div>
                 <% end %>
-                </tbody>
-              </table>
               </div>
+
+
+              <div class="box col-md-6">
+
+                <%= form_tag "#{view_students_path}" do %>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="dropdown">
+                        <button id="course_filter" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          Course Filter
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <% @user.courses.each do |course| %>
+                              <li><a><input type="checkbox" name="course_<%= course.id %>" value="<%= course.course_name %>" <% if @filtered_courses[course.id] %> checked <% end %>> <%= course.course_name %></a></li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                    <%= submit_tag "Submit", class: "btn btn-primary"%>
+                    </div>
+                  </div>
+                </div>
+
+                <% end %>
+
+
+                <div class="box col-md-12">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>#ID</th>
+                      <th>Name</th>
+                      <th>E-mail</th>
+                      <th>Courses</th>
+                      <th>View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @students.each do |stu|%>
+                        <tr>
+                          <th scope="row"><%= stu.id %></th>
+                          <td><%= stu.user_name %></td>
+                          <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></td>
+                          <td>
+                            <ul>
+                              <% stu.courses.each do |course| %>
+                                  <li><%= course.course_name %></li>
+                              <% end %>
+                            </ul>
+                          </td>
+                          <td class="center">
+                            <%= link_to view_student_record_path(:student_id => stu.id) do%>
+                                <button type="button" class="btn btn-success">
+                                  <i class="glyphicon glyphicon-zoom-in icon-white"></i>
+                                  View This Student's Record
+                                </button>
+                            <% end %>
+                          </td>
+                        </tr>
+                    <% end %>
+                    <% if @students.empty? %>
+                      <% if @search_type and @filtered_courses %>
+                        <tr class="danger"><td colspan="5" align="center">Sorry, but there is no student with <%= @search_type %> "<%= @search_val %>" taking the filtered courses.</td></tr>
+                      <% elsif @filtered_courses %>
+                            <tr class="danger"><td colspan="5" align="center">Sorry, but there are no students taking the filtered courses.</td></tr>
+                      <% end %>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>

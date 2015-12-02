@@ -147,16 +147,28 @@
                                   <% if i % 4 == 0 %>
                                     <tr>
                                       <td><%= stu.id %></td>
-                                      <td><%= stu.user_name %></td>
+                                      <td>
+                                        <%= link_to view_student_record_path(student_id: stu.id) do %>
+                                          <%= stu.user_name %>
+                                        <% end %>
+                                      </td>
                                       <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></a></td>
                                   <% elsif i % 4 == 3%>
                                       <td><%= stu.id %></td>
-                                      <td><%= stu.user_name %></td>
+                                      <td>
+                                        <%= link_to view_student_record_path(student_id: stu.id) do %>
+                                            <%= stu.user_name %>
+                                        <% end %>
+                                      </td>
                                       <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></a></td>
                                     </tr>
                                   <% else %>
                                       <td><%= stu.id %></td>
-                                      <td><%= stu.user_name %></td>
+                                      <td>
+                                        <%= link_to view_student_record_path(student_id: stu.id) do %>
+                                            <%= stu.user_name %>
+                                        <% end %>
+                                      </td>
                                       <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></a></td>
                                   <% end %>
                                 <% end %>
