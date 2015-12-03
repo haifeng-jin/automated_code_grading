@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   post '/courses/create'     => 'courses#create'
   post '/courses/update'     => 'courses#update'
   post '/view_students'       => 'users#view_student'
+  post '/announcements/create'     => 'announcements#create'
 
   resources :announcements
   resources :course_to_users

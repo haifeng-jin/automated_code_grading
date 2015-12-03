@@ -17,6 +17,118 @@
         </ul>
       </div>
 
+      <div class="dropdown">
+        <h3>Course:
+        <span>
+        <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <% unless @user.courses.where(id: params[:current_course]).empty? %>
+              <%= @user.courses.find(params[:current_course]).course_name%>
+          <% else %>
+              <%= @user.courses.first.course_name if @user.courses.first %>
+          <% end %>
+
+          <span class="caret"></span>
+        </button>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <% @user.courses.each do |course| %>
+              <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
+          <% end %>
+        </ul>
+        </span>
+        </h3>
+      </div>
+
+      <div class="row">
+        <div class="box col-md-12">
+          <div class="box-inner">
+            <div class="box-header well">
+
+              <h2><i class="glyphicon glyphicon-info-sign"></i> Announcement</h2>
+
+            </div>
+            <div class="box-content row">
+              <div class="col-lg-7 col-md-12">
+
+                <% @user.courses.each do |course| %>
+                    <ul id="annm_course_<%= course.id %>" class="annm"
+                        <% unless @user.courses.where(id: params[:current_course]).empty? %>
+                          <% if params[:current_course] != course.id.to_s %>
+                            style="display: none">
+                          <% else %>
+                            >
+                          <% end %>
+                        <% else %>
+                          <% if course.id != @user.courses.first.id %>
+                            style="display: none">
+                          <% else %>
+                            >
+                          <% end %>
+                        <% end %>
+                    <% course.announcements.each do |annm|%>
+                    <li>
+                      <p><%= annm.announcement_description %>
+                        <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/announcements/<%= annm.id %>">(Delete)</a>
+                      </p>
+                    </li>
+                    <% end %>
+                    </ul>
+
+                <% end %>
+
+                <p>
+                  <a id="new_annm_btn" class="btn btn-warning" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseNewAnnm">
+                    New Announcement
+                  </a>
+                </p>
+                <p>
+                  <div class="collapse" id="collapseNewAnnm">
+                    <div>
+                      <h4 id="new_annm_head">New Announcement</h4>
+
+                      <h5>Course:</h5>
+                      <button id="new_course_annm" class="btn btn-default dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="true">
+                        <% unless @user.courses.where(id: params[:current_course]).empty? %>
+                            <%= @user.courses.find(params[:current_course]).course_name%>
+                        <% else %>
+                          <%= @user.courses.first.course_name if @user.courses.first %>
+                        <% end %>
+                      </button>
+
+                      <%= form_tag '/announcements/create', { :multipart => true } do %>
+
+
+                    <p>
+
+                    <h5>Content</h5>
+                    <%=text_area_tag 'announcement[announcement_description]', nil, rows: 3, cols: 120 , placeholder: "Create Your Note..."%>
+
+                    <input type="hidden" id="annm_course_id" name="announcement[course_id]" value="<% unless @user.courses.where(id: params[:current_course]).empty? %><%= params[:current_course]%><% else %><%= @user.courses.first.id if @user.courses.first %><% end %>">
+
+                    <br/>
+                    <br/>
+                    <div class="row">
+                      <div  class="col-md-3">
+                        <%= submit_tag "Submit", class: "btn btn-primary"%>
+                      </div>
+                      <div  class="col-md-3">
+                        <a id="show_new_annm_btn" class="btn btn-default" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseNewAnnm">
+                          Cancel
+                        </a>
+                      </div>
+
+                    </div>
+
+                <% end %>
+              </div>
+            </div>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
       <div class="row">
         <div class="box col-md-12">
           <div class="box-inner">
@@ -27,27 +139,23 @@
             </div>
             <div class="box-content row">
               <div class="col-md-12">
-      <div class="dropdown">
-        Course:
-        <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <%= @user.courses.first.course_name if @user.courses.first %>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <% @user.courses.each do |course| %>
-              <li id="dropdown_<%= course.id %>"><a href="#"><%= course.course_name %></a></li>
-          <% end %>
-        </ul>
-      </div>
-      <br>
+
             <% @user.courses.each do |course| %>
                 <table  id="hw_course_<%= course.id %>"
                         class="table table-striped table-bordered bootstrap-datatable datatable responsive"
-                        <% if course.id != @user.courses.first.id %>
+                    <% unless @user.courses.where(id: params[:current_course]).empty? %>
+                      <% if params[:current_course] != course.id.to_s %>
                         style="display: none">
-                <% else %>
-                >
-                <% end %>
+                      <% else %>
+                        >
+                      <% end %>
+                    <% else %>
+                      <% if course.id != @user.courses.first.id %>
+                        style="display: none">
+                      <% else %>
+                        >
+                      <% end %>
+                    <% end %>
                 <thead>
                 <tr>
                   <th>Homework</th>
@@ -91,39 +199,7 @@
       </div>
       </div>
       </div>
-      <div class="row">
-        <div class="box col-md-12">
-          <div class="box-inner">
-            <div class="box-header well">
 
-              <h2><i class="glyphicon glyphicon-info-sign"></i> Announcement</h2>
-
-            </div>
-            <div class="box-content row">
-              <div class="col-lg-7 col-md-12">
-
-
-
-                    <% @user.courses.each do |course| %>
-                        <h4><%= course.course_name %></h4>
-                        <ul id="annm_course_<%= course.id %>" class="annm"
-                            <% if course.id != @user.courses.first.id %>
-                            style="display: none">
-                        <% else %>
-                        >
-                        <% end %>
-                        <% course.announcements.each do |annm|%>
-                        <li><p><%= annm.announcement_description %></p></li>
-                        <% end %>
-                        </ul>
-
-                    <% end %>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
   <script>
@@ -131,12 +207,33 @@
       $('#dropdown_<%= course.id%>').click(function(){
           $('#course_displayed').html('<%= course.course_name %>')
                   .attr('aria-expanded', 'false');
+          $('#new_course_annm').html('<%= course.course_name %>')
+            .attr('aria-expanded', 'false');
+
           $('.open').attr('class', 'dropdown');
           $('table').hide();
           $('#hw_course_<%= course.id %>').show();
+          $('ul.annm').hide();
           $('#annm_course_<%= course.id %>').show();
 
+          $('#annm_course_id').attr('value', '<%= course.id %>')
           return false; });
       <% end %>
   </script>
 
+  <script>
+    $('#new_annm_btn').click(function() {
+      $(this).hide();
+      $('.collapse').collapse('show');
+      $("html,body").animate({
+        scrollTop: $('#new_annm_head').offset().top
+      });
+    });
+
+    $('#show_new_annm_btn').click(function() {
+      $('#new_annm_btn').show();
+      $('.collapse.in').collapse('hide');
+    });
+
+
+  </script>

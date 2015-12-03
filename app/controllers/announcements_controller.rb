@@ -28,7 +28,7 @@ class AnnouncementsController < ApplicationController
 
     respond_to do |format|
       if @announcement.save
-        format.html { redirect_to @announcement, notice: 'Announcement was successfully created.' }
+        format.html { redirect_to show_instructor_path(current_course: @announcement.course.id), notice: 'Announcement was successfully created.' }
         format.json { render :show, status: :created, location: @announcement }
       else
         format.html { render :new }
@@ -54,9 +54,12 @@ class AnnouncementsController < ApplicationController
   # DELETE /announcements/1
   # DELETE /announcements/1.json
   def destroy
+    if session[:user_role] != 'instructor'
+      redirect_to login_path
+    end
     @announcement.destroy
     respond_to do |format|
-      format.html { redirect_to announcements_url, notice: 'Announcement was successfully destroyed.' }
+      format.html { redirect_to show_instructor_path(current_course: @announcement.course.id), notice: 'Announcement was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
