@@ -30,7 +30,7 @@
             <div class="dropdown">
               Course:
               <button id="course_displayed" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <%= @user.courses.first.course_name if @user.courses.first %>
+                <%= @first_course.course_name if @first_course %>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -50,11 +50,11 @@
               <div class="panel-body">
                 <% @user.courses.each do |course| %>
                     <ul id="annm_course_<%= course.id %>" class="annm"
-                        <% if course.id != @user.courses.first.id %>
+                        <% if @first_course and course.id != @first_course.id %>
                         style="display: none">
-                    <% else %>
-                    >
-                    <% end %>
+                        <% else %>
+                        >
+                        <% end %>
                     <% course.announcements.each do |annm|%>
                     <li><p><%= annm.announcement_description %></p></li>
                     <% end %>
@@ -74,11 +74,11 @@
                 <% @user.courses.each do |course| %>
                     <table  id="hw_course_<%= course.id %>"
                             class="table table-striped table-bordered bootstrap-datatable datatable responsive"
-                            <% if course.id != @user.courses.first.id %>
+                            <% if @first_course and course.id != @first_course.id %>
                             style="display: none">
-                    <% else %>
-                    >
-                    <% end %>
+                            <% else %>
+                            >
+                            <% end %>
                     <thead>
                     <tr>
                       <th class="sorting">Homework</th>
