@@ -123,6 +123,24 @@
                                         </ul>
                                       </td>
                                     </tr>
+                                <% else %>
+                                    <tr class="active">
+                                      <th scope="row">
+                                        <input type="checkbox" name="select_hw_<%= hw.id %>">
+                                      </th>
+                                      <td><%= hw.hw_name %></td>
+                                      <td>
+                                      </td>
+                                      <td><%= hw.hw_release_time %></td>
+                                      <td><%= hw.hw_due_time %></td>
+                                      <td>
+                                        <ul>
+                                          <% hw.courses.each do |course| %>
+                                              <li><%= course.course_name %></li>
+                                          <% end %>
+                                        </ul>
+                                      </td>
+                                    </tr>
                                 <% end %>
                             <% end %>
                             </tbody>
