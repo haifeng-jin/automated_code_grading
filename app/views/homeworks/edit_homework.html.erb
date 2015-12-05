@@ -20,6 +20,8 @@
         </li>
       </ul>
     </div>
+
+
     <div class="row">
       <div class="box col-md-12">
         <div class="box-inner">
@@ -45,24 +47,29 @@
               </form>
             </center>
             <center>
-              <div class="form-group">
-                <label for="exampleInputFile">Upload testcase</label>
-                <input type="file" id="upload file" name="upload file"/>
-              </div>
+            <div class="col-md-12">
+              <h4>Test Input </h4>
+              <%= file_field_tag 'testcase_output' %>
+            </div>
+              </center>
+            <center>
+            <div class="col-md-12">
+              <h4>Test Output </h4>
+              <%= file_field_tag 'testcase_output' %>
+            </div>
             </center>
-            <form action=show_instructor>
-              <p class="center col-md-5">
-                <button type="submit" id="finish button" class="btn btn-primary" style="width:150px">Finish</button>
-              </p>
-            </form>
-            <form action=show_instructor>
-              <p class="center col-md-5">
-                <button class="btn btn-primary" style="width:150px">Cancel</button>
-              </p>
+            <p>&nbsp;</p>
+              <center>
+            <div  class="col-md-12">
+              <%= submit_tag "Submit", class: "btn btn-primary"%>
+            </div>
+            </center>
+
             </form>
           </div>
         </div>
       </div>
     </div>
+    
   </div>
 </div>

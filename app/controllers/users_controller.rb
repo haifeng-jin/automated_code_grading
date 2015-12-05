@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       redirect_to login_path
     else
       @user = User.find(session[:user_id])
+      @first_course = @user.courses.first
     end
   end
 
