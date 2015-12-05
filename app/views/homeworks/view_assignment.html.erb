@@ -44,9 +44,9 @@
               <div class="clearfix"></div><br>
               <form action="/html/tags/html_form_tag_action.cfm" method="post">
 
-                <div class="box-content row" style="width: 50%; text-align: justify; ">
-                  <%=@homework.hw_description%>
-                </div>
+                <textarea name="contents" id="contents" disabled style="width: 50%;text-align:justify; padding: 2%; height: 500px; font:20px italic; border: 10px double gray; ">
+<%=@homework.hw_description%>
+                                  </textarea><br>
                 <div class="clearfix"></div><br>
               </form>
             </center>
