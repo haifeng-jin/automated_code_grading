@@ -109,8 +109,8 @@ class CoursesController < ApplicationController
         end
         
         Homework.all.each do |hw|
+          course_to_homework = CourseToHomework.where(course_id: @course.id, homework_id: hw.id).first
           if params["select_hw_#{hw.id}"] == "on"
-            course_to_homework = CourseToHomework.where(course_id: @course.id, homework_id: hw.id).first
             CourseToHomework.new(course_id: @course.id, homework_id: hw.id).save
           elsif course_to_homework
             CourseToHomework.find(course_to_homework.id).destroy
