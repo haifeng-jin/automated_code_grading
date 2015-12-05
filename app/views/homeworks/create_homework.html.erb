@@ -71,10 +71,10 @@
                     <%= file_field_tag 'testcase_output' %>
                         </div>
                       </div>
-                    <h4>Due date   </h4>
-                    <%= datetime_select(:time, 'due_time') %>
                     <h4>Release date</h4>
                     <%= datetime_select(:time, 'release_time') %>
+                    <h4>Due date   </h4>
+                    <%= datetime_select(:time, 'due_time') %>
                       <input type="hidden" id="course_id" name="course_id" value="<%= @user.courses.first.id if @user.courses.first %>">
 
                       <br/>
