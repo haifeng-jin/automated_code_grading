@@ -17,10 +17,10 @@
       <div>
         <ul class="breadcrumb">
           <li>
-            <a href=show_student>Home</a>
+            <i class="glyphicon glyphicon-home"></i>&nbsp<a href=show_student>Home</a>
           </li>
           <li>
-            View <%= @homework.hw_name%>
+            <span class="glyphicon glyphicon-list-alt"></span>&nbsp View <%= @homework.hw_name%>
           </li>
         </ul>
       </div>
@@ -42,9 +42,11 @@
               <center>
                 <div class="clearfix"></div><br>
                 <form action="/html/tags/html_form_tag_action.cfm" method="post">
-                  <div class="box-content row" style="width: 50%; text-align: justify; ">
-                    <%=@homework.hw_description%>
-                  </div>
+
+                <textarea name="contents" id="contents" disabled style="width: 50%;text-align:justify; padding: 2%; height: 500px; font:20px italic; border: 10px double gray; ">
+<%=@homework.hw_description%>
+                                  </textarea><br>
+                  <div class="clearfix"></div><br>
                 </form>
               </center>
               <center>
