@@ -68,7 +68,7 @@
                       <%= hidden_field_tag :homework_id, @homework.id %>
                     </p>
                     <p>
-                      <button type="submit" class="btn btn-primary" style="width:200px">Submit</button>
+                      <button type="submit" class="btn btn-primary" style="width:200px" onClick="m(this.value)">Submit</button>
                     </p>
                 <% end %>
                 </p>
@@ -87,3 +87,13 @@
   </div>
     </div>
   </div>
+
+<script>
+function m(value){
+if( document.getElementById("file").files.length == 0 ){
+alert("No file selected!");
+event.preventDefault();
+}
+}
+
+</script>
