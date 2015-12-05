@@ -1,6 +1,6 @@
-require_relative 'temporary_files_info'
 require_relative 'command'
 require_relative 'execute_result'
+require_relative 'temporary_files_info'
 require 'timeout'
 
 class Executor

@@ -1,6 +1,3 @@
-#require_relative 'grading/executor/java_executor'
-require_relative 'grading/executor_factory'
-require_relative 'grading/executor/execute_result'
 
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
