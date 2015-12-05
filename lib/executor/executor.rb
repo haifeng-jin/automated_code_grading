@@ -29,6 +29,10 @@ class Executor
       rescue Timeout::Error
         return "Time Limit Exceeded"
     end
+    if !File.exist?(@command.get_temp_files.get_error_path)
+      temp_file = File.new(@command.get_temp_files.get_error_path, "w")
+      temp_file.close
+    end
     file = File.new(@command.get_temp_files.get_error_path, "r")
     message = ""
     while (line = file.gets)
@@ -43,6 +47,9 @@ class Executor
 
   def score
     total_line_num = `#{@command.total_line_command}`.split(" ").at(0).to_i
+    if (total_line_num == 0)
+      return 100
+    end
     diff_line_num = `#{@command.diff_line_command}`.to_i / 2
     common_line_num = total_line_num - diff_line_num
     return (common_line_num * 1.0 / total_line_num * 100).to_i
