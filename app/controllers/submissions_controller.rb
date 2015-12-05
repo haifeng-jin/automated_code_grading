@@ -92,9 +92,12 @@ class SubmissionsController < ApplicationController
     time = current_time.strftime('%Y_%m_%d-%H_%M_%S')
     file_type = params[:file].original_filename.partition('.')[-1]
     file_name = time + '.' + file_type
+    file_name = file_name.tr(' ','_')
 
     directory = './UPLOAD/' + @course.course_name + '/' + @homework.hw_name + '/' + @user.user_login_name + '/' + num_submission.to_s
-    path_file = File.join(directory, file_name).tr(' ', '_')
+    directory = directory.tr(' ','_')
+
+    path_file = File.join(directory, file_name)
 
     mkdir(directory)
 

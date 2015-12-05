@@ -38,9 +38,9 @@
               <div class="clearfix"></div><br>
               <form action="/html/tags/html_form_tag_action.cfm" method="post">
 
-                                 <textarea name="contents" id="contents" style="width: 50%;text-align:justify; padding: 2%; height: 500px; font:20px italic; border: 10px double gray; ">
-<%=@homework.hw_description%>
-                                  </textarea><br>
+                <textarea name="contents" id="contents" style="width: 50%;text-align:justify; padding: 2%; height: 500px; font:20px italic; border: 10px double gray; ">
+                  <%=@homework.hw_description%>
+                </textarea><br>
                 <div class="clearfix"></div><br>
               </form>
             </center>
@@ -50,7 +50,7 @@
                 <input type="file" id="upload file" name="upload file"/>
               </div>
             </center>
-            <form action="homeworktable.html">
+            <form action=show_instructor>
               <p class="center col-md-5">
                 <button type="submit" id="finish button" class="btn btn-primary" style="width:150px">Finish</button>
               </p>
