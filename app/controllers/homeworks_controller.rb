@@ -66,9 +66,9 @@ class HomeworksController < ApplicationController
       else
         @time_left = time_diff_string(homework_timeLeft)
       end
-      @user_in_course = @course.users.size
+      @user_in_course = @course.users.where(user_role: 'student').size
       @user_valid = Submission.where(course_id: params[:course_id], homework_id: params[:homework_id]).select(:user_id).map(&:user_id).uniq.size
-      @average_grade = Submission.where(course_id: params[:course_id], homework_id: params[:homework_id]).average(:sm_grade)
+      @average_grade = Submission.select("MAX(sm_grade)").group(:user_id).having(course_id: params[:course_id], homework_id: params[:homework_id]).average(:sm_grade)[1].to_s
     end
   end
 
