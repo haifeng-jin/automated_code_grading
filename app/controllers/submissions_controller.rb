@@ -111,7 +111,12 @@ class SubmissionsController < ApplicationController
     #`cp #{Rails.root.to_s + '/' + path_file} #{Rails.root.to_s + '/' + directory + '/main.java'}`
 
     testcase_path = Rails.root.to_s + '/' + @courseToHomework.hw_test_case_dir + '/'
-    grading_result = ExecutorFactory.get_executor(Rails.root.to_s + '/' + directory, "java", Rails.root.to_s + '/' + path_file, testcase_path + 'input', testcase_path + 'output').execute
+    ext_string = File.extname(path_file)
+    if ext_string == ".java"
+      grading_result = ExecutorFactory.get_executor(Rails.root.to_s + '/' + directory, "java", Rails.root.to_s + '/' + path_file, testcase_path + 'input', testcase_path + 'output').execute
+    else# if ext_string == ".py"
+      grading_result = ExecutorFactory.get_executor(Rails.root.to_s + '/' + directory, "python", Rails.root.to_s + '/' + path_file, testcase_path + 'input', testcase_path + 'output').execute
+    end
     @submission[:sm_grade] = grading_result.get_score
     @submission[:sm_judgement] = grading_result.get_judgement
     @submission[:sm_src_dir] = path_file
