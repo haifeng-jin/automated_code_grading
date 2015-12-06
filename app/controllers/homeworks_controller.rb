@@ -106,6 +106,7 @@ class HomeworksController < ApplicationController
       @user = User.find(session[:user_id])
       @username = User.find(session[:user_id]).user_name
       @student = User.find(params[:student_id])
+      @homework_grades = Submission.select(:sm_grade).group(:homework_id).where(course_id: 1).maximum(:sm_grade)
     end
     #@submissions = Submission.where(:course_id => params[:course_id]).where(:homework_id => params[:homework_id])
     #@homework = Homework.find(params[:homework_id])
