@@ -120,8 +120,10 @@ class HomeworksController < ApplicationController
     if (params[:edit_homework_flag].nil?)
       @homework = Homework.new
       @homework[:hw_name] = params[:hw_name]
+      @courseToHomework = CourseToHomework.new
     else
       @homework = Homework.find(params[:homework_id])
+      @courseToHomework = CourseToHomework.where(:course_id => params[:course_id], :homework_id => params[:homework_id]).first
     end
 
 
@@ -153,7 +155,7 @@ class HomeworksController < ApplicationController
       File.open(directory + 'output', "w") { |f| f.write(params[:testcase_output].read.force_encoding('UTF-8')) }
     end
 
-    @courseToHomework = CourseToHomework.new
+
     @courseToHomework.course_id = params[:course_id]
     @courseToHomework.homework_id = @homework.id 
     @courseToHomework[:hw_test_case_dir] = directory
