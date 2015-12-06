@@ -64,7 +64,7 @@
             <tr>
               <td><%= hw.hw_name %></td>
               <td class="center"><%= hw.hw_due_time %></td>
-              <td class="center"><%= @homework_grades.where(course_id: course.id ).maximum(:sm_grade)[hw.id]%></td>
+              <td class="center"><%= @homework_grades.where(course_id: course.id, user_id: @student.id).maximum(:sm_grade)[hw.id]%></td>
               <td class="center">
                 <%= link_to specific_stu_hw_submissions_path(:student_id => @student.id,:homework_id => hw.id) do%>
                     <button type="button" class="btn btn-success">
