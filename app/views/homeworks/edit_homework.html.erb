@@ -61,12 +61,14 @@
                       </div>
                     </div>
                     <h4>Release date</h4>
-                    <%= datetime_select(:time, 'release_time') %>
+                    <%= datetime_select(:time, 'release_time', :default => {:year => @release_date_times[0], :month => @release_date_times[1], :day => @release_date_times[2],:hour => @release_date_times[3], :minute => @release_date_times[4]}) %>
                     <h4>Due date   </h4>
-                    <%= datetime_select(:time, 'due_time') %>
+                    <%= datetime_select(:time, 'due_time', :default => {:year => @due_date_times[0], :month => @due_date_times[1], :day => @due_date_times[2],:hour => @due_date_times[3], :minute => @due_date_times[4]}) %>
                     <input type="hidden" id="course_id" name="course_id" value="<%= @user.courses.first.id if @user.courses.first %>">
                     <input type="hidden" id="homework_id" name="homework_id" value="<%= @homework.id %>">
                     <input type="hidden" id="edit_homework_flag" name="edit_homework_flag" value="<%= @edit_homework_flag=1 %>">
+                    <input type="hidden" id="homework_release_time" name="homework_release_time" value="<%= @homework.hw_release_time %>">
+                    <input type="hidden" id="homework_due_time" name="homework_due_time" value="<%= @homework.hw_due_time %>">
 
                     <br/>
                     <br/>

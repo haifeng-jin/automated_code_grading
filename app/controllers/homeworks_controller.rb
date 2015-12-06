@@ -84,7 +84,18 @@ class HomeworksController < ApplicationController
       @user = User.find(session[:user_id])
       @course = Course.find(params[:course_id])
       @homework = Homework.find(params[:homework_id])
-      ##@edithomework_flag = 1
+      #@homework.hw_due_time.to_s.split('')
+
+      @due_split = @homework[:hw_due_time].to_s.split(' ')
+      @due_date = @due_split[0].split('-')
+      @due_time = @due_split[1].split(':')
+      @due_date_times = @due_date + @due_time
+
+      @release_split = @homework[:hw_release_time].to_s.split(' ')
+      @release_date = @release_split[0].split('-')
+      @release_time = @release_split[1].split(':')
+      @release_date_times = @release_date + @release_time
+
     end
   end
 
@@ -104,7 +115,6 @@ class HomeworksController < ApplicationController
   def create
     @user = User.find(session[:user_id])
     @course = Course.find(params[:course_id])
-    @homework = Homework.find(params[:homework_id])
 
     if (params[:edit_homework_flag].nil?)
       @homework = Homework.new
