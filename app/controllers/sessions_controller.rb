@@ -22,7 +22,10 @@ class SessionsController < ApplicationController
       else
         render plain: 'User role can not be identified, please contact admin' 
       end
-    else render 'new'
+    else
+      flash[:error] = "Invalid login_id/password combination."
+      #flash.keep
+      render 'new'
     end
   end
 
