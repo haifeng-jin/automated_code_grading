@@ -25,3 +25,5 @@
 /UPLOAD
 .*.sw?
 
+#Ignore simplecov files
+/coverage
