@@ -15,6 +15,8 @@ class UsersController < ApplicationController
     else
       @user = User.find(session[:user_id])
       @first_course = @user.courses.first
+      @grades = Submission.select(:sm_grade)
+      @current_time = Time.zone.now
     end
   end
 
