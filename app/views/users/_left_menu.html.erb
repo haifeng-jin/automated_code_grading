@@ -11,31 +11,31 @@
               <a class="ajax-link" href=show_instructor><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
             </li>
             <li>
-              <%= link_to create_homework_path() do %>
+              <a href = "<%=create_homework_path()%>" id = "create_homework">
                   <span class="glyphicon glyphicon-edit"></span> Assign New Homework
-              <% end %>
+              </a>
             </li>
             <li>
-              <%= link_to homework_history_path() do %>
+              <a href = "<%=homework_history_path()%>" id = "homework_history">
                   <span class="glyphicon glyphicon-list-alt"></span> Homework History
-              <%end%>
+              </a>
             </li>
             <li>
-              <%= link_to view_students_path do %>
+              <a href = "<%=view_students_path%>" id = "view_students">
                   <span class="glyphicon glyphicon-user"></span> Students
-              <% end %>
+              </a>
             </li>
 
             <li>
-              <%= link_to view_courses_path do %>
+              <a href = "<%=view_courses_path%>" id = "view_courses">
                   <span class="glyphicon glyphicon-book"></span> Courses
-              <% end %>
+              </a>
             </li>
 
             <li>
-              <%= link_to create_course_path() do %>
+              <a href = "<%=create_course_path()%>" id = "create_course">
                   <span class="glyphicon glyphicon-plus"></span> Add New Course
-              <% end %>
+              </a>
             </li>
 
             <li>

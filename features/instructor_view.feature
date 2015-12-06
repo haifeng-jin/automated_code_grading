@@ -11,11 +11,11 @@ Feature: login for a student user
 
     Given the following homeworks exist:
       | id | hw_name | hw_description | hw_release_time | hw_due_time | created_at | updated_at |
-      | 10 | hw_test | des_test | 1970-01-01 3:46:00.000000 | 2022-12-12 3:46:00.000000 | 1970-01-01 3:46:00.000000 | 1970-01-01 3:46:00.000000 |
+      | 10 | hw_test | des_test | 2015-01-01 3:46:00.000000 | 2022-12-12 3:46:00.000000 | 1970-01-01 3:46:00.000000 | 1970-01-01 3:46:00.000000 |
 
     Given the following courses exist:
       | id | course_name | created_at | updated_at |
-      | 20 | Analysis | 1970-01-01 3:46:00.000000 | 1970-01-01 3:46:00.000000 |
+      | 20 | Analysis | 2015-01-01 3:46:00.000000 | 2015-01-01 3:46:00.000000 |
 
     Given the following course_to_users exist:
       | id | course_id | user_id |
@@ -23,12 +23,12 @@ Feature: login for a student user
       | 31 | 20 | 7 |
 
     Given the following course_to_homeworks exist:
-      | id | course_id | homework_id |
-      | 40 | 20 | 10 |
+      | id | course_id | homework_id | created_at | updated_at |
+      | 40 | 20 | 10 | 2015-01-01 3:46:00.000000 | 2015-01-01 3:46:00.000000 |
 
     Given the following submissions exist:
-      | id | homework_id | user_id | course_id | sm_grade |
-      | 8 | 10 | 6 | 20 | 77 |
+      | id | homework_id | user_id | course_id | sm_grade | created_at | updated_at | sm_judgement |
+      | 8 | 10 | 6 | 20 | 77 | 2015-01-01 3:46:00.000000 | 2015-01-01 3:46:00.000000 | Success |
 
     Given the following announcements exist:
       | id | announcement_description | course_id |
@@ -39,9 +39,19 @@ Feature: login for a student user
     And I fill in "session_login_credential" with "inst123"
     And I fill in "session_password" with "inst1"
     And I press "Log in"
+    Then I should see "ac"
+    When I follow "(Delete)"
     Then I should see "hw_test"
     And I press "View"
-    Then I should see "des_test"
+    And I press "Submission History"
+    When I follow "create_homework"
+#    And I press "Submit"
+    When I follow "homework_history"
+    And I press "Delete"
+    When I follow "view_students"
+    And I press "6_view"
+    When I follow "view_courses"
+    When I follow "create_course"
     And I press "logout"
     Then I should see "Welcome"
 
