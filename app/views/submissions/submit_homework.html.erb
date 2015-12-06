@@ -1,26 +1,26 @@
 
-  <div class="row">
-    <noscript>
-      <div class="alert alert-block col-md-12">
-        <h4 class="alert-heading">Warning!</h4>
-        <p>
-          You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
-          enabled to use this site.
-        </p>
-      </div>
-    </noscript>
-    <div id="content">
-      <!-- content starts -->
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-      <div>
-        <ul class="breadcrumb">
-          <li>
-            <i class="glyphicon glyphicon-home"></i>&nbsp<a href=show_student>Home</a>
-          </li>
-          <li>
-            <span class="glyphicon glyphicon-list-alt"></span>&nbsp View <%= @homework.hw_name%>
+<div class="row">
+  <noscript>
+    <div class="alert alert-block col-md-12">
+      <h4 class="alert-heading">Warning!</h4>
+      <p>
+        You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+        enabled to use this site.
+      </p>
+    </div>
+  </noscript>
+  <div id="content">
+    <!-- content starts -->
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div>
+          <ul class="breadcrumb">
+            <li>
+              <i class="glyphicon glyphicon-home"></i>&nbsp<a href=show_student>Home</a>
+            </li>
+            <li>
+              <span class="glyphicon glyphicon-list-alt"></span>&nbsp View <%= @homework.hw_name%>
           </li>
         </ul>
       </div>
@@ -35,67 +35,71 @@
               <form>
                 <center>
                   <h2><%= @homework.hw_name %>
-                  </h2>
-                </center>
-              </form>
+                </h2>
+              </center>
+            </form>
 
-              <center>
-                <div class="clearfix"></div><br>
-                <form action="/html/tags/html_form_tag_action.cfm" method="post">
+            <center>
+              <div class="clearfix"></div><br>
+              <form action="/html/tags/html_form_tag_action.cfm" method="post">
 
                 <textarea name="contents" id="contents" disabled style="width: 50%;text-align:justify; padding: 2%; height: 500px; font:20px italic; border: 10px double gray; ">
-<%=@homework.hw_description%>
-                                  </textarea><br>
-                  <div class="clearfix"></div><br>
-                </form>
-              </center>
-              <center>
-                <h4>Status:<%= @time_left%></h4>
-                <h4>Test Results: </h4>
-                <h4>Compile Error: </h4>
-                <h4>Check first line </h4>
-              </center>
-              <div class="clearfix"></div><br>
+                  <%=@homework.hw_description%>
+                </textarea><br>
+                <div class="clearfix"></div><br>
+              </form>
+            </center>
+            <center>
+              <h4>Status:<%= @time_left%></h4>
+              <h4>Test Results: </h4>
+              <h4>Compile Error: </h4>
+              <h4>Check first line </h4>
+            </center>
+            <div class="clearfix"></div><br>
+
+            <% if @time_left[0] != '-' %>
 
               <center>
-              <div>
-                <p class="center col-md-5">
-                  <% flash.each do |key, msg| %>
+                <div>
+                  <p class="center col-md-5">
+                    <% flash.each do |key, msg| %>
                       <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
+                    <% end %>
+                    <%= form_tag '/submissions/create', { :multipart => true } do %>
+                      <p>
+                        <%= file_field_tag 'file' %>
+                        <%= hidden_field_tag :course_id, @course.id %>
+                        <%= hidden_field_tag :homework_id, @homework.id %>
+                      </p>
+                      <p>
+                        <button type="submit" class="btn btn-primary" style="width:200px" onClick="m(this.value)">Submit</button>
+                      </p>
+                    <% end %>
+
                   <% end %>
-                  <%= form_tag '/submissions/create', { :multipart => true } do %>
-                    <p>
-                      <%= file_field_tag 'file' %>
-                      <%= hidden_field_tag :course_id, @course.id %>
-                      <%= hidden_field_tag :homework_id, @homework.id %>
-                    </p>
-                    <p>
-                      <button type="submit" class="btn btn-primary" style="width:200px" onClick="m(this.value)">Submit</button>
-                    </p>
-                <% end %>
                 </p>
-                </div>
-               </center>
-              <form action=show_student>
-                <p class="center col-md-5">
-                  <button class="btn btn-primary" style="width:200px">Back</button>
-                </p>
-              </form>
-            </div>
+              </div>
+            </center>
+            <form action=show_student>
+              <p class="center col-md-5">
+                <button class="btn btn-primary" style="width:200px">Back</button>
+              </p>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
     </div>
   </div>
 
-<script>
-function m(value){
-if( document.getElementById("file").files.length == 0 ){
-alert("No file selected!");
-event.preventDefault();
-}
-}
+  <script>
+    function m(value){
+      if( document.getElementById("file").files.length == 0 ){
+        alert("No file selected!");
+        event.preventDefault();
+      }
+    }
 
 </script>
