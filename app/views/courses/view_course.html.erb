@@ -35,7 +35,6 @@
               <table class="table">
                 <thead>
                 <tr>
-                  <th>#ID</th>
                   <th>Name</th>
                   <th>Instructors</th>
                   <th>Students</th>
@@ -47,7 +46,6 @@
                 <tbody>
                 <% @user.courses.each do |course|%>
                     <tr class="active">
-                      <th scope="row"><%= course.id %></th>
                       <td><%= course.course_name %></td>
                       <td>
                         <ul>
@@ -129,16 +127,12 @@
                           <div class="col-md-12">
                             <table class="table table-bordered">
                               <thead>
-                                <th>#ID</th>
                                 <th>Name</th>
                                 <th>E-mail</th>
-                                <th>#ID</th>
                                 <th>Name</th>
                                 <th>E-mail</th>
-                                <th>#ID</th>
                                 <th>Name</th>
                                 <th>E-mail</th>
-                                <th>#ID</th>
                                 <th>Name</th>
                                 <th>E-mail</th>
                               </thead>
@@ -146,7 +140,6 @@
                                 <% course.users.where(user_role: "student").each_with_index do |stu, i| %>
                                   <% if i % 4 == 0 %>
                                     <tr>
-                                      <td><%= stu.id %></td>
                                       <td>
                                         <%= link_to view_student_record_path(student_id: stu.id) do %>
                                           <%= stu.user_name %>
@@ -154,7 +147,6 @@
                                       </td>
                                       <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></a></td>
                                   <% elsif i % 4 == 3%>
-                                      <td><%= stu.id %></td>
                                       <td>
                                         <%= link_to view_student_record_path(student_id: stu.id) do %>
                                             <%= stu.user_name %>
@@ -163,7 +155,6 @@
                                       <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></a></td>
                                     </tr>
                                   <% else %>
-                                      <td><%= stu.id %></td>
                                       <td>
                                         <%= link_to view_student_record_path(student_id: stu.id) do %>
                                             <%= stu.user_name %>

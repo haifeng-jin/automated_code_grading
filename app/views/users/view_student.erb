@@ -91,7 +91,6 @@
                   <table class="table">
                     <thead>
                     <tr>
-                      <th>#ID</th>
                       <th>Name</th>
                       <th>E-mail</th>
                       <th>Courses</th>
@@ -101,7 +100,6 @@
                     <tbody>
                     <% @students.each do |stu|%>
                         <tr>
-                          <th scope="row"><%= stu.id %></th>
                           <td><%= stu.user_name %></td>
                           <td><a href="mailto:<%= stu.user_email %>"><%= stu.user_email %></td>
                           <td>
