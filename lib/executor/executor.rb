@@ -42,6 +42,9 @@ class Executor
     if (message.include? "java.lang.OutOfMemoryError")
       return "Memory Limit Exceeded"
     end
+    if (message != "")
+      return "Runtime Error"
+    end
     return "Success"
   end
 
