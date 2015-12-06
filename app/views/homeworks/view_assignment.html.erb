@@ -57,7 +57,7 @@
             </center>
             <div class="clearfix"></div><br>
             <tbody>
-            <%= link_to edit_homework_path( :homework_id => @homework.id) do %>
+            <%= link_to edit_homework_path(:course_id => @course.id, :homework_id => @homework.id) do %>
                 <center> <button type="button" class="btn btn-success">
                   <i class="glyphicon glyphicon-edit icon-white"></i>
                   Edit

@@ -1,0 +1,75 @@
+<div class="row">
+  <noscript>
+    <div class="alert alert-block col-md-12">
+      <h4 class="alert-heading">Warning!</h4>
+      <p>
+        You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+        enabled to use this site.
+      </p>
+    </div>
+  </noscript>
+  <div id="content" class="col-lg-10 col-sm-10">
+    <!-- content starts -->
+    <div>
+      <ul class="breadcrumb">
+        <li>
+          <i class="glyphicon glyphicon-home"></i>&nbsp<a href=show_instructor>Home</a>
+        </li>
+        <li>
+          <span class="glyphicon glyphicon-edit"></span>&nbspEdit Homework
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="row">
+      <div class="box col-md-12">
+        <div class="box-inner">
+          <div class="box-header well" data-original-title="">
+            <h2><i class="glyphicon glyphicon-user"></i> <%=@homework.hw_name%> Description</h2>
+          </div>
+          <div class="box-content">
+            <div class="clearfix"></div><br>
+            <form>
+              <center>
+                <h2><%=@homework.hw_name%></h2>
+              </center>
+            </form>
+
+            <center>
+              <div class="clearfix"></div><br>
+              <form action="/html/tags/html_form_tag_action.cfm" method="post">
+
+                <textarea name="contents" id="contents" style="width: 50%;text-align:justify; padding: 2%; height: 500px; font:20px italic; border: 10px double gray; ">
+                  <%=@homework.hw_description%>
+                </textarea><br>
+                <div class="clearfix"></div><br>
+              </form>
+            </center>
+            <center>
+            <div class="col-md-12">
+              <h4>Test Input </h4>
+              <%= file_field_tag 'testcase_output' %>
+            </div>
+              </center>
+            <center>
+            <div class="col-md-12">
+              <h4>Test Output </h4>
+              <%= file_field_tag 'testcase_output' %>
+            </div>
+            </center>
+            <p>&nbsp;</p>
+              <center>
+            <div  class="col-md-12">
+              <%= submit_tag "Submit", class: "btn btn-primary"%>
+            </div>
+            </center>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

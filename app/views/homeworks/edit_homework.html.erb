@@ -21,55 +21,70 @@
       </ul>
     </div>
 
-
     <div class="row">
       <div class="box col-md-12">
         <div class="box-inner">
           <div class="box-header well" data-original-title="">
-            <h2><i class="glyphicon glyphicon-user"></i> <%=@homework.hw_name%> Description</h2>
+            <h2><i class="glyphicon glyphicon-user"></i> Homework Information</h2>
           </div>
           <div class="box-content">
             <div class="clearfix"></div><br>
-            <form>
-              <center>
-                <h2><%=@homework.hw_name%></h2>
-              </center>
-            </form>
 
-            <center>
-              <div class="clearfix"></div><br>
-              <form action="/html/tags/html_form_tag_action.cfm" method="post">
 
-                <textarea name="contents" id="contents" style="width: 50%;text-align:justify; padding: 2%; height: 500px; font:20px italic; border: 10px double gray; ">
-                  <%=@homework.hw_description%>
-                </textarea><br>
-                <div class="clearfix"></div><br>
-              </form>
-            </center>
-            <center>
-            <div class="col-md-12">
-              <h4>Test Input </h4>
-              <%= file_field_tag 'testcase_output' %>
-            </div>
-              </center>
-            <center>
-            <div class="col-md-12">
-              <h4>Test Output </h4>
-              <%= file_field_tag 'testcase_output' %>
-            </div>
-            </center>
-            <p>&nbsp;</p>
-              <center>
-            <div  class="col-md-12">
-              <%= submit_tag "Submit", class: "btn btn-primary"%>
-            </div>
-            </center>
 
-            </form>
+            <% flash.each do |key, msg| %>
+                <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
+            <% end %>
+            <div class="row">
+              <div class="col-md-6">
+
+
+
+                <%= form_tag '/homeworks/create', { :multipart => true } do %>
+
+
+                    <p>
+                    <h3>Homework Name</h3>
+                   <textbox name="contents" id="contents" disabled style="width: 50%;text-align:justify; padding: 2%; height: 10px; font:20px italic;  ">
+<%=@homework.hw_name%>
+                                  </textbox><br>
+                    <h3>Homework Description</h3>
+                    <%=text_area_tag 'hw_description', content =@homework.hw_description , rows: 8, cols: 120  %>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h4> Test input </h4>
+                        <%= file_field_tag 'testcase_input' %>
+                      </div>
+                      <div class="col-md-6">
+                        <h4>Test output </h4>
+                        <%= file_field_tag 'testcase_output' %>
+                      </div>
+                    </div>
+                    <h4>Release date</h4>
+                    <%= datetime_select(:time, 'release_time') %>
+                    <h4>Due date   </h4>
+                    <%= datetime_select(:time, 'due_time') %>
+                    <input type="hidden" id="course_id" name="course_id" value="<%= @user.courses.first.id if @user.courses.first %>">
+                    <input type="hidden" id="homework_id" name="homework_id" value="<%= @homework.id %>">
+                    <input type="hidden" id="edit_homework_flag" name="edit_homework_flag" value="<%= @edit_homework_flag=1 %>">
+
+                    <br/>
+                    <br/>
+                    <div class="row">
+                      <div  class="col-md-3">
+                        <%= submit_tag "Submit", class: "btn btn-primary"%>
+                      </div>
+
+                    </div>
+
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </div>
+
+

@@ -77,8 +77,9 @@ class HomeworksController < ApplicationController
       redirect_to login_path
     else
       @user = User.find(session[:user_id])
-      #@course = Course.find(params[:course_id])
+      @course = Course.find(params[:course_id])
       @homework = Homework.find(params[:homework_id])
+      ##@edithomework_flag = 1
     end
   end
 
@@ -98,9 +99,16 @@ class HomeworksController < ApplicationController
   def create
     @user = User.find(session[:user_id])
     @course = Course.find(params[:course_id])
+    @homework = Homework.find(params[:homework_id])
 
-    @homework = Homework.new
-    @homework[:hw_name] = params[:hw_name]
+    if (params[:edit_homework_flag].nil?)
+      @homework = Homework.new
+      @homework[:hw_name] = params[:hw_name]
+    else
+      @homework = Homework.find(params[:homework_id])
+    end
+
+
     @homework[:hw_description] = params[:hw_description]
     due_time = Time.zone.local(params[:time]["due_time(1i)"].to_i,
                             params[:time]["due_time(2i)"].to_i,
@@ -116,7 +124,8 @@ class HomeworksController < ApplicationController
     @homework[:hw_due_time] = due_time 
     @homework.save
 
-    directory = './UPLOAD/' + @course.course_name + '/' + @homework[:hw_name] + '/'
+
+    directory = './UPLOAD/' + @course[:course_name] + '/' + @homework[:hw_name] + '/'
     directory = directory.tr(' ', '_')
 
     mkdir(directory)
