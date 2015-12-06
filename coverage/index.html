@@ -14,14 +14,14 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-12-05T20:50:44-06:00">2015-12-05T20:50:44-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-12-05T21:37:53-06:00">2015-12-05T21:37:53-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">9.76%</span></span>
+    (<span class="covered_percent"><span class="red">9.65%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
@@ -32,9 +32,9 @@
   <a name="AllFiles"></a>
   <div>
     <b>36</b> files in total.
-    <b>1219</b> relevant lines. 
+    <b>1233</b> relevant lines. 
     <span class="green"><b>119</b> lines covered</span> and
-    <span class="red"><b>1100</b> lines missed </span>
+    <span class="red"><b>1114</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -103,10 +103,10 @@
       <tr>
         <td class="strong"><a href="#a3bab5fb89d38ca21369923449f492931d556f69" class="src_link" title="app/controllers/homeworks_controller.rb">app/controllers/homeworks_controller.rb</a></td>
         <td class="red strong">0.0 %</td>
-        <td>182</td>
-        <td>182</td>
+        <td>196</td>
+        <td>196</td>
         <td>0</td>
-        <td>182</td>
+        <td>196</td>
         <td>0.0</td>
       </tr>
       
@@ -419,7 +419,7 @@
           <div class="file_list_container" id="Controllers">
   <h2>
     <span class="group_name">Controllers</span>
-    (<span class="covered_percent"><span class="red">5.37%</span></span>
+    (<span class="covered_percent"><span class="red">5.28%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
@@ -430,9 +430,9 @@
   <a name="Controllers"></a>
   <div>
     <b>10</b> files in total.
-    <b>819</b> relevant lines. 
+    <b>833</b> relevant lines. 
     <span class="green"><b>44</b> lines covered</span> and
-    <span class="red"><b>775</b> lines missed </span>
+    <span class="red"><b>789</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -501,10 +501,10 @@
       <tr>
         <td class="strong"><a href="#a3bab5fb89d38ca21369923449f492931d556f69" class="src_link" title="app/controllers/homeworks_controller.rb">app/controllers/homeworks_controller.rb</a></td>
         <td class="red strong">0.0 %</td>
-        <td>182</td>
-        <td>182</td>
+        <td>196</td>
+        <td>196</td>
         <td>0</td>
-        <td>182</td>
+        <td>196</td>
         <td>0.0</td>
       </tr>
       
@@ -3388,9 +3388,9 @@
     <h3>app/controllers/homeworks_controller.rb</h3>
     <h4><span class="red">0.0 %</span> covered</h4>
     <div>
-      <b>182</b> relevant lines. 
+      <b>196</b> relevant lines. 
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>182</b> lines missed.</span>
+      <span class="red"><b>196</b> lines missed.</span>
     </div>
   </div>
   
@@ -3820,511 +3820,511 @@
         <li class="missed" data-hits="0" data-linenumber="71">
           
           
-          <code class="ruby">      @average_grade = Submission.select(&quot;MAX(sm_grade)&quot;).group(:user_id).having(course_id: params[:course_id], homework_id: params[:homework_id]).average(:sm_grade)[1].to_s</code>
+          <code class="ruby">      grade_byUser = Submission.select(&quot;MAX(sm_grade)&quot;).group(:user_id).having(course_id: params[:course_id], homework_id: params[:homework_id]).maximum(:sm_grade)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="72">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      if grade_byUser.values.count == 0</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="73">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">        @average_grade = 0</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="74">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      else</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="75">
           
           
-          <code class="ruby">  def edit_homework</code>
+          <code class="ruby">        @average_grade = grade_byUser.values.sum / grade_byUser.values.count</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="76">
           
           
-          <code class="ruby">    if session[:user_role] != &#39;instructor&#39;</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="77">
           
           
-          <code class="ruby">      redirect_to login_path</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="78">
           
           
-          <code class="ruby">    else</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="79">
           
           
-          <code class="ruby">      @user = User.find(session[:user_id])</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="80">
           
           
-          <code class="ruby">      #@course = Course.find(params[:course_id])</code>
+          <code class="ruby">  def edit_homework</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="81">
           
           
-          <code class="ruby">      @homework = Homework.find(params[:homework_id])</code>
+          <code class="ruby">    if session[:user_role] != &#39;instructor&#39;</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="82">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      redirect_to login_path</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="83">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    else</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="84">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      @user = User.find(session[:user_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="85">
           
           
-          <code class="ruby">  def view_student_record</code>
+          <code class="ruby">      @course = Course.find(params[:course_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="86">
           
           
-          <code class="ruby">    if session[:user_role] != &#39;instructor&#39;</code>
+          <code class="ruby">      @homework = Homework.find(params[:homework_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="87">
           
           
-          <code class="ruby">      redirect_to login_path</code>
+          <code class="ruby">      ##@edithomework_flag = 1</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="88">
           
           
-          <code class="ruby">    else</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="89">
           
           
-          <code class="ruby">    @user = User.find(session[:user_id])</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="90">
           
           
-          <code class="ruby">    @username = User.find(session[:user_id]).user_name</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="91">
           
           
-          <code class="ruby">    @student = User.find(params[:student_id])</code>
+          <code class="ruby">  def view_student_record</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="92">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">    if session[:user_role] != &#39;instructor&#39;</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="93">
           
           
-          <code class="ruby">    #@submissions = Submission.where(:course_id =&gt; params[:course_id]).where(:homework_id =&gt; params[:homework_id])</code>
+          <code class="ruby">      redirect_to login_path</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="94">
           
           
-          <code class="ruby">    #@homework = Homework.find(params[:homework_id])</code>
+          <code class="ruby">    else</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="95">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    @user = User.find(session[:user_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="96">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    @username = User.find(session[:user_id]).user_name</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="97">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    @student = User.find(params[:student_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="98">
           
           
-          <code class="ruby">  def create</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="99">
           
           
-          <code class="ruby">    @user = User.find(session[:user_id])</code>
+          <code class="ruby">    #@submissions = Submission.where(:course_id =&gt; params[:course_id]).where(:homework_id =&gt; params[:homework_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="100">
           
           
-          <code class="ruby">    @course = Course.find(params[:course_id])</code>
+          <code class="ruby">    #@homework = Homework.find(params[:homework_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="101">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="102">
           
           
-          <code class="ruby">    @homework = Homework.new</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="103">
           
           
-          <code class="ruby">    @homework[:hw_name] = params[:hw_name]</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="104">
           
           
-          <code class="ruby">    @homework[:hw_description] = params[:hw_description]</code>
+          <code class="ruby">  def create</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="105">
           
           
-          <code class="ruby">    due_time = Time.zone.local(params[:time][&quot;due_time(1i)&quot;].to_i,</code>
+          <code class="ruby">    @user = User.find(session[:user_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="106">
           
           
-          <code class="ruby">                            params[:time][&quot;due_time(2i)&quot;].to_i,</code>
+          <code class="ruby">    @course = Course.find(params[:course_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="107">
           
           
-          <code class="ruby">                            params[:time][&quot;due_time(3i)&quot;].to_i,</code>
+          <code class="ruby">    @homework = Homework.find(params[:homework_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="108">
           
           
-          <code class="ruby">                            params[:time][&quot;due_time(4i)&quot;].to_i,</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="109">
           
           
-          <code class="ruby">                            params[:time][&quot;due_time(5i)&quot;].to_i)</code>
+          <code class="ruby">    if (params[:edit_homework_flag].nil?)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="110">
           
           
-          <code class="ruby">    release_time = Time.zone.local(params[:time][&quot;release_time(1i)&quot;].to_i,</code>
+          <code class="ruby">      @homework = Homework.new</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="111">
           
           
-          <code class="ruby">                            params[:time][&quot;release_time(2i)&quot;].to_i,</code>
+          <code class="ruby">      @homework[:hw_name] = params[:hw_name]</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="112">
           
           
-          <code class="ruby">                            params[:time][&quot;release_time(3i)&quot;].to_i,</code>
+          <code class="ruby">    else</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="113">
           
           
-          <code class="ruby">                            params[:time][&quot;release_time(4i)&quot;].to_i,</code>
+          <code class="ruby">      @homework = Homework.find(params[:homework_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="114">
           
           
-          <code class="ruby">                            params[:time][&quot;release_time(5i)&quot;].to_i)</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="115">
           
           
-          <code class="ruby">    @homework[:hw_release_time] = release_time</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="116">
           
           
-          <code class="ruby">    @homework[:hw_due_time] = due_time </code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="117">
           
           
-          <code class="ruby">    @homework.save</code>
+          <code class="ruby">    @homework[:hw_description] = params[:hw_description]</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="118">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    due_time = Time.zone.local(params[:time][&quot;due_time(1i)&quot;].to_i,</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="119">
           
           
-          <code class="ruby">    directory = &#39;./UPLOAD/&#39; + @course.course_name + &#39;/&#39; + @homework[:hw_name] + &#39;/&#39;</code>
+          <code class="ruby">                            params[:time][&quot;due_time(2i)&quot;].to_i,</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="120">
           
           
-          <code class="ruby">    directory = directory.tr(&#39; &#39;, &#39;_&#39;)</code>
+          <code class="ruby">                            params[:time][&quot;due_time(3i)&quot;].to_i,</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="121">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">                            params[:time][&quot;due_time(4i)&quot;].to_i,</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="122">
           
           
-          <code class="ruby">    mkdir(directory)</code>
+          <code class="ruby">                            params[:time][&quot;due_time(5i)&quot;].to_i)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="123">
           
           
-          <code class="ruby">    if !params[:testcase_input].nil?</code>
+          <code class="ruby">    release_time = Time.zone.local(params[:time][&quot;release_time(1i)&quot;].to_i,</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="124">
           
           
-          <code class="ruby">      File.open(directory + &#39;input&#39;, &quot;w&quot;) { |f| f.write(params[:testcase_input].read.force_encoding(&#39;UTF-8&#39;)) }</code>
+          <code class="ruby">                            params[:time][&quot;release_time(2i)&quot;].to_i,</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="125">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">                            params[:time][&quot;release_time(3i)&quot;].to_i,</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="126">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">                            params[:time][&quot;release_time(4i)&quot;].to_i,</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="127">
           
           
-          <code class="ruby">    if !params[:testcase_output].nil?</code>
+          <code class="ruby">                            params[:time][&quot;release_time(5i)&quot;].to_i)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="128">
           
           
-          <code class="ruby">      File.open(directory + &#39;output&#39;, &quot;w&quot;) { |f| f.write(params[:testcase_output].read.force_encoding(&#39;UTF-8&#39;)) }</code>
+          <code class="ruby">    @homework[:hw_release_time] = release_time</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="129">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">    @homework[:hw_due_time] = due_time </code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="130">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    @homework.save</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="131">
           
           
-          <code class="ruby">    @courseToHomework = CourseToHomework.new</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="132">
           
           
-          <code class="ruby">    @courseToHomework.course_id = params[:course_id]</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="133">
           
           
-          <code class="ruby">    @courseToHomework.homework_id = @homework.id </code>
+          <code class="ruby">    directory = &#39;./UPLOAD/&#39; + @course[:course_name] + &#39;/&#39; + @homework[:hw_name] + &#39;/&#39;</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="134">
           
           
-          <code class="ruby">    @courseToHomework[:hw_test_case_dir] = directory</code>
+          <code class="ruby">    directory = directory.tr(&#39; &#39;, &#39;_&#39;)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="135">
           
           
-          <code class="ruby">    @courseToHomework.save</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="136">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    mkdir(directory)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="137">
           
           
-          <code class="ruby">    redirect_to &quot;/show_instructor&quot;</code>
+          <code class="ruby">    if !params[:testcase_input].nil?</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="138">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">      File.open(directory + &#39;input&#39;, &quot;w&quot;) { |f| f.write(params[:testcase_input].read.force_encoding(&#39;UTF-8&#39;)) }</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="139">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="140">
           
           
-          <code class="ruby">  # PATCH/PUT /homeworks/1</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="141">
           
           
-          <code class="ruby">  # PATCH/PUT /homeworks/1.json</code>
+          <code class="ruby">    if !params[:testcase_output].nil?</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="142">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      File.open(directory + &#39;output&#39;, &quot;w&quot;) { |f| f.write(params[:testcase_output].read.force_encoding(&#39;UTF-8&#39;)) }</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="143">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="144">
           
           
-          <code class="ruby">  # DELETE /homeworks/1</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="145">
           
           
-          <code class="ruby">  # DELETE /homeworks/1.json</code>
+          <code class="ruby">    @courseToHomework = CourseToHomework.new</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="146">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    @courseToHomework.course_id = params[:course_id]</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="147">
           
           
-          <code class="ruby">  def destroy</code>
+          <code class="ruby">    @courseToHomework.homework_id = @homework.id </code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="148">
           
           
-          <code class="ruby">    @homework.destroy</code>
+          <code class="ruby">    @courseToHomework[:hw_test_case_dir] = directory</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="149">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    @courseToHomework.save</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="150">
           
           
-          <code class="ruby">    respond_to do |format|</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="151">
           
           
-          <code class="ruby">      format.html { redirect_to homeworks_url, notice: &#39;Homework was successfully destroyed.&#39; }</code>
+          <code class="ruby">    redirect_to &quot;/show_instructor&quot;</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="152">
           
           
-          <code class="ruby">      format.json { head :no_content }</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="153">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="154">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">  # PATCH/PUT /homeworks/1</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="155">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  # PATCH/PUT /homeworks/1.json</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="156">
@@ -4336,154 +4336,238 @@
         <li class="missed" data-hits="0" data-linenumber="157">
           
           
-          <code class="ruby">  def destroy_homework</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="158">
           
           
-          <code class="ruby">    @course_to_homework = CourseToHomework.where(course_id: params[:course_id], homework_id: params[:homework_id]).first</code>
+          <code class="ruby">  # DELETE /homeworks/1</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="159">
           
           
-          <code class="ruby">    @course_to_homework.destroy</code>
+          <code class="ruby">  # DELETE /homeworks/1.json</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="160">
           
           
-          <code class="ruby">    @remainder = CourseToHomework.where(homework_id: params[:homework_id]).first</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="161">
           
           
-          <code class="ruby">    if @remainder.nil?</code>
+          <code class="ruby">  def destroy</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="162">
           
           
-          <code class="ruby">      @homework = Homework.find(params[:homework_id])</code>
+          <code class="ruby">    @homework.destroy</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="163">
           
           
-          <code class="ruby">      @homework.destroy</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="164">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">    respond_to do |format|</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="165">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      format.html { redirect_to homeworks_url, notice: &#39;Homework was successfully destroyed.&#39; }</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="166">
           
           
-          <code class="ruby">    respond_to do |format|</code>
+          <code class="ruby">      format.json { head :no_content }</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="167">
           
           
-          <code class="ruby">      format.html { redirect_to homework_history_path, notice: &#39;Homework was successfully destroyed.&#39; }</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="168">
           
           
-          <code class="ruby">      format.json { head :no_content }</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="169">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="170">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="171">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  def destroy_homework</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="172">
           
           
-          <code class="ruby">  private</code>
+          <code class="ruby">    @course_to_homework = CourseToHomework.where(course_id: params[:course_id], homework_id: params[:homework_id]).first</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="173">
           
           
-          <code class="ruby">  # Use callbacks to share common setup or constraints between actions.</code>
+          <code class="ruby">    @course_to_homework.destroy</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="174">
           
           
-          <code class="ruby">  def set_homework</code>
+          <code class="ruby">    @remainder = CourseToHomework.where(homework_id: params[:homework_id]).first</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="175">
           
           
-          <code class="ruby">    @homework = Homework.find(params[:id])</code>
+          <code class="ruby">    if @remainder.nil?</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="176">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">      @homework = Homework.find(params[:homework_id])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="177">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      @homework.destroy</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="178">
           
           
-          <code class="ruby">  # Never trust parameters from the scary internet, only allow the white list through.</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="179">
           
           
-          <code class="ruby">  def homework_params</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="180">
           
           
-          <code class="ruby">    params.require(:homework).permit(:hw_name, :hw_description, :hw_release_time, :hw_due_time, :hw_test_case_dir)</code>
+          <code class="ruby">    respond_to do |format|</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="181">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">      format.html { redirect_to homework_history_path, notice: &#39;Homework was successfully destroyed.&#39; }</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="182">
+          
+          
+          <code class="ruby">      format.json { head :no_content }</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="183">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="184">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="185">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="186">
+          
+          
+          <code class="ruby">  private</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="187">
+          
+          
+          <code class="ruby">  # Use callbacks to share common setup or constraints between actions.</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="188">
+          
+          
+          <code class="ruby">  def set_homework</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="189">
+          
+          
+          <code class="ruby">    @homework = Homework.find(params[:id])</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="190">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="191">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="192">
+          
+          
+          <code class="ruby">  # Never trust parameters from the scary internet, only allow the white list through.</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="193">
+          
+          
+          <code class="ruby">  def homework_params</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="194">
+          
+          
+          <code class="ruby">    params.require(:homework).permit(:hw_name, :hw_description, :hw_release_time, :hw_due_time, :hw_test_case_dir)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="195">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="196">
           
           
           <code class="ruby">end</code>

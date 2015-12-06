@@ -157,6 +157,13 @@
         1,
         null
       ],
+      "/home/rainydays/Git/automated_code_grading/app/models/announcement.rb": [
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
       "/home/rainydays/Git/automated_code_grading/app/controllers/sessions_controller.rb": [
         1,
         1,
@@ -368,14 +375,21 @@
         null,
         null
       ],
-      "/home/rainydays/Git/automated_code_grading/app/models/announcement.rb": [
-        1,
-        1,
-        1,
-        null,
-        null
-      ],
       "/home/rainydays/Git/automated_code_grading/app/controllers/homeworks_controller.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -1435,6 +1449,6 @@
         0
       ]
     },
-    "timestamp": 1449370244
+    "timestamp": 1449373073
   }
 }

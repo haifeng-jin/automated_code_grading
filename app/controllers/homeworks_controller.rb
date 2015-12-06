@@ -68,7 +68,7 @@ class HomeworksController < ApplicationController
       end
       @user_in_course = @course.users.where(user_role: 'student').size
       @user_valid = Submission.where(course_id: params[:course_id], homework_id: params[:homework_id]).select(:user_id).map(&:user_id).uniq.size
-      grade_byUser = Submission.select("MAX(sm_grade)").group(:user_id).having(course_id: params[:course_id], homework_id: params[:homework_id]).maximum(:sm_grade)
+      grade_byUser = Submission.select("MAX(sm_grade)").group(:user_id).where(course_id: params[:course_id], homework_id: params[:homework_id]).maximum(:sm_grade)
       if grade_byUser.values.count == 0
         @average_grade = 0
       else

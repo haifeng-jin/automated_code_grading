@@ -37,3 +37,9 @@ Given /the following submissions exist/ do |a|
   end
 end
 
+Given /the following announcements exist/ do |a|
+  a.hashes.each do |b|
+    Announcement.create!(b)
+  end
+end
+
