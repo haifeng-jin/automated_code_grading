@@ -72,7 +72,7 @@ class HomeworksController < ApplicationController
       if grade_byUser.values.count == 0
         @average_grade = 0
       else
-        @average_grade = grade_byUser.values.sum / grade_byUser.values.count
+        @average_grade = (grade_byUser.values.sum / grade_byUser.values.count).round(3)
       end
     end
   end
