@@ -100,14 +100,14 @@
                           <td></td>
                           <td class="center">
                             <%= link_to submit_homework_path(:course_id => course.id, :homework_id => hw.id) do%>
-                                <button type="button" class="btn btn-success">
+                                <button type="button" class="btn btn-success" id = "<%=hw.hw_name%>_view">
                                   <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                                   View
                                 </button>
                             <% end %></td>
                           <td class="center">
                             <%= link_to submission_history_path(:course_id => course.id, :homework_id => hw.id) do%>
-                                <button type="button" class="btn btn-info">
+                                <button type="button" class="btn btn-info" id = "<%=hw.hw_name%>_submission">
                                   <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                                   Submission History
                                 </button>

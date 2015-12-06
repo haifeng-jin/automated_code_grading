@@ -42,50 +42,6 @@ Feature: register for a student user
     But I should not see "User was successfully created"
 
 
-  Scenario: register with wrong name
-    Given I am on the home page
-    When I press "Register"
-    And I fill in "user_user_name" with "Foo B@r"
-    And I fill in "user_user_login_name" with "foobar1234"
-    And I fill in "user_user_email" with "foobar1234@gmail.com"
-    And I fill in "user_user_password" with "fO0b@rpwd"
-    And I press "Submit"
-    Then I should see "Please enter a valid name"
-    But I should not see "User was successfully created"
-
-  Scenario: register with wrong login name
-    Given I am on the home page
-    When I press "Register"
-    And I fill in "user_user_name" with "Foo Bar"
-    And I fill in "user_user_login_name" with "(╯﹏╰）"
-    And I fill in "user_user_email" with "foobar1234@gmail.com"
-    And I fill in "user_user_password" with "fO0b@rpwd"
-    And I press "Submit"
-    Then I should see "Please enter a valid login name"
-    But I should not see "User was successfully created"
-
-  Scenario: register with wrong email
-    Given I am on the home page
-    When I press "Register"
-    And I fill in "user_user_name" with "Foo Bar"
-    And I fill in "user_user_login_name" with "foobar1234"
-    And I fill in "user_user_email" with "foobar1234"
-    And I fill in "user_user_password" with "fO0b@rpwd"
-    And I press "Submit"
-    Then I should see "Please enter a valid email address"
-    But I should not see "User was successfully created"
-
-  Scenario: register with short password
-    Given I am on the home page
-    When I press "Register"
-    And I fill in "user_user_name" with "Foo Bar"
-    And I fill in "user_user_login_name" with "foobar1234"
-    And I fill in "user_user_email" with "foobar1234@gmail.com"
-    And I fill in "user_user_password" with "1"
-    And I press "Submit"
-    Then I should see "Please enter a valid password"
-    But I should not see "User was successfully created"
-
   Scenario: register without name
     Given I am on the home page
     When I press "Register"
