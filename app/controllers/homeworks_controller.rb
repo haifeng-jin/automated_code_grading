@@ -92,10 +92,10 @@ class HomeworksController < ApplicationController
     if session[:user_role] != 'instructor'
       redirect_to login_path
     else
-    @user = User.find(session[:user_id])
-    @username = User.find(session[:user_id]).user_name
-    @student = User.find(params[:student_id])
-      end
+      @user = User.find(session[:user_id])
+      @username = User.find(session[:user_id]).user_name
+      @student = User.find(params[:student_id])
+    end
     #@submissions = Submission.where(:course_id => params[:course_id]).where(:homework_id => params[:homework_id])
     #@homework = Homework.find(params[:homework_id])
   end
@@ -116,15 +116,15 @@ class HomeworksController < ApplicationController
 
     @homework[:hw_description] = params[:hw_description]
     due_time = Time.zone.local(params[:time]["due_time(1i)"].to_i,
-                            params[:time]["due_time(2i)"].to_i,
-                            params[:time]["due_time(3i)"].to_i,
-                            params[:time]["due_time(4i)"].to_i,
-                            params[:time]["due_time(5i)"].to_i)
+                               params[:time]["due_time(2i)"].to_i,
+                               params[:time]["due_time(3i)"].to_i,
+                               params[:time]["due_time(4i)"].to_i,
+                               params[:time]["due_time(5i)"].to_i)
     release_time = Time.zone.local(params[:time]["release_time(1i)"].to_i,
-                            params[:time]["release_time(2i)"].to_i,
-                            params[:time]["release_time(3i)"].to_i,
-                            params[:time]["release_time(4i)"].to_i,
-                            params[:time]["release_time(5i)"].to_i)
+                                   params[:time]["release_time(2i)"].to_i,
+                                   params[:time]["release_time(3i)"].to_i,
+                                   params[:time]["release_time(4i)"].to_i,
+                                   params[:time]["release_time(5i)"].to_i)
     @homework[:hw_release_time] = release_time
     @homework[:hw_due_time] = due_time 
     @homework.save
