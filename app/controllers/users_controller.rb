@@ -57,7 +57,8 @@ class UsersController < ApplicationController
             students = course.users.get_student_by_name(params[:search_val])
             @students = @students + students
           elsif params[:search_type] == "E-mail"
-            @students = @students + course.users.get_student_by_email(params[:search_val])
+            students = course.users.get_student_by_email(params[:search_val])
+            @students = @students + students
           end
 
           @filtered_courses[course.id] = true

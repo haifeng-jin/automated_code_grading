@@ -96,7 +96,7 @@
                         <td><%= hw.hw_name %></td>
                         <td><%= hw.hw_release_time %></td>
                         <td><%= hw.hw_due_time %></td>
-                        <td><%= (hw.hw_due_time - @current_time > 0 ? "Avaiable" : "Closed")%></td>
+                        <td><%= (hw.hw_due_time - @current_time > 0 ? "Available" : "Closed")%></td>
                         <td><%= @grades.group(:homework_id).where(user_id: @user.id, course_id: course.id).maximum(:sm_grade)[hw.id]%></td>
                         <td class="center">
                           <%= link_to submit_homework_path(:course_id => course.id, :homework_id => hw.id) do%>
