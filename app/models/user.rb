@@ -47,8 +47,14 @@ class User < ActiveRecord::Base
   end
 
   def self.get_student_by_email(email)
-    users = self.where user_role: 'student', user_email: email
-    return users
+    users = self.where user_role: 'student'
+    students = []
+    users.each do |user|
+      if user.user_email.downcase.include? email.downcase
+        students = students << user
+      end
+    end
+    return students
   end
 
   def self.get_student_by_course(course_id)
